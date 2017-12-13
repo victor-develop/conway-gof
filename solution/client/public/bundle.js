@@ -74,6 +74,22 @@
   
     function ready() {
       const Vue = window.Vue;
+
+      Vue.component('player-banner', {
+        template:`<span>
+                    {{ player.name }}
+                    <span class="player-color" v-bind:style="styleObject"></span>
+                  </span>
+                 `,
+        props: ['player'],
+        computed: {
+          styleObject: function() {
+            return {
+              backgroundColor: this.player.color
+            }
+          }
+        }
+      });
   
       Vue.component('cell', {
         template: `<span class="cell" v-bind:style="styleObject"></span>`,
@@ -91,12 +107,13 @@
           }
         }
       })
-  
+
+      // TODO: feature: explore borderless board
       Vue.component('game-board', {
         template: `<table class="board">
                     <tbody>
                       <tr v-for="h in board.height">
-                        <td v-for="w in board.width">
+                        <td v-for="w in 60">
                           <cell :x=w-1 :y=h-1 :board=board></cell>
                         </td>
                       </tr>
@@ -109,9 +126,12 @@
       const app = new Vue({
         el: '#app',
         data: {
-          game
+          game,
+          players
         }
       });
+
+
 
       setInterval(() => {
         if (app.game == game) {

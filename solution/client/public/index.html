@@ -46,13 +46,8 @@
           <div class="row">
             <div class="col-md-12">
               <ul>
-                <li>
-                  User 1 
-                  <span class="player-color"></span>                
-                </li>
-                <li>
-                  User 2
-                  <span class="player-color"></span>
+                <li v-for="player in players">
+                  <player-banner :player="player"></player-banner> 
                 </li>
               </ul>
             </div>
