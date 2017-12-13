@@ -4,7 +4,7 @@ services:
   conway:
     tty: true
     build: ./docker/docker-image/
-    command: node --version
+    command: node
     environment:
       - PORT=8080
       - NODE_ENV=development

@@ -1,0 +1,20 @@
+{
+  "name": "conway-game-of-life",
+  "version": "0.0.0",
+  "description": "A multi-player conway-game-of-life.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Not configured, yet\" && exit 1"
+  },
+  "keywords": [
+    "conway",
+    "conway-game",
+    "node",
+    "docker",
+    "multi-player",
+    "multiplayer"
+  ],
+  "author": "Victor <victor.develop@outlook.com>",
+  "license": "MIT"
+}
+
