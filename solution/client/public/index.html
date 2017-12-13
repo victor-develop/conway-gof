@@ -5,9 +5,11 @@
     <title>Conway s Game of Life</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/site.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.10/vue.min.js"></script>
+    <script src="bundle.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="app">
       <div class="row">
         <div class="col-md-12">
           <h3>
@@ -25,25 +27,7 @@
                       </h3>
                     </div>
                     <div class="panel-body">
-                        <table class="board">
-                            <tbody>
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
-                          </table>
+                        <game-board :board=game.board></game-board>
                     </div>
                     <div class="panel-footer">
                       
@@ -51,7 +35,7 @@
                   </div>              
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 players-container">
           <div class="row">
             <div class="col-md-12">
               <h3>
