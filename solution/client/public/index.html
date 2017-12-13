@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/site.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.10/vue.min.js"></script>
+    <script src="datamodels.js"></script>
+    <script src="vuecomponents.js"></script>
     <script src="bundle.js"></script>
   </head>
   <body>
@@ -47,7 +49,7 @@
             <div class="col-md-12">
               <ul>
                 <li v-for="player in players">
-                  <player-banner :player="player"></player-banner> 
+                  <player-banner :current-player="currentPlayer" :player="player" ></player-banner> 
                 </li>
               </ul>
             </div>
