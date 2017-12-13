@@ -4,7 +4,9 @@
   "description": "A multi-player conway-game-of-life.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Not configured, yet\" && exit 1"
+    "test": "echo \"Not configured, yet\" && exit 1",
+    "transplie": "node node_modules/typescript/lib/tsc",
+    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 server/dist"
   },
   "keywords": [
     "conway",
@@ -15,6 +17,9 @@
     "multiplayer"
   ],
   "author": "Victor <victor.develop@outlook.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "1.12.5",
+    "typescript": "2.6.2"
+  }
 }
-
