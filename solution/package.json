@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "transplie": "node node_modules/typescript/lib/tsc",
-    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 server/dist",
+    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 server/dist/src",
     "lint": "node_modules/tslint/bin/tslint server/**/*.ts",
     "test": "npm run transplie && node_modules/mocha/bin/mocha server/dist/**/*.spec.js"
   },
@@ -20,10 +20,16 @@
   "author": "Victor <victor.develop@outlook.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/cheerio": "0.22.6",
+    "@types/express": "4.0.39",
     "@types/mocha": "2.2.44",
     "@types/node": "8.0.58",
+    "@types/supertest": "^2.0.4",
+    "cheerio": "1.0.0-rc.2",
+    "express": "4.16.2",
     "mocha": "4.0.1",
     "nodemon": "1.12.5",
+    "supertest": "3.0.0",
     "tslint": "5.8.0",
     "tslint-config-airbnb-base": "0.1.0",
     "typescript": "2.6.2"
