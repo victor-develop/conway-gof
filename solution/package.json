@@ -2,13 +2,13 @@
   "name": "conway-game-of-life",
   "version": "0.0.0",
   "description": "A multi-player conway-game-of-life.",
-  "main": "dist/index.js",
+  "main": "dist/server/index.js",
   "scripts": {
     "transpile": "node node_modules/typescript/lib/tsc",
-    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 server/dist/src",
-    "lint": "node_modules/tslint/bin/tslint server/**/*.ts",
-    "test": "npm run transpile && node_modules/mocha/bin/mocha server/dist/**/*.spec.js",
-    "heroku-deploy": "npm install && npm run transpile && node server/dist/src"
+    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 dist/server/src",
+    "lint": "node_modules/tslint/bin/tslint ts_code/**/*.ts",
+    "test": "npm run transpile && node_modules/mocha/bin/mocha dist/**/*.spec.js",
+    "heroku-deploy": "npm install && npm run transpile && node dist/server/src"
   },
   "keywords": [
     "conway",
