@@ -17,8 +17,8 @@ table {
 }
 
 .board tr td { 
-  width: 60px; 
-  height: 60px; 
-  border: 2px solid #181818;
-  background: grey
+  min-width: 10px; 
+  height: 10px; 
+  border: 2px solid grey;
+  background: black;
 }
