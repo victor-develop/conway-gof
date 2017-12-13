@@ -4,10 +4,10 @@
   "description": "A multi-player conway-game-of-life.",
   "main": "dist/index.js",
   "scripts": {
-    "transplie": "node node_modules/typescript/lib/tsc",
+    "transpile": "node node_modules/typescript/lib/tsc",
     "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 server/dist/src",
     "lint": "node_modules/tslint/bin/tslint server/**/*.ts",
-    "test": "npm run transplie && node_modules/mocha/bin/mocha server/dist/**/*.spec.js",
+    "test": "npm run transpile && node_modules/mocha/bin/mocha server/dist/**/*.spec.js",
     "heroku-deploy": "npm install && npm run transpile && node server/dist/src"
   },
   "keywords": [
