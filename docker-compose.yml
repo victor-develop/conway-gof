@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  conway:
+    tty: true
+    build: ./docker/docker-image/
+    command: node --version
+    environment:
+      - PORT=8080
+      - NODE_ENV=development
+    ports:
+      - 8080:8080
+      - 8081:8081
+      - 5555:5555
