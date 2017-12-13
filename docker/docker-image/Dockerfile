@@ -1,6 +1,8 @@
 FROM node:8.9.2
 
-WORKDIR /solution
+RUN mkdir -p /home/dev
+
+WORKDIR /home/dev
 # Web
 EXPOSE 8080
 
