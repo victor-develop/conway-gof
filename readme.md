@@ -82,8 +82,13 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+Credits to below, where I adapted/learnt from their code for
+
+Drawing game board
+ - Codebyte: https://coderbyte.com/tutorial/create-a-simple-chessboard-using-html-css-and-jquery
+
+Boilerplate reference
 * Rising Stack: https://blog.risingstack.com/building-a-node-js-app-with-typescript-tutorial/
+
+Readme Template
 * PurpleBooth: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
