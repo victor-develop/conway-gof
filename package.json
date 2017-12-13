@@ -1,0 +1,11 @@
+{
+  "name": "conway-game-of-life",
+  "version": "1.0.0",
+  "description": "NOTE: this pacakge.json is for heroku deployment only. Go to solution/ for real package.json",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd solution && node run heroku-deploy"
+  },
+  "author": "Victor <victor.develop@outlook.com>",
+  "license": "MIT"
+}
