@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Not configured, yet\" && exit 1",
     "transplie": "node node_modules/typescript/lib/tsc",
-    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 server/dist"
+    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 server/dist",
+    "lint": "node_modules/tslint/bin/tslint server/**/*.ts"
   },
   "keywords": [
     "conway",
@@ -20,6 +21,8 @@
   "license": "MIT",
   "devDependencies": {
     "nodemon": "1.12.5",
+    "tslint": "5.8.0",
+    "tslint-config-airbnb-base": "0.1.0",
     "typescript": "2.6.2"
   }
 }
