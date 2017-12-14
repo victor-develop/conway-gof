@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "ts_code/"
+  ],
+  "ext": "ts json",
+  "legacyWatch": true
+}

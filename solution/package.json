@@ -5,10 +5,15 @@
   "main": "dist/server/index.js",
   "scripts": {
     "transpile": "node node_modules/typescript/lib/tsc",
-    "dev": "node node_modules/typescript/lib/tsc --watch & ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:5555 dist/server/src",
+    "pack": "./node_modules/.bin/webpack",
+    "build": "npm run transpile && npm run pack",
+    "debug": "node --inspect=0.0.0.0:5555 dist/server/src",
+    "build-serve": "npm run build && npm run debug",
+    "dev": "./node_modules/nodemon/bin/nodemon.js --exec 'npm run build-serve' ",    
+    "serve": "node dist/server/src",
     "lint": "node_modules/tslint/bin/tslint ts_code/**/*.ts",
     "test": "npm run transpile && node_modules/mocha/bin/mocha dist/**/*.spec.js",
-    "heroku-deploy": "npm install && npm run transpile && node dist/server/src"
+    "heroku-deploy": "npm install && npm run build && npm run serve"
   },
   "keywords": [
     "conway",
@@ -31,8 +36,10 @@
     "mocha": "4.0.1",
     "nodemon": "1.12.5",
     "supertest": "3.0.0",
+    "ts-loader": "3.2.0",
     "tslint": "5.8.0",
     "tslint-config-airbnb-base": "0.1.0",
-    "typescript": "2.6.2"
+    "typescript": "2.6.2",
+    "webpack": "3.10.0"
   }
 }
