@@ -1,4 +1,4 @@
-import ILogger from '../../common/ilogger'
+import ILogger from '../../common/src/ilogger'
 import * as path from 'path'
 
 const logger: ILogger = { info: console.log }

@@ -1,5 +1,5 @@
 import * as express from 'express'
-import ILogger from '../../common/ilogger'
+import ILogger from '../../common/src/ilogger'
 
 export default class Server {
   private appInstance: express.Application

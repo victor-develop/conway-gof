@@ -1,7 +1,7 @@
 import 'mocha'
 import * as assert from 'assert'
 import * as supertest from 'supertest'
-import ILogger from '../../common/ilogger'
+import ILogger from '../../common/src/ilogger'
 import Server from '../src/server'
 import { config } from '../src/config/config'
 import * as cheerio from 'cheerio'
