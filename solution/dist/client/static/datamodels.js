@@ -7,12 +7,12 @@
     err: window.console.log
   };
 
+  // "Class" definitions
   const CellState = window.mods.CellState = {
     ActiveStill: 'ActiveStill',
     AliveFromDeath: 'AliveFromDeath'
   };
 
-  // "Class" definitions
   const Cell = window.mods.Cell = (x, y, uid, state, overlayColor) => { 
     return { x, y, uid, state, overlayColor } 
   };
