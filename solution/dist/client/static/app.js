@@ -23,16 +23,12 @@
           game,
           currentPlayer,
           players,
-          presetPatternBoards,
-          config: {
-            pattern: {
-              board: {
-                height: 10,
-                width: 10
-              }
-            }
-          }
+          presetPatternBoards
         }
+      });
+
+      mods.notices.forEach(notice => {
+        app.$notify(notice);
       });
 
       setInterval(() => {

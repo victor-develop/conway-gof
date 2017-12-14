@@ -50,4 +50,12 @@
       Cell(1, 2, 'aaa', CellState.AliveFromDeath, 'green')
     ])
   }
+
+  window.mods.notices = [
+    "Successfully connect",
+    "New user entered the world",
+    "You just contributed to the world!",
+    "You contribution was skipped due to network latency",
+    "Some cells has goned beyond the view window. You might not be able to see them"
+  ]
 })(window)
