@@ -5,13 +5,13 @@
     function ready() {
       const Vue = window.Vue;
 
-      const game = window.game;
+      const game = window.mods.game;
 
-      const players = window.players;
+      const players = window.mods.players;
 
-      const tick2 = window.tick2;
+      const tick2 = window.mods.tick2;
     
-      const currentPlayer = window.currentPlayer;
+      const currentPlayer = window.mods.currentPlayer;
 
       const app = new Vue({
         el: '#app',

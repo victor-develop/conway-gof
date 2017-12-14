@@ -1,20 +1,23 @@
 (function(window) {
-  window.logger = {
+
+  const mods = window.mods = window.mods || {};
+
+  window.mods.logger = {
     info: window.console.log,
     err: window.console.log
   };
 
-  window.CellState = {
+  const CellState = window.mods.CellState = {
     ActiveStill: 'ActiveStill',
     AliveFromDeath: 'AliveFromDeath'
   };
 
   // "Class" definitions
-  window.Cell = (x, y, uid, state, overlayColor) => { 
+  const Cell = window.mods.Cell = (x, y, uid, state, overlayColor) => { 
     return { x, y, uid, state, overlayColor } 
   };
 
-  window.Board = (width, height, cells) => {
+  const Board = window.mods.Board = (width, height, cells) => {
 
     const hashCells = {};
 
@@ -36,7 +39,7 @@
     }
   };
 
-  window.Player = (uid, color, name) => {
+  const Player = window.mods.Player = (uid, color, name) => {
     return {
       uid,
       color,
@@ -45,15 +48,15 @@
   }
 
   // sample data models
-  window.players = [
+  window.mods.players = [
     Player('aaa', '#226ad6', 'Tom'),
     Player('bbb', '#f20cdb', 'Cat'),
     Player('ccc', '#0d6d06', 'Fok')
   ]
 
-  window.currentPlayer = window.players[0];
+  window.mods.currentPlayer = window.mods.players[0];
   
-  window.game = {
+  window.mods.game = {
     board: Board(20, 20, [
       Cell(0, 1, 'aaa', CellState.ActiveStill, 'red'),
       Cell(1, 1, 'aaa', CellState.ActiveStill,'blue'),
@@ -61,7 +64,7 @@
     ])
   }
 
-  window.tick2 = {
+  window.mods.tick2 = {
     board: Board(20, 20, [
       Cell(1, 0, 'aaa', CellState.ActiveStill, 'red'),
       Cell(1, 1, 'aaa', CellState.ActiveStill,'blue'),
