@@ -35,15 +35,28 @@ export class Board {
 
   private init() {
     const hashCells = this.cells
-    this.listcells.forEach((pos) => {
-      hashCells[pos.x] = hashCells[pos.x] || {}
-      hashCells[pos.x][pos.y] = pos
-    })
+    try {
+      this.listcells.forEach((pos) => {
+        hashCells[pos.x] = hashCells[pos.x] || {}
+        hashCells[pos.x][pos.y] = pos
+      })
+    } catch(error) {
+      this.logger.err(error, Board.errorTypes.INIT_FAIL)
+      throw error
+    }
+  }
+
+  public isValidPos(pos: IPos) {
+    return (this.cells[pos.x] && this.cells[pos.x][pos.y])
   }
 
   public width: number
   public height: number
   public cells: HashCells
+
+  public static errorTypes: {
+    INIT_FAIL: 'fail to init a board',
+  }
 
   /**
    * Actual cells
