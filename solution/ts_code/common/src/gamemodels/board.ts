@@ -46,8 +46,12 @@ export class Board {
     }
   }
 
-  public isValidPos(pos: IPos) {
-    return (this.cells[pos.x] && this.cells[pos.x][pos.y])
+  public isValidPos(pos: IPos): boolean {
+    if ((this.cells[pos.x] &&
+       this.cells[pos.x][pos.y])) {
+      return true
+    }
+    return false
   }
 
   public width: number

@@ -20,19 +20,27 @@
     }
   });
 
-  Vue.component('cell', {
-    template: `<span class="cell" v-bind:style="styleObject"></span>`,
-    props: ['x', 'y', 'board'],
+  Vue.component('color-pos',{
+    template: `<span class="color-pos" v-bind:style="styleObject"></span>`,
+    props: ['color'],
     computed: {
       styleObject: function() {
-        const cells = this.board.cells;
-        if(!(cells[this.x] && cells[this.x][this.y])) {
-          return {};
-        }
-        const cell = cells[this.x][this.y];
         return {
-          backgroundColor: cell.overlayColor
+          backgroundColor: this.color
         };
+      }
+    }    
+  })
+
+  Vue.component('cell', {
+    template: `<span class="cell"><color-pos :color=color></color-pos></span>`,
+    props: ['x', 'y', 'board'],
+    computed: {
+      color: function() {
+        if (this.board.isValidPos({x: this.x, y: this.y})) {
+          return this.board.cells[this.x][this.y].overlayColor
+        }
+        return null
       }
     }
   })
@@ -52,47 +60,26 @@
     props: ['board']
   });
 
-/*
-  Vue.component('pattern-pos', {
-    template: `<span class="cell" v-bind:style="styleObject"></span>`,
-    props: ['x', 'y', 'color'],
-    computed: {
-      styleObject: function() {
-        const cells = this.board.cells;
-        if(!(cells[this.x] && cells[this.x][this.y])) {
-          return {};
-        }
-        const cell = cells[this.x][this.y];
-        return {
-          backgroundColor: this.color
-        };
-      }
-    }    
-  })
-
   Vue.component('pattern-board', {
-    template: `
-    <table class="board">
-        <tbody>
-          <tr v-for="h in height">
-            <td v-for="w in width">
-              <pattern-pos :x=w-1 :y=h-1 :color=color :board=patternBoard></pattern-pos>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    template:`
+    <table class="board pattern-board">
+    <tbody>
+        <tr v-for="h in board.height">
+          <td v-for="w in board.width">
+            <color-pos class="pattern-pos" :color=color v-if="hasValue(w-1, h-1)" ></color-pos>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     `,
-    props: ['pattern', 'height', 'width'],
-    data: function() {
-
-      const patternBoard = mods.Board(10, 10, this.pattern)
-
-      return {
-        patternBoard: {
-          
-        }
-      }
-    }
+    props: ['color', 'board'],
+    methods: {
+      hasValue: function(x, y) {
+        const offsetX = parseInt(this.board.width/3);
+        const offsetY = parseInt(this.board.height/3);
+        return this.board.isValidPos({ x: x - offsetX, y: y - offsetY });
+      },
+    },
   })
-*/
+
 })(window)

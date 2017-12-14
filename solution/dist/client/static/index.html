@@ -27,8 +27,10 @@
                     <div class="panel-heading">
                         Preset Pattern
                     </div>
-                    <div class="panel-body">
-                        some text
+                    <div class="panel-body row">
+                        <div class="pattern-board-container" v-for="patternBoard in presetPatternBoards">
+                          <pattern-board :color=currentPlayer.color :board="patternBoard"></pattern-board>
+                        </div>
                     </div>
                   </div>              
             </div>

@@ -15,12 +15,23 @@
     
       const currentPlayer = window.mods.currentPlayer;
 
+      const presetPatternBoards = window.mods.presetPatternBoards
+
       const app = new Vue({
         el: '#app',
         data: {
           game,
           currentPlayer,
-          players
+          players,
+          presetPatternBoards,
+          config: {
+            pattern: {
+              board: {
+                height: 10,
+                width: 10
+              }
+            }
+          }
         }
       });
 
