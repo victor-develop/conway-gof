@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Conway s Game of Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/site.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.10/vue.min.js"></script>
+    <script src="datamodels.js"></script>
+    <script src="vuecomponents.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>
+            Conway's Game of Life
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        Game World
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                        <game-board :board=game.board></game-board>
+                    </div>
+                    <div class="panel-footer">
+                      
+                    </div>
+                  </div>              
+            </div>
+        </div>
+        <div class="col-md-4 players-container">
+          <div class="row">
+            <div class="col-md-12">
+              <h3>
+                Players
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <ul>
+                <li v-for="player in players">
+                  <player-banner :current-player="currentPlayer" :player="player" ></player-banner> 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
