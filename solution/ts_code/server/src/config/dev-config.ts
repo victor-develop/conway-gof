@@ -4,7 +4,7 @@ import * as path from 'path'
 
 const devConfig: IConfig = {
   serveStatic: true,
-  staticDir: path.resolve(serverRoot, '..', 'static'),
+  staticDir: path.resolve(serverRoot, '..', 'client', 'static'),
 }
 
 export { devConfig }
