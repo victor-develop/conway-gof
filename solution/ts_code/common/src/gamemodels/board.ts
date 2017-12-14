@@ -12,6 +12,10 @@ export class BoardBuilder {
 
   private logger: ILogger
 
+  constructor(aLogger: ILogger) {
+    this.logger = aLogger
+  }
+
   public Create(w: number, h: number, positions: IPos[]): Board {
     return new Board(w, h, positions, this.logger)
   }
