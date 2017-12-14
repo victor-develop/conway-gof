@@ -1,7 +1,8 @@
 import { ICellState } from './icell-state'
 import { Color } from './color'
+import IPos from './ipos'
 
-export default interface ICell {
+export default interface ICell extends IPos {
   x: number
   y: number
 
