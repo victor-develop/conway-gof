@@ -1,12 +1,5 @@
-import Foo from './foo'
-import Bar from './bar'
+import { presets } from '../../common/gamemodels/preset-pattern'
 
-// see if refresh
-// for compatibility with legacy js
-(<any>window).foobar = () => {
-  const foo = new Foo()
-  const bar = new Bar()
-  const a = 1
-  const b = 2
-  return bar.bar(foo.add(a, b))
-}
+const mods = (<any>window).mods = (<any>window).mods || {}
+
+mods.presetPatterns = presets

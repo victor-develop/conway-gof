@@ -2,7 +2,9 @@
   
     document.addEventListener("DOMContentLoaded", ready);
   
+    // TODO: failure handling
     function ready() {
+
       const Vue = window.Vue;
 
       const game = window.mods.game;
