@@ -35,7 +35,7 @@ export class Client {
 
   private setEvtListener(): Promise<Client> {
     this.gameApi.$on(apiEvents.IGameStateUpdate, this.updateGameState)
-    this.gameApi.$on(playerEventType.putCellsAttemp, this.attemptPutCells)
+    this.eventBus.$on(playerEventType.putCellsAttemp, this.attemptPutCells)
 
     return Promise.resolve(this)
   }

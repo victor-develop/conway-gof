@@ -10,6 +10,7 @@ import IPos from '../../common/src/gamemodels/ipos'
 import IResponse from '../../common/src/api/IResponse'
 import { INotice } from './inotice'
 import { IEventBus } from './ievent-bus'
+import { mockGameApi } from '../tests/mocks/mockGameApi'
 
 window.addEventListener('DOMContentLoaded', boot)
 
@@ -28,30 +29,13 @@ function boot(): Client {
 
   const eventBus: IEventBus = new Vue()
 
-  // TODO: implement a real one
-
-  const mockGameApi: IGameApi = (function(){
-    const response: IResponse = {
-      messages: ['success'],
-      success: true,
-      errors: [],
-      data: {
-
-      },
-    }
-    return {
-      connect: () => Promise.resolve(response),
-      cells: {
-        patch: (positions: IPos[]) => Promise.resolve(response),
-      },
-    }
-  })()
+  const aGameApi = mockGameApi(tempLogger)
 
   const mockNotice: INotice = {
     notice: (<any>app).$notify,
   }
 
-  const client = Client.create(tempLogger)(eventBus, <any>app, mockGameApi, mockNotice)
+  const client = Client.create(tempLogger)(eventBus, <any>app, aGameApi, mockNotice)
 
   return client
 }
