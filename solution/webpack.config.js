@@ -17,6 +17,9 @@ module.exports = {
   resolve: {
     extensions: [ '.tsx', '.ts' ]
   },
+  externals: {
+    vue:'Vue'
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
