@@ -7,14 +7,7 @@ import { IGameApi } from './gameapi/IGameApi'
 import { INotice } from './inotice'
 import { IEventBus } from './ievent-bus'
 import { ClientState, InitialValue } from './client-state'
-
-
-const eventType = {
-  enter: 'enter',
-  newPlayerIn: 'new-player-in',
-  playerOut: 'player-out',
-  IGameStateUpdate: 'game-state-update',
-}
+import { apiEvents } from '../../common/src/api/api-events'
 
 const playerEventType = {
   putCellsAttemp: 'put-cells-attempt',
@@ -27,7 +20,6 @@ const logMessage = {
 }
 
 export class Client {
-
   private eventBus: IEventBus
   private state: ClientState
   private logger: ILogger
@@ -42,9 +34,9 @@ export class Client {
   }
 
   private setEvtListener(): Promise<Client> {
-    this.eventBus.$on(eventType.IGameStateUpdate, this.updateGameState)
-    this.eventBus.$on(playerEventType.putCellsAttemp, this.attemptPutCells)
-    this.eventBus.$on()
+    this.gameApi.$on(apiEvents.IGameStateUpdate, this.updateGameState)
+    this.gameApi.$on(playerEventType.putCellsAttemp, this.attemptPutCells)
+
     return Promise.resolve(this)
   }
 
@@ -80,7 +72,6 @@ export class Client {
     state: ClientState,
     gameApi: IGameApi,
     noticer: INotice) {
-
     this.eventBus = eventBus
     this.state = state
     this.gameApi = gameApi
@@ -91,7 +82,5 @@ export class Client {
   public static create =
     (logger: ILogger) =>
     (eventBus: IEventBus, state: ClientState,
-       gameapi: IGameApi, noticer: INotice) =>
-    new Client(logger, eventBus, state, gameapi, noticer)
-
-}
+      gameapi: IGameApi, noticer: INotice) =>
+        new Client(logger, eventBus, state, gameapi, noticer)}
