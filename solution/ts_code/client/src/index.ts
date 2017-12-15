@@ -2,7 +2,7 @@ import { presets } from '../../common/src/gamemodels/preset-pattern'
 import { BoardBuilder } from '../../common/src/gamemodels/board'
 import ILogger from '../../common/src/ilogger'
 import TempLogger from '../../common/src/temp-logger'
-import { Pattern } from '../../common/src/gamemodels/ipattern';
+import { Pattern } from '../../common/src/gamemodels/ipattern'
 
 const mods = (<any>window).mods = (<any>window).mods || {}
 const log = console.log
