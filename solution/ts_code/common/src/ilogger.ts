@@ -1,6 +1,8 @@
-interface ILogger {
-  info(obj: any): void
-  err(obj:any, message: string): void
+import IChildable from './ichildable'
+
+interface ILogger extends IChildable<ILogger> {
+  info
+  err
 }
 
 export default ILogger
