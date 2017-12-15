@@ -10,7 +10,7 @@ import { ClientState, InitialValue } from './client-state'
 import { apiEvents } from '../../common/src/api/api-events'
 
 const playerEventType = {
-  putCellsAttemp: 'put-cells-attempt',
+  putCellsAttempt: 'put-cells-attempt',
 }
 
 const logMessage = {
@@ -35,7 +35,7 @@ export class Client {
 
   private setEvtListener(): Promise<Client> {
     this.gameApi.$on(apiEvents.IGameStateUpdate, this.updateGameState)
-    this.eventBus.$on(playerEventType.putCellsAttemp, this.attemptPutCells)
+    this.eventBus.$on(playerEventType.putCellsAttempt, this.attemptPutCells)
 
     return Promise.resolve(this)
   }

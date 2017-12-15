@@ -1,4 +1,4 @@
 export interface IEventBus {
   $emit
-  $on: (eventKey: string, callback: () => void) => void
+  $on: (eventKey: string, callback) => any
 }
