@@ -13,6 +13,7 @@ export default class TempLogger implements ILogger, IChildable<TempLogger> {
 
   constructor(identifier) {
     this.identifier = identifier
+    this.log = log
   }
 
   child(identifier): Promise<TempLogger> {
