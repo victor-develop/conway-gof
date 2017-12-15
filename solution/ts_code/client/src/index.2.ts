@@ -27,15 +27,15 @@ function boot(): Client {
 
   const tempLogger: ILogger = new TempLogger(logMessages.STARTING)
 
-  const eventBus: IEventBus = new Vue()
+  const mainEventBus: IEventBus = new Vue()
 
-  const aGameApi = mockGameApi(tempLogger)
+  const aGameApi = mockGameApi(tempLogger, new Vue())
 
   const mockNotice: INotice = {
     notice: (<any>app).$notify,
   }
 
-  const client = Client.create(tempLogger)(eventBus, <any>app, aGameApi, mockNotice)
+  const client = Client.create(tempLogger)(mainEventBus, <any>app, aGameApi, mockNotice)
 
   return client
 }

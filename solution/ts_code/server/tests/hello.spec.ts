@@ -8,7 +8,7 @@ import { config } from '../src/config/config'
 import * as cheerio from 'cheerio'
 
 const testPort = '3000'
-const testLogger = new TempLogger()
+const testLogger = new TempLogger('hello test')
 const bootServer = () => new Server(testLogger,testPort)
 
 describe('Everything', () => {
