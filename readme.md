@@ -92,8 +92,11 @@ Credits to below, where I adapted/learnt from their code for
 Drawing game board
  - Codebyte: https://coderbyte.com/tutorial/create-a-simple-chessboard-using-html-css-and-jquery
 
-Boilerplate reference
+Reference for setting up the project structure and environment
 * Rising Stack: https://blog.risingstack.com/building-a-node-js-app-with-typescript-tutorial/
+
+* luixaviles: 
+https://github.com/luixaviles/socket-io-typescript-chat
 
 Readme Template
 * PurpleBooth: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
