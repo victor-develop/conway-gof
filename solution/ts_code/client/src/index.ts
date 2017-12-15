@@ -6,7 +6,7 @@ import { Pattern } from '../../common/src/gamemodels/ipattern'
 
 const mods = (<any>window).mods = (<any>window).mods || {}
 const log = console.log
-const tempLogger = new TempLogger()
+const tempLogger = new TempLogger('Client start')
 const boardBuilder = new BoardBuilder(tempLogger)
 
 const patternWidth = 10
