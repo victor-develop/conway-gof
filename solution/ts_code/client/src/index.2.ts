@@ -20,6 +20,7 @@ const logMessages = {
 
 function boot(): Client {
 
+  // will be used as ClientState
   const app = new Vue({
     el: '#app',
     data: initialClientState,

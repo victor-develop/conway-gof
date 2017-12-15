@@ -3,6 +3,8 @@ import IResponse from '../../../common/src/api/IResponse'
 import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 import { IEventBus } from '../../src/ievent-bus'
+import { apiEvents } from '../../../common/src/api/api-events'
+import { mockGameState } from '../../../client/tests/mocks/mockGameState'
 
 export const mockGameApi = function(logger: ILogger, eventBus: IEventBus) :IGameApi {
   const response: IResponse = {
@@ -16,7 +18,10 @@ export const mockGameApi = function(logger: ILogger, eventBus: IEventBus) :IGame
   return {
     on: eventBus.on,
     emit: eventBus.emit,
-    connect: () => <any>Promise.resolve(response),
+    connect: () => {
+      eventBus.emit(apiEvents.IGameStateUpdate, mockGameState(logger))
+      return <any>Promise.resolve(response)
+    },
     cells: {
       patch: (positions: IPos[]) => Promise.resolve(response),
     },

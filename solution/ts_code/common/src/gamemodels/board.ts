@@ -23,6 +23,10 @@ export class BoardBuilder {
 
 export class Board {
 
+  public static create = (logger: ILogger) =>
+    (w: number, h: number, positions: IPos[]) =>
+      new Board(w, h, positions, logger)
+
   constructor(w: number, h: number, positions: IPos[], aLogger: ILogger) {
     this.width = w
     this.height = h
