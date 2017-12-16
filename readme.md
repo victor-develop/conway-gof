@@ -75,6 +75,12 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 Why do i curry some class constructor with a create() method?
  - To separate functional dependencies(e.g. logger) and business-logic dependencies
 
+## Code naming convention
+
+All follows airbnb-base lint standard as specified in `tslint.json`, and some extra stuff:
+
+ - For class member assessors like getter/setter, e.g. class `Foo` has a private member `bar`, then its getter should has its class name prepended with first letter lowercased, i.e. `fooBar` as its getter name
+
 ## Authors
 
 * **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
