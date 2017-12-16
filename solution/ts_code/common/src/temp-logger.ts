@@ -6,7 +6,7 @@ const log = console.log
 /**
  * Stop using it when starting develop backend service
  */
-export default class TempLogger implements ILogger, IChildable<TempLogger> {
+export default class TempLogger implements ILogger {
 
   private log
   private identifier
@@ -32,12 +32,17 @@ export default class TempLogger implements ILogger, IChildable<TempLogger> {
     return Promise.resolve(new TempLogger(childIdentifier))
   }
 
-  info(obj: any) {
-    this.log(this.makeLog(obj))
+  info(obj: any, message: string = '') {
+    this.log(this.makeLog({
+      message,
+      info: obj,
+    }))
   }
 
   err(obj: any, message: string): void {
-    this.info(message)
-    this.info(obj)
+    this.log(this.makeLog({
+      message,
+      err: obj,
+    }))
   }
 }

@@ -1,3 +1,3 @@
 export interface INotice {
-  notice(msg: string): void
+  notice(msg: string | string[]): void
 }

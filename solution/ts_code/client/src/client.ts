@@ -9,6 +9,7 @@ import { IEventBus } from './ievent-bus'
 import { ClientState, InitialValue } from './client-state'
 import { apiEvents } from '../../common/src/api/api-events'
 import { playerEventType } from './event-types'
+import IErrorResponse from '../../common/src/api/IErrorResponse'
 
 const logMessage = {
   DATA_BE_SENT: 'data to be sent',
@@ -58,9 +59,9 @@ export class Client {
 
       this.gameApi
         .cells.patch(positions)
-        .catch((err) => {
-          transactionLogger.info(err, logMessage.FAIL_PUT_CELL)
-          this.noticer.notice(err.message)
+        .catch((err: IErrorResponse) => {
+          transactionLogger.err(err, logMessage.FAIL_PUT_CELL)
+          this.noticer.notice(err.messages)
         })
     })
   }

@@ -5,17 +5,28 @@ import { ILogger } from '../../../common/src/services'
 import { IEventBus } from '../../src/ievent-bus'
 import { apiEvents } from '../../../common/src/api/api-events'
 import { mockGameState } from '../../../client/tests/mocks/mockGameState'
+import IErrorResponse from '../../../common/src/api/IErrorResponse'
 
 function response(uploadedData: any): IResponse {
   return {
     messages: ['success'],
     success: true,
-    errors: [],
     data: uploadedData,
   }
 }
 
-type cb = () => void
+
+const emptyResponse = response({})
+
+const failCellPatch: IErrorResponse = {
+  messages:['fail patch intentionally'],
+  errors: [],
+}
+
+export const mockGameApiResponse = {
+  emptyResponse,
+  failCellPatch,
+}
 
 export interface mockGameApiCallbacks {
   patchCallback: (positions: IPos[]) => void
@@ -29,8 +40,6 @@ export const mockGameApi = function(
   logger: ILogger,
   eventBus: IEventBus,
   callbacks: mockGameApiCallbacks = emptyCallbacks) :IGameApi {
-
-  const emptyResponse = response({})
 
   return {
     on: (...args: any[]) => eventBus.on.apply(eventBus, args),
