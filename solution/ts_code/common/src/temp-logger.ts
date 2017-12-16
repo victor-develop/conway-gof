@@ -11,6 +11,13 @@ export default class TempLogger implements ILogger, IChildable<TempLogger> {
   private log
   private identifier
 
+  private makeLog(obj: any) {
+    return {
+      identifier: this.identifier,
+      content: obj,
+    }
+  }
+
   constructor(identifier) {
     this.identifier = identifier
     this.log = log
@@ -26,11 +33,11 @@ export default class TempLogger implements ILogger, IChildable<TempLogger> {
   }
 
   info(obj: any) {
-    this.log(obj)
+    this.log(this.makeLog(obj))
   }
 
   err(obj: any, message: string): void {
-    this.log(obj)
-    this.log(message)
+    this.info(message)
+    this.info(obj)
   }
 }
