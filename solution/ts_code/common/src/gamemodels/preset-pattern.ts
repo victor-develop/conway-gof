@@ -26,4 +26,4 @@ export const tub: Pattern = [
   { x: 1, y: 2 },
 ]
 
-export const presets: Pattern[] = [blinker, toad, tub]
+export const presetPatterns: Pattern[] = [blinker, toad, tub]

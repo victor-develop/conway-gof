@@ -2,14 +2,14 @@ import 'mocha'
 import * as assert from 'assert'
 import { Board } from '../../../common/src/gamemodels/board'
 import TempLogger from '../../../common/src/temp-logger'
-import { presets } from '../../../common/src/gamemodels/preset-pattern'
+import { presetPatterns } from '../../../common/src/gamemodels/preset-pattern'
 
 const testLogger = new TempLogger('Board test')
 
 describe('Board.create method', () => {
   const width = 10
   const height = 10
-  const positions = presets[0]
+  const positions = presetPatterns[0]
   describe('create() a normal board', () => {
     const board = Board.create(width, height, positions)
     it('will have a new Board instance', (done) => {
