@@ -34,8 +34,10 @@ export class Client {
   }
 
   private setEvtListener(): Promise<Client> {
-    this.gameApi.on(apiEvents.IGameStateUpdate, this.updateGameState)
-    this.eventBus.on(playerEventType.putCellsAttempt, this.attemptPutCells)
+    this.gameApi.on(apiEvents.IGameStateUpdate,
+      (gameState: IGameState) => this.updateGameState(gameState))
+    this.eventBus.on(playerEventType.putCellsAttempt,
+      (positions: IPos[]) => this.attemptPutCells(positions))
 
     return Promise.resolve(this)
   }
@@ -72,6 +74,7 @@ export class Client {
     state: ClientState,
     gameApi: IGameApi,
     noticer: INotice) {
+    this.logger = logger
     this.eventBus = eventBus
     this.state = state
     this.gameApi = gameApi
