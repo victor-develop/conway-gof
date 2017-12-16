@@ -1,4 +1,4 @@
-import { presets } from '../../common/src/gamemodels/preset-pattern'
+import { presetPatterns } from '../../common/src/gamemodels/preset-pattern'
 import { BoardBuilder } from '../../common/src/gamemodels/board'
 import ILogger from '../../common/src/ilogger'
 import TempLogger from '../../common/src/temp-logger'
@@ -12,7 +12,7 @@ const boardBuilder = new BoardBuilder(tempLogger)
 const patternWidth = 10
 const patternHeight = 10
 
-mods.presetPatternBoards = presets
+mods.presetPatternBoards = presetPatterns
   .map(pattern =>
     boardBuilder.Create(patternWidth, patternHeight, pattern))
 

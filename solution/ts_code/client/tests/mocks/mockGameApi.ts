@@ -15,7 +15,20 @@ function response(uploadedData: any): IResponse {
   }
 }
 
-export const mockGameApi = function(logger: ILogger, eventBus: IEventBus) :IGameApi {
+type cb = () => void
+
+export interface mockGameApiCallbacks {
+  patchCallback: (positions: IPos[]) => void
+}
+
+const emptyCallbacks: mockGameApiCallbacks = {
+  patchCallback: null,
+}
+
+export const mockGameApi = function(
+  logger: ILogger,
+  eventBus: IEventBus,
+  callbacks: mockGameApiCallbacks = emptyCallbacks) :IGameApi {
 
   const emptyResponse = response({})
 
@@ -24,7 +37,12 @@ export const mockGameApi = function(logger: ILogger, eventBus: IEventBus) :IGame
     emit: (...args: any[]) => eventBus.emit.apply(eventBus,args),
     connect: () => Promise.resolve(emptyResponse),
     cells: {
-      patch: (positions: IPos[]) => Promise.resolve(response(positions)),
+      patch: (positions: IPos[]) => {
+        if (callbacks.patchCallback) {
+          callbacks.patchCallback(positions)
+        }
+        return Promise.resolve(response(positions))
+      },
     },
   }
 }
