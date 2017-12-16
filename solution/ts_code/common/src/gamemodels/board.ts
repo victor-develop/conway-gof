@@ -1,6 +1,7 @@
 import ICell from './icell'
 import IPos from './ipos'
 import ILogger from '../ilogger'
+import { arch } from 'os';
 
 interface HashCells {
   [x: number]: {
@@ -16,20 +17,24 @@ export class BoardBuilder {
     this.logger = aLogger
   }
 
-  public Create(w: number, h: number, positions: IPos[]): Board {
-    return new Board(w, h, positions, this.logger)
+  public Create(width: number, height: number, positions: IPos[]): Board {
+    return new Board(width, height, positions, this.logger)
   }
 }
 
 export class Board {
 
   public static create = (logger: ILogger) =>
-    (w: number, h: number, positions: IPos[]) =>
-      new Board(w, h, positions, logger)
+    (width: number, height: number, positions: IPos[]) =>
+      new Board(width, height, positions, logger)
 
-  constructor(w: number, h: number, positions: IPos[], aLogger: ILogger) {
-    this.width = w
-    this.height = h
+  constructor(width: number, height: number, positions: IPos[], aLogger: ILogger) {
+
+    validatePositive(width, 'width')
+    validatePositive(height, 'height')
+
+    this.width = width
+    this.height = height
     this.cells = {}
 
     this.listcells = positions
@@ -71,4 +76,10 @@ export class Board {
    */
   private listcells: IPos[]
   private logger: ILogger
+}
+
+const validatePositive = (arg, argName) => {
+  if (arg < 0) {
+    throw new RangeError(`${argName} should not be negative: ${arg}`)
+  }
 }
