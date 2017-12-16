@@ -79,6 +79,10 @@ export class Client {
     this.init()
   }
 
+  public get appState(): ClientState {
+    return this.state
+  }
+
   public static create =
     (logger: ILogger) =>
     (eventBus: IEventBus, state: ClientState,

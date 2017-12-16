@@ -33,7 +33,7 @@ describe('Board.create method', () => {
 
   describe('creat() with unexpected width and height', () => {
     it('shoud reject negative width or height', (done) => {
-      const create = Board.create(testLogger)
+      const create = Board.create
       const minusWidth = -10
       const minusHeight = -10
       asserRangeError(() => {

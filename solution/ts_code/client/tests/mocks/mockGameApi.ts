@@ -18,10 +18,7 @@ export const mockGameApi = function(logger: ILogger, eventBus: IEventBus) :IGame
   return {
     on: eventBus.on,
     emit: eventBus.emit,
-    connect: () => {
-      eventBus.emit(apiEvents.IGameStateUpdate, mockGameState(logger))
-      return <any>Promise.resolve(response)
-    },
+    connect: () => <any>Promise.resolve(response),
     cells: {
       patch: (positions: IPos[]) => Promise.resolve(response),
     },

@@ -24,11 +24,10 @@ export class BoardBuilder {
 
 export class Board {
 
-  public static create = (logger: ILogger) =>
-    (width: number, height: number, positions: IPos[]) =>
-      new Board(width, height, positions, logger)
+  public static create = (width: number, height: number, positions: IPos[]) =>
+      new Board(width, height, positions)
 
-  constructor(width: number, height: number, positions: IPos[], aLogger: ILogger) {
+  constructor(width: number, height: number, positions: IPos[]) {
 
     validatePositive(width, 'width')
     validatePositive(height, 'height')
@@ -38,7 +37,6 @@ export class Board {
     this.cells = {}
 
     this.listcells = positions
-    this.logger = aLogger
     this.init()
   }
 
@@ -75,7 +73,6 @@ export class Board {
    * Actual cells
    */
   private listcells: IPos[]
-  private logger: ILogger
 }
 
 const validatePositive = (arg, argName) => {

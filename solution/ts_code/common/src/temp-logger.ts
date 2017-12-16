@@ -14,6 +14,7 @@ export default class TempLogger implements ILogger, IChildable<TempLogger> {
   constructor(identifier) {
     this.identifier = identifier
     this.log = log
+    this.log(`logger of ${identifier} created`)
   }
 
   child(identifier): Promise<TempLogger> {
