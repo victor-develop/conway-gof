@@ -18,6 +18,12 @@ const logger = new TempLogger(mainTestTitle)
 
 describe('Client test', () => {
 
+  describe('server emits event to update players list', () => {
+    it('should update players list', () => {
+
+    })
+  })
+
   describe('server emits event to update client game state', () => {
     it('should update game state after event fired', (done) => {
       const aGameApi = mockGameApi(logger, createEventBus())
@@ -33,8 +39,7 @@ describe('Client test', () => {
     })
   })
 
-
-  describe('player try to patch some cells', () => {
+  describe('IPlayer try to patch some cells', () => {
     const positionsToPut = presetPatterns[1]
     it('should call gameApi.patch after event fired, and will fail by timeout', (done) => {
       const aGameApi = mockGameApi(logger, createEventBus(), {

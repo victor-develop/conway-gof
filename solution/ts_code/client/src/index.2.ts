@@ -1,5 +1,5 @@
 import IGameState from './game-state'
-import Player from '../../common/src/gamemodels/player'
+import IPlayer from '../../common/src/gamemodels/IPlayer'
 import Vue from 'vue'
 import { Client } from './client'
 import { ClientState, initialClientState } from './client-state'

@@ -1,11 +1,11 @@
-import Player from '../../common/src/gamemodels/player'
+import IPlayer from '../../common/src/gamemodels/IPlayer'
 import { Board } from '../../common/src/gamemodels/board'
 
 type unixtime = number
 
 export default interface IGameState {
   updateAt: unixtime,
-  players: Player[],
+  players: IPlayer[],
   board: Board
 }
 

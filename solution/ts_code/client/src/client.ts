@@ -1,5 +1,5 @@
 import IGameState from './game-state'
-import Player from '../../common/src/gamemodels/player'
+import IPlayer from '../../common/src/gamemodels/IPlayer'
 import IPos from '../../common/src/gamemodels/ipos'
 import { Board } from '../../common/src/gamemodels/board'
 import { ILogger } from '../../common/src/services'

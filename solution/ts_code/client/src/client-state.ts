@@ -1,5 +1,5 @@
 import IGameState from './game-state'
-import Player from '../../common/src/gamemodels/player'
+import IPlayer from '../../common/src/gamemodels/IPlayer'
 import { Board } from '../../common/src/gamemodels/board'
 
 export class InitialValue {
@@ -24,7 +24,7 @@ export const initialClientState: ClientState = {
 
 export interface ClientState {
   game: InitialValue | IGameState
-  currentPlayer: InitialValue | Player
-  players: InitialValue | Player[]
+  currentPlayer: InitialValue | IPlayer
+  players: InitialValue | IPlayer[]
   presetPatternBoards: InitialValue | Board[]
 }
