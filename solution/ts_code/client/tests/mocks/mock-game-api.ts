@@ -4,7 +4,7 @@ import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 import { IEventBus } from '../../src/ievent-bus'
 import { apiEvents } from '../../../common/src/api/api-events'
-import { mockGameState } from '../../../client/tests/mocks/mockGameState'
+import { mockGameState } from '../../../client/tests/mocks/mock-game-state'
 import IErrorResponse from '../../../common/src/api/IErrorResponse'
 
 function response(uploadedData: any): IResponse {

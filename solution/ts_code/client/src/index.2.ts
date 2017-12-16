@@ -1,5 +1,5 @@
 import IGameState from './game-state'
-import IPlayer from '../../common/src/gamemodels/IPlayer'
+import IPlayer from '../../common/src/gamemodels/iplayer'
 import Vue from 'vue'
 import { Client } from './client'
 import { ClientState, initialClientState } from './client-state'
@@ -10,7 +10,7 @@ import IPos from '../../common/src/gamemodels/ipos'
 import IResponse from '../../common/src/api/IResponse'
 import { INotice } from './inotice'
 import { IEventBus } from './ievent-bus'
-import { mockGameApi } from '../tests/mocks/mockGameApi'
+import { mockGameApi } from '../tests/mocks/mock-game-api'
 
 window.addEventListener('DOMContentLoaded', boot)
 

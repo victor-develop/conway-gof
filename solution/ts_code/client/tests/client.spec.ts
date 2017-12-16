@@ -3,15 +3,17 @@ import * as assert from 'assert'
 import { Client } from '../src/client'
 import TempLogger from '../../common/src/temp-logger'
 import { initialClientState } from '../src/client-state'
-import { mockGameApi, mockGameApiResponse } from './mocks/mockGameApi'
-import noticer from './mocks/mockNotice'
+import { mockGameApi, mockGameApiResponse } from './mocks/mock-game-api'
+import noticer from './mocks/mock-notice'
 import { createEventBus } from '../src/event-bus'
 import { apiEvents } from '../../common/src/api/api-events'
-import { mockGameState } from './mocks/mockGameState'
+import { mockGameState } from './mocks/mock-game-state'
 import { playerEventType } from '../src/event-types'
 import { presetPatterns } from '../../common/src/gamemodels/preset-pattern'
 import IPos from '../../common/src/gamemodels/ipos'
 import { INotice } from '../src/inotice'
+import { mockGameStates } from './mocks/mock-game-state'
+import IGameState from '../src/game-state'
 
 const mainTestTitle = 'Client test'
 const logger = new TempLogger(mainTestTitle)
@@ -20,7 +22,13 @@ describe('Client test', () => {
 
   describe('server emits event to update players list', () => {
     it('should update players list', () => {
-
+      const aGameApi = mockGameApi(logger, createEventBus())
+      const createClient = () => Client
+        .create(logger)(createEventBus(), initialClientState, aGameApi, noticer)
+      const client = createClient()
+      aGameApi.emit(apiEvents.IGameStateUpdate, mockGameStates.playersOnly)
+      const clientPlayers = (<IGameState>client.clientState.game).players
+      assert.deepEqual(clientPlayers, mockGameStates.playersOnly)
     })
   })
 
@@ -33,7 +41,6 @@ describe('Client test', () => {
       const client = createClient()
 
       aGameApi.emit(apiEvents.IGameStateUpdate, aGameState)
-      const clientState = client.clientState
       assert.deepEqual(client.clientState.game, aGameState)
       done()
     })
