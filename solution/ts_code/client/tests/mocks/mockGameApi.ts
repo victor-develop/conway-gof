@@ -6,21 +6,25 @@ import { IEventBus } from '../../src/ievent-bus'
 import { apiEvents } from '../../../common/src/api/api-events'
 import { mockGameState } from '../../../client/tests/mocks/mockGameState'
 
-export const mockGameApi = function(logger: ILogger, eventBus: IEventBus) :IGameApi {
-  const response: IResponse = {
+function response(uploadedData: any): IResponse {
+  return {
     messages: ['success'],
     success: true,
     errors: [],
-    data: {
-
-    },
+    data: uploadedData,
   }
+}
+
+export const mockGameApi = function(logger: ILogger, eventBus: IEventBus) :IGameApi {
+
+  const emptyResponse = response({})
+
   return {
     on: (...args: any[]) => eventBus.on.apply(eventBus, args),
     emit: (...args: any[]) => eventBus.emit.apply(eventBus,args),
-    connect: () => <any>Promise.resolve(response),
+    connect: () => Promise.resolve(emptyResponse),
     cells: {
-      patch: (positions: IPos[]) => Promise.resolve(response),
+      patch: (positions: IPos[]) => Promise.resolve(response(positions)),
     },
   }
 }
