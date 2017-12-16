@@ -20,15 +20,18 @@ const logger = new TempLogger(mainTestTitle)
 
 describe('Client test', () => {
 
+
   describe('server emits event to update players list', () => {
-    it('should update players list', () => {
+    it('should update players list', (done) => {
       const aGameApi = mockGameApi(logger, createEventBus())
       const createClient = () => Client
-        .create(logger)(createEventBus(), initialClientState, aGameApi, noticer)
+        .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
       const client = createClient()
       aGameApi.emit(apiEvents.IGameStateUpdate, mockGameStates.playersOnly)
       const clientPlayers = (<IGameState>client.clientState.game).players
-      assert.deepEqual(clientPlayers, mockGameStates.playersOnly)
+      logger.info(clientPlayers)
+      assert.deepEqual(clientPlayers, mockGameStates.playersOnly.players)
+      done()
     })
   })
 
@@ -37,10 +40,11 @@ describe('Client test', () => {
       const aGameApi = mockGameApi(logger, createEventBus())
       const aGameState = mockGameState(logger)
       const createClient = () => Client
-        .create(logger)(createEventBus(), initialClientState, aGameApi, noticer)
+        .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
       const client = createClient()
 
       aGameApi.emit(apiEvents.IGameStateUpdate, aGameState)
+      logger.info(client.clientState.game)
       assert.deepEqual(client.clientState.game, aGameState)
       done()
     })
@@ -56,7 +60,7 @@ describe('Client test', () => {
         },
       })
       const client = Client
-        .create(logger)(createEventBus(), initialClientState, aGameApi, noticer)
+        .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
       client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
     })
 
@@ -70,7 +74,7 @@ describe('Client test', () => {
       }
 
       const client = Client
-      .create(logger)(createEventBus(), initialClientState, aGameApi, aNoticer)
+      .create(logger)(createEventBus(), initialClientState(), aGameApi, aNoticer)
       client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
     })
   })

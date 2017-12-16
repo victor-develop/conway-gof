@@ -15,11 +15,13 @@ export class InitialValue {
   }
 }
 
-export const initialClientState: ClientState = {
-  game: InitialValue.instance,
-  currentPlayer: InitialValue.instance,
-  players: InitialValue.instance,
-  presetPatternBoards: InitialValue.instance,
+export function initialClientState(): ClientState {
+  return {
+    game: InitialValue.instance,
+    currentPlayer: InitialValue.instance,
+    players: InitialValue.instance,
+    presetPatternBoards: InitialValue.instance,
+  }
 }
 
 export interface ClientState {
