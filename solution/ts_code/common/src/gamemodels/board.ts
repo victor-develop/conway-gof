@@ -1,7 +1,7 @@
 import ICell from './icell'
 import IPos from './ipos'
 import ILogger from '../ilogger'
-import { arch } from 'os';
+import { arch } from 'os'
 
 interface HashCells {
   [x: number]: {
