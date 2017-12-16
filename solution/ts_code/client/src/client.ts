@@ -8,10 +8,7 @@ import { INotice } from './inotice'
 import { IEventBus } from './ievent-bus'
 import { ClientState, InitialValue } from './client-state'
 import { apiEvents } from '../../common/src/api/api-events'
-
-const playerEventType = {
-  putCellsAttempt: 'put-cells-attempt',
-}
+import { playerEventType } from './event-types'
 
 const logMessage = {
   DATA_BE_SENT: 'data to be sent',
@@ -82,8 +79,12 @@ export class Client {
     this.init()
   }
 
-  public get appState(): ClientState {
+  public get clientState(): ClientState {
     return this.state
+  }
+
+  public get clientEvent(): IEventBus {
+    return this.eventBus
   }
 
   public static create =
