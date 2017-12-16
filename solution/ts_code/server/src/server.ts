@@ -34,7 +34,7 @@ export default class Server {
   public boot(): Server {
     this.appInstance.listen(this.portInUse, (err) => {
       if(err) {
-        return this.logger.info(err)
+        return this.logger.err(err, `cannot listen to port ${this.portInUse}`)
       }
     })
     this.logger.info(`listening on ${this.portInUse}`)
