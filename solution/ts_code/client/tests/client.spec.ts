@@ -13,7 +13,7 @@ const mainTestTitle = 'Client test'
 const logger = new TempLogger(mainTestTitle)
 
 describe('Client test', () => {
-  it('should update state after event fired', (done) => {
+  it('should update game state after event fired', (done) => {
     const aGameApi = mockGameApi(logger, createEventBus())
     const aGameState = mockGameState(logger)
     const client = Client
