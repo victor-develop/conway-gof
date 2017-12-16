@@ -35,7 +35,7 @@ export class Client {
     this.gameApi.on(apiEvents.IGameStateUpdate,
       (gameState: IGameState) => this.updateGameState(gameState))
     this.eventBus.on(playerEventType.putCellsAttempt,
-      (positions: IPos[]) => this.attemptPutCells(positions))
+      (positions: IPos[]) => this.attemptPatchCells(positions))
 
     return Promise.resolve(this)
   }
@@ -52,8 +52,8 @@ export class Client {
     }
   }
 
-  private attemptPutCells(positions: IPos[]) {
-    this.logger.child(this.attemptPutCells.name)
+  private attemptPatchCells(positions: IPos[]) {
+    this.logger.child(this.attemptPatchCells.name)
     .then((transactionLogger) => {
       transactionLogger.info({ positions }, logMessage.DATA_BE_SENT)
 
