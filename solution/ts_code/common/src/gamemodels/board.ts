@@ -18,7 +18,7 @@ export class BoardBuilder {
   }
 
   public Create(width: number, height: number, positions: IPos[]): Board {
-    return new Board(width, height, positions, this.logger)
+    return new Board(width, height, positions)
   }
 }
 
@@ -42,15 +42,10 @@ export class Board {
 
   private init() {
     const hashCells = this.cells
-    try {
-      this.listcells.forEach((pos) => {
-        hashCells[pos.x] = hashCells[pos.x] || {}
-        hashCells[pos.x][pos.y] = pos
-      })
-    } catch(error) {
-      this.logger.err(error, Board.errorTypes.INIT_FAIL)
-      throw error
-    }
+    this.listcells.forEach((pos) => {
+      hashCells[pos.x] = hashCells[pos.x] || {}
+      hashCells[pos.x][pos.y] = pos
+    })
   }
 
   public isValidPos(pos: IPos): boolean {
