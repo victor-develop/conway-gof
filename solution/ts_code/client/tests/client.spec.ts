@@ -5,7 +5,7 @@ import TempLogger from '../../common/src/temp-logger'
 import { initialClientState } from '../src/client-state'
 import { mockGameApi } from './mocks/mockGameApi'
 import noticer from './mocks/mockNotice'
-import EventBus from '../src/event-bus'
+import { createEventBus } from '../src/event-bus'
 import { apiEvents } from '../../common/src/api/api-events'
 import { mockGameState } from './mocks/mockGameState'
 
@@ -14,12 +14,13 @@ const logger = new TempLogger(mainTestTitle)
 
 describe('Client test', () => {
   it('should update state after event fired', (done) => {
-    const aGameApi = mockGameApi(logger, new EventBus())
+    const aGameApi = mockGameApi(logger, createEventBus())
     const aGameState = mockGameState(logger)
     const client = Client
-      .create(logger)(new EventBus(), initialClientState, aGameApi, noticer)
+      .create(logger)(createEventBus(), initialClientState, aGameApi, noticer)
     aGameApi.emit(apiEvents.IGameStateUpdate, aGameState)
     const clientState = client.appState
     assert.deepEqual(client.appState.game, aGameState)
+    done()
   })
 })
