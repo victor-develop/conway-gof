@@ -7,7 +7,6 @@ import { mockGameApi, mockGameApiResponse } from './mocks/mock-game-api'
 import noticer from './mocks/mock-notice'
 import { createEventBus } from '../src/event-bus'
 import { apiEvents } from '../../common/src/api/api-events'
-import { mockGameState } from './mocks/mock-game-state'
 import { playerEventType } from '../src/event-types'
 import { presetPatterns } from '../../common/src/gamemodels/preset-pattern'
 import IPos from '../../common/src/gamemodels/ipos'
@@ -60,7 +59,7 @@ describe('Client test', () => {
   describe('server emits event to update client game state', () => {
     it('should update game state after event fired', (done) => {
       const aGameApi = mockGameApi(logger, createEventBus())
-      const aGameState = mockGameState(logger)
+      const aGameState = mockGameStates.full
       Client
       .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
       .then((client) => {

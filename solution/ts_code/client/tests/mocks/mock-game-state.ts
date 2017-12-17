@@ -9,15 +9,6 @@ import { CellState } from '../../../common/src/gamemodels/cell-state'
 const w = 80
 const h = 60
 
-// TODO: legacy to be removed
-export function mockGameState(logger: ILogger): IGameState {
-  return {
-    updateAt: 1513368397117,
-    board: Board.create(w, h, presetPatterns[1]),
-    players: [],
-    presetPatternBoards,
-  }
-}
 
 const players = [
   createPlayer('Tom', '#226ad6', 'Tom'),
