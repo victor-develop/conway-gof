@@ -3,9 +3,11 @@ import { presetPatterns, presetPatternBoards } from '../../../common/src/gamemod
 import { Board } from '../../../common/src/gamemodels/board'
 import { ILogger } from '../../../common/src/services'
 import createPlayer from '../../../common/tests/mocks/mock-player'
+import createCell from '../../../common/src/gamemodels/cell'
+import { CellState } from '../../../common/src/gamemodels/cell-state'
 
-const w = 60
-const h = 100
+const w = 80
+const h = 60
 
 // TODO: legacy to be removed
 export function mockGameState(logger: ILogger): IGameState {
@@ -17,6 +19,40 @@ export function mockGameState(logger: ILogger): IGameState {
   }
 }
 
+const players = [
+  createPlayer('Tom', '#226ad6', 'Tom'),
+  createPlayer('Jack', '#f20cdb', 'Cat'),
+  createPlayer('Lam', '#0d6d06', 'Fok'),
+]
+
+// I have no idea why ts-lint complains the 3rd components in the array
+// so I just disable the rule in the following code
+
+const gameTick1 = {
+  board: Board.create(w, h, [
+    createCell(0, 1, 'aaa', CellState.AliveStill, 'red'),
+    createCell(1, 1, 'aaa', CellState.AliveStill,'blue'),
+    // tslint:disable-next-line:no-magic-numbers
+    createCell(2, 1, 'aaa', CellState.AliveFromDeath, 'green'),
+  ]),
+}
+
+const gameTick2 = {
+  board: Board.create(w, h, [
+    createCell(1, 0, 'aaa', CellState.AliveStill, 'red'),
+    createCell(1, 1, 'aaa', CellState.AliveStill,'blue'),
+    // tslint:disable-next-line:no-magic-numbers
+    createCell(1, 2, 'aaa', CellState.AliveFromDeath, 'green'),
+  ]),
+}
+
+const fullState: IGameState = {
+  updateAt: 1513368397117,
+  board: gameTick1.board,
+  players,
+  presetPatternBoards,
+}
+
 export const mockGameStates = {
   boardOnly: {
     updateAt: 1513368397117,
@@ -24,10 +60,9 @@ export const mockGameStates = {
   },
   playersOnly: {
     updateAt: 1513368397117,
-    players: [
-      createPlayer('aaa', '#226ad6', 'Tom'),
-      createPlayer('bbb', '#f20cdb', 'Cat'),
-      createPlayer('ccc', '#0d6d06', 'Fok'),
-    ],
+    players,
   },
+  full: fullState,
+  gameTick1,
+  gameTick2,
 }
