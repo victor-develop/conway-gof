@@ -1,4 +1,5 @@
 import { Pattern } from './ipattern'
+import { Board } from './board'
 
 /**
  *  refer to `https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns`
@@ -27,3 +28,9 @@ export const tub: Pattern = [
 ]
 
 export const presetPatterns: Pattern[] = [blinker, toad, tub]
+
+const patternBoardWidth = 10
+const patternBoardHeight = 10
+export const presetPatternBoards: Board[] = presetPatterns
+  .map(pattern =>
+    Board.create(patternBoardWidth, patternBoardHeight, pattern))

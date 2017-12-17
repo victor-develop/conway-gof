@@ -6,6 +6,7 @@ type unixtime = number
 export default interface IGameState {
   updateAt: unixtime,
   players: IPlayer[],
-  board: Board
+  board: Board,
+  presetPatternBoards: Board[]
 }
 

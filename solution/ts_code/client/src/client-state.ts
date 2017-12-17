@@ -19,14 +19,10 @@ export function initialClientState(): ClientState {
   return {
     game: InitialValue.instance,
     currentPlayer: InitialValue.instance,
-    players: InitialValue.instance,
-    presetPatternBoards: InitialValue.instance,
   }
 }
 
 export interface ClientState {
   game: InitialValue | IGameState
   currentPlayer: InitialValue | IPlayer
-  players: InitialValue | IPlayer[]
-  presetPatternBoards: InitialValue | Board[]
 }

@@ -48,7 +48,7 @@ export class Client {
 
     const oldState = (<IGameState>this.state.game)
     if (newState.updateAt > oldState.updateAt) {
-      this.state.game = newState
+      this.state.game = Object.assign(this.state.game, newState)
     }
   }
 
