@@ -23,7 +23,7 @@ function boot(): Client {
   // will be used as ClientState
   const app = new Vue({
     el: '#app',
-    data: initialClientState,
+    data: initialClientState(),
   })
 
   const tempLogger: ILogger = new TempLogger(logMessages.STARTING)
