@@ -1,4 +1,4 @@
-import { ICellState } from './icell-state'
+import { CellState } from './cell-state'
 import { Color } from './color'
 import IPos from './ipos'
 
@@ -11,7 +11,7 @@ export default interface ICell extends IPos {
    */
   uid: string
 
-  state: ICellState
+  state: CellState
 
   overlayColor: Color
 }
