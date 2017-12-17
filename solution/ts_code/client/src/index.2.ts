@@ -11,7 +11,11 @@ import IResponse from '../../common/src/api/IResponse'
 import { INotice } from './inotice'
 import { IEventBus } from './ievent-bus'
 import { mockGameApi } from '../tests/mocks/mock-game-api'
-import { createEventBus } from './event-bus';
+import { createEventBus } from './event-bus'
+import { apiEvents } from '../../common/src/api/api-events'
+import { clientContext } from '../tests/mocks/mock-client-context'
+import { mockGameStates } from '../tests/mocks/mock-game-state'
+import { setInterval } from 'timers'
 
 window.addEventListener('DOMContentLoaded', boot)
 
@@ -21,7 +25,10 @@ const logMessages = {
 
 function boot() {
 
-  // will be used as ClientState
+  // from legacy js file
+  (<any>window).setupVueComponents(Vue)
+
+  // will be used as ClientState 
   const app = new Vue({
     el: '#app',
     data: initialClientState(),
@@ -40,8 +47,27 @@ function boot() {
     notice: (<any>app).$notify,
   }
 
-  //const client = Client.create(tempLogger)(mainEventBus, <any>app, aGameApi, mockNotice)
+  const resolveClient = Client.create(tempLogger)(mainEventBus, <any>app, aGameApi, mockNotice)
 
-  //return client
+  resolveClient
+  .then((client) => {
+    // simluate the server
+    aGameApi.emit(apiEvents.context, clientContext.default)
+    aGameApi.emit(apiEvents.gameStateUpdate, mockGameStates.full)
 
+    let mutex = true
+    const duration = 1000
+    setInterval(() => {
+
+      const addUpdateAt = partialState =>
+        Object.assign({}, partialState, { updateAt: Date.now() })
+
+      if (mutex) {
+        aGameApi.emit(apiEvents.gameStateUpdate, addUpdateAt(mockGameStates.gameTick1))
+      } else {
+        aGameApi.emit(apiEvents.gameStateUpdate, addUpdateAt(mockGameStates.gameTick2))
+      }
+      mutex = !mutex
+    }, duration)
+  })
 }

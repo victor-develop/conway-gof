@@ -15,6 +15,7 @@ const logMessage = {
   DATA_BE_SENT: 'data to be sent',
   FAIL_PUT_CELL: 'fail to put cells',
   GAME_NOT_INIT_YET: 'game is not initialized yet',
+  BELATED_STATE_RECEIVED: 'a overdue IGameState update is received',
 }
 
 export class Client {
@@ -48,6 +49,8 @@ export class Client {
     const oldState = (<IGameState>this.state.game)
     if (newState.updateAt > oldState.updateAt) {
       this.state.game = Object.assign(this.state.game, newState)
+    } else {
+      this.logger.info({ oldState, newState }, logMessage.BELATED_STATE_RECEIVED)
     }
   }
 

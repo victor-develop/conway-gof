@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'client/static/base': './ts_code/client/src/index.ts',
+    'client/static/base': './ts_code/client/src/index.2.ts',
   },
   devtool: 'inline-source-map',
   module: {

@@ -9,8 +9,7 @@
     <script type="text/javascript" src="//unpkg.com/uiv/dist/uiv.min.js"></script>
     <script src="vuecomponents.js"></script>
     <script src="base.bundle.js"></script>
-    <script src="datamodels.js"></script>
-    <script src="app.js"></script>
+
   </head>
   <body>
     <div class="container" id="app">
@@ -67,6 +66,11 @@
                 <li v-for="player in game.players">
                   <player-banner :current-player="context.currentPlayer" :player="player" ></player-banner> 
                 </li>
+              </ul>
+              <ul v-if="(!hasInit(game)) && hasInit(context.currentPlayer)" >
+                <li>
+                  <player-banner :current-player="context.currentPlayer" :player="context.currentPlayer" ></player-banner> 
+                </li>                
               </ul>
             </div>
           </div>
