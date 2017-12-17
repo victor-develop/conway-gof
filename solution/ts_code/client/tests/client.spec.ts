@@ -22,7 +22,7 @@ const logger = new TempLogger(mainTestTitle)
 describe('Client test', () => {
 
   describe('server emits event to update client context', () => {
-    it('should update current player information from InitialValue', (done) => {
+    it('should update current player information', (done) => {
       const aGameApi = mockGameApi(logger, createEventBus())
       Client
         .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
