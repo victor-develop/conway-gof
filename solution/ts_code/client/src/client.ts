@@ -24,13 +24,6 @@ export class Client {
   private gameApi: IGameApi
   private noticer: INotice
 
-  private init(): Promise<Client> {
-    return this
-    .setEvtListener()
-    .then(() => this.gameApi.connect())
-    .then(() => this)
-  }
-
   private setEvtListener(): Promise<Client> {
     this.gameApi.on(apiEvents.context, context => this.updateContext(context))
     this.gameApi.on(apiEvents.gameStateUpdate,
@@ -72,7 +65,14 @@ export class Client {
     })
   }
 
-  constructor(
+  public init(): Promise<Client> {
+    return this
+    .setEvtListener()
+    .then(() => this.gameApi.connect())
+    .then(() => this)
+  }
+
+  protected constructor(
     logger: ILogger,
     eventBus: IEventBus,
     state: ClientState,
@@ -83,7 +83,6 @@ export class Client {
     this.state = state
     this.gameApi = gameApi
     this.noticer = noticer
-    this.init()
   }
 
   public get clientState(): ClientState {
@@ -94,8 +93,13 @@ export class Client {
     return this.eventBus
   }
 
+  public static eventTypes = {
+    INIT_READY: 'init-ready',
+  }
+
   public static create =
     (logger: ILogger) =>
     (eventBus: IEventBus, state: ClientState,
       gameapi: IGameApi, noticer: INotice) =>
-        new Client(logger, eventBus, state, gameapi, noticer)}
+       new Client(logger, eventBus, state, gameapi, noticer).init()
+}
