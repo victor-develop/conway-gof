@@ -3,9 +3,9 @@ import IPos from './ipos'
 import ILogger from '../ilogger'
 import { arch } from 'os'
 
-interface HashCells {
+export interface HashCells {
   [x: number]: {
-    [y: number]: Object,
+    [y: number]: any,
   }
 }
 
@@ -14,30 +14,33 @@ export class Board {
   public static create = (width: number, height: number, positions: IPos[]) =>
       new Board(width, height, positions)
 
-  constructor(width: number, height: number, positions: IPos[]) {
+  protected constructor(width: number, height: number, positions: IPos[]) {
 
     validatePositive(width, 'width')
     validatePositive(height, 'height')
 
     this.width = width
     this.height = height
-    this.cells = {}
+    this.hashCells = {}
 
     this.listcells = positions
     this.init()
   }
 
   private init() {
-    const hashCells = this.cells
-    this.listcells.forEach((pos) => {
-      hashCells[pos.x] = hashCells[pos.x] || {}
-      hashCells[pos.x][pos.y] = pos
-    })
+    const self = this
+    const hashCells = this.hashCells
+    self.listcells.forEach(posObj => self.addCell(posObj))
+  }
+
+  protected addCell(positionObj: IPos) {
+    this.hashCells[positionObj.x] = this.hashCells[positionObj.x] || {}
+    this.hashCells[positionObj.x][positionObj.y] = positionObj
   }
 
   public isValidPos(pos: IPos): boolean {
-    if ((this.cells[pos.x] &&
-       this.cells[pos.x][pos.y])) {
+    if ((this.hashCells[pos.x] &&
+       this.hashCells[pos.x][pos.y])) {
       return true
     }
     return false
@@ -45,7 +48,11 @@ export class Board {
 
   public width: number
   public height: number
-  public cells: HashCells
+  protected hashCells: HashCells
+
+  public get cells(): HashCells {
+    return this.hashCells
+  }
 
   public static errorTypes: {
     INIT_FAIL: 'fail to init a board',
