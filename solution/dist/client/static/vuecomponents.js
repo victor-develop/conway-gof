@@ -46,7 +46,7 @@ function setupVueComponents(Vue) {
     template: `<table class="board">
                 <tbody>
                   <tr v-for="h in board.height">
-                    <td v-for="w in 60">
+                    <td v-for="w in board.width">
                       <cell :x=w-1 :y=h-1 :board=board></cell>
                     </td>
                   </tr>
