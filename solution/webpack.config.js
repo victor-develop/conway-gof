@@ -15,10 +15,13 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts' ]
+    extensions: [ '.tsx', '.ts' ],
+    alias: {
+        'vue': 'vue/dist/vue.esm.browser.js'
+    }
   },
   externals: {
-    vue:'Vue'
+
   },
   output: {
     filename: '[name].bundle.js',
