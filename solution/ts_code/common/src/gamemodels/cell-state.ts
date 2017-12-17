@@ -1,4 +1,4 @@
-export enum ICellState {
+export enum CellState {
   AliveStill,
   AliveFromDeath,
 }
