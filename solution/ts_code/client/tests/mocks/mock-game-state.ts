@@ -7,6 +7,7 @@ import createPlayer from '../../../common/tests/mocks/mock-player'
 const w = 60
 const h = 100
 
+// TODO: legacy to be removed
 export function mockGameState(logger: ILogger): IGameState {
   return {
     updateAt: 1513368397117,
