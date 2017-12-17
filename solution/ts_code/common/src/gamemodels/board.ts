@@ -9,19 +9,6 @@ interface HashCells {
   }
 }
 
-export class BoardBuilder {
-
-  private logger: ILogger
-
-  constructor(aLogger: ILogger) {
-    this.logger = aLogger
-  }
-
-  public Create(width: number, height: number, positions: IPos[]): Board {
-    return new Board(width, height, positions)
-  }
-}
-
 export class Board {
 
   public static create = (width: number, height: number, positions: IPos[]) =>
