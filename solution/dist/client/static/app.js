@@ -7,6 +7,8 @@
 
       const Vue = window.Vue;
 
+      setupVueComponents(Vue);
+
       const game = window.mods.game;
 
       const players = window.mods.players;
@@ -16,7 +18,7 @@
       const currentPlayer = window.mods.currentPlayer;
 
       const presetPatternBoards = window.mods.presetPatternBoards
-
+/*
       const app = new Vue({
         el: '#app',
         data: {
@@ -26,17 +28,33 @@
           presetPatternBoards
         }
       });
+*/
+      const clientState = {
+        context: {
+          currentPlayer
+        },
+        game: {
+          updateAt: Date.now(),
+          players,
+          board: game.board,
+          presetPatternBoards
+        }
+      }
 
+      const app = new Vue({
+        el: '#app',
+        data: clientState
+      })
       mods.notices.forEach(notice => {
         app.$notify(notice);
       });
 
       setInterval(() => {
-        if (app.game == game) {
-          app.game = tick2;
+        if (app.game.board == game.board) {
+          app.game.board = tick2.board;
         }
         else {
-          app.game = game;
+          app.game.board = game.board;
         }
       }, 1000);
     }

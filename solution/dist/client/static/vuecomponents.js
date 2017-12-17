@@ -1,8 +1,4 @@
-(function(window) {
-
-  const mods = window.mods;
-  const Vue = window.Vue;
-
+function setupVueComponents(Vue) {
   Vue.component('player-banner', {
     template:`<span>
                 <span v-if="player.uid == currentPlayer.uid">></span>
@@ -81,5 +77,4 @@
       },
     },
   })
-
-})(window)
+}

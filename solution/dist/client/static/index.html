@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="/site.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.10/vue.js"></script>
     <script type="text/javascript" src="//unpkg.com/uiv/dist/uiv.min.js"></script>
+    <script src="vuecomponents.js"></script>
     <script src="base.bundle.js"></script>
     <script src="datamodels.js"></script>
-    <script src="vuecomponents.js"></script>
     <script src="app.js"></script>
   </head>
   <body>
@@ -29,8 +29,8 @@
                         Preset Pattern
                     </div>
                     <div class="panel-body row">
-                        <div class="pattern-board-container" v-for="patternBoard in presetPatternBoards">
-                          <pattern-board :color=currentPlayer.color :board="patternBoard"></pattern-board>
+                        <div class="pattern-board-container" v-for="patternBoard in game.presetPatternBoards">
+                          <pattern-board :color=context.currentPlayer.color :board="patternBoard"></pattern-board>
                         </div>
                     </div>
                   </div>              
@@ -62,8 +62,8 @@
           <div class="row">
             <div class="col-md-12">
               <ul>
-                <li v-for="player in players">
-                  <player-banner :current-player="currentPlayer" :player="player" ></player-banner> 
+                <li v-for="player in game.players">
+                  <player-banner :current-player="context.currentPlayer" :player="player" ></player-banner> 
                 </li>
               </ul>
             </div>
