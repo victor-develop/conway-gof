@@ -36,7 +36,7 @@
         data: mods.initialClientState(),
         methods: {
           hasInit: function(item) {
-            return item == mods.InitialValue
+            return (item != mods.InitialValue.instance)
           }
         }
       })
