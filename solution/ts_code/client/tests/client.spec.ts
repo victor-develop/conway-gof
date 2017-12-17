@@ -27,7 +27,7 @@ describe('Client test', () => {
       const createClient = () => Client
         .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
       const client = createClient()
-      aGameApi.emit(apiEvents.IGameStateUpdate, mockGameStates.playersOnly)
+      aGameApi.emit(apiEvents.gameStateUpdate, mockGameStates.playersOnly)
       const clientPlayers = (<IGameState>client.clientState.game).players
       logger.info(clientPlayers)
       assert.deepEqual(clientPlayers, mockGameStates.playersOnly.players)
@@ -43,7 +43,7 @@ describe('Client test', () => {
         .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
       const client = createClient()
 
-      aGameApi.emit(apiEvents.IGameStateUpdate, aGameState)
+      aGameApi.emit(apiEvents.gameStateUpdate, aGameState)
       logger.info(client.clientState.game)
       assert.deepEqual(client.clientState.game, aGameState)
       done()

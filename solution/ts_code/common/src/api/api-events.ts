@@ -1,6 +1,6 @@
 export const apiEvents = {
-  enter: 'enter',
+  context: 'context',
   newPlayerIn: 'new-IPlayer-in',
   playerOut: 'IPlayer-out',
-  IGameStateUpdate: 'game-state-update',
+  gameStateUpdate: 'game-state-update',
 }

@@ -18,11 +18,17 @@ export class InitialValue {
 export function initialClientState(): ClientState {
   return {
     game: InitialValue.instance,
-    currentPlayer: InitialValue.instance,
+    context: {
+      currentPlayer: InitialValue.instance,
+    },
   }
+}
+
+export interface ClientContext {
+  currentPlayer: InitialValue | IPlayer
 }
 
 export interface ClientState {
   game: InitialValue | IGameState
-  currentPlayer: InitialValue | IPlayer
+  context: ClientContext
 }

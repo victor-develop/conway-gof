@@ -6,7 +6,7 @@ import { ILogger } from '../../common/src/services'
 import { IGameApi } from './gameapi/IGameApi'
 import { INotice } from './inotice'
 import { IEventBus } from './ievent-bus'
-import { ClientState, InitialValue } from './client-state'
+import { ClientState, InitialValue, ClientContext } from './client-state'
 import { apiEvents } from '../../common/src/api/api-events'
 import { playerEventType } from './event-types'
 import IErrorResponse from '../../common/src/api/IErrorResponse'
@@ -32,12 +32,18 @@ export class Client {
   }
 
   private setEvtListener(): Promise<Client> {
-    this.gameApi.on(apiEvents.IGameStateUpdate,
+    this.gameApi.on(apiEvents.context, context => this.updateContext(context))
+    this.gameApi.on(apiEvents.gameStateUpdate,
       (gameState: IGameState) => this.updateGameState(gameState))
     this.eventBus.on(playerEventType.putCellsAttempt,
       (positions: IPos[]) => this.attemptPatchCells(positions))
 
     return Promise.resolve(this)
+  }
+
+  // TODO: think a bit more on error handling
+  private updateContext(context: ClientContext) {
+    this.state.context = Object.assign(this.state.context, context)
   }
 
   private updateGameState(newState: IGameState): void {
