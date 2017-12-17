@@ -29,9 +29,11 @@
                         Preset Pattern
                     </div>
                     <div class="panel-body row">
+                      <div v-if="hasInit(game)">
                         <div class="pattern-board-container" v-for="patternBoard in game.presetPatternBoards">
                           <pattern-board :color=context.currentPlayer.color :board="patternBoard"></pattern-board>
                         </div>
+                      </div>
                     </div>
                   </div>              
             </div>
@@ -43,7 +45,7 @@
                       </h3>
                     </div>
                     <div class="panel-body">
-                        <game-board :board=game.board></game-board>
+                        <game-board v-if="hasInit(game)" :board=game.board></game-board>
                     </div>
                     <div class="panel-footer">
                       
@@ -61,7 +63,7 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <ul>
+              <ul v-if="hasInit(game)">
                 <li v-for="player in game.players">
                   <player-banner :current-player="context.currentPlayer" :player="player" ></player-banner> 
                 </li>

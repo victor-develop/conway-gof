@@ -18,17 +18,7 @@
       const currentPlayer = window.mods.currentPlayer;
 
       const presetPatternBoards = window.mods.presetPatternBoards
-/*
-      const app = new Vue({
-        el: '#app',
-        data: {
-          game,
-          currentPlayer,
-          players,
-          presetPatternBoards
-        }
-      });
-*/
+
       const clientState = {
         context: {
           currentPlayer
@@ -43,12 +33,17 @@
 
       const app = new Vue({
         el: '#app',
-        data: clientState
+        data: mods.initialClientState(),
+        methods: {
+          hasInit: function(item) {
+            return item == mods.InitialValue
+          }
+        }
       })
       mods.notices.forEach(notice => {
         app.$notify(notice);
       });
-
+      /*
       setInterval(() => {
         if (app.game.board == game.board) {
           app.game.board = tick2.board;
@@ -57,6 +52,8 @@
           app.game.board = game.board;
         }
       }, 1000);
+      */
     }
+
   })(window);
   

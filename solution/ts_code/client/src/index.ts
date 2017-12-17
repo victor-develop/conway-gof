@@ -1,3 +1,4 @@
+import { initialClientState, InitialValue } from './client-state'
 import { presetPatterns } from '../../common/src/gamemodels/preset-pattern'
 import { BoardBuilder, Board } from '../../common/src/gamemodels/board'
 import ILogger from '../../common/src/ilogger'
@@ -16,3 +17,5 @@ mods.presetPatternBoards = presetPatterns
     Board.create(patternWidth, patternHeight, pattern))
 
 mods.Board = Board
+mods.initialClientState = initialClientState
+mods.InitialValue = InitialValue
