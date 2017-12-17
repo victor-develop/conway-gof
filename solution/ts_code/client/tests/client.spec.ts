@@ -14,12 +14,24 @@ import IPos from '../../common/src/gamemodels/ipos'
 import { INotice } from '../src/inotice'
 import { mockGameStates } from './mocks/mock-game-state'
 import IGameState from '../src/game-state'
+import { clientContext } from './mocks/mock-client-context'
 
 const mainTestTitle = 'Client test'
 const logger = new TempLogger(mainTestTitle)
 
 describe('Client test', () => {
 
+  describe('server emits event to update client context', () => {
+    it('should update current player information from InitialValue', (done) => {
+      const aGameApi = mockGameApi(logger, createEventBus())
+      const createClient = () => Client
+        .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
+      const client = createClient()
+      aGameApi.emit(apiEvents.context, clientContext.default)
+      assert.deepEqual(client.clientState.context, clientContext.default)
+      done()
+    })
+  })
 
   describe('server emits event to update players list', () => {
     it('should update players list', (done) => {
