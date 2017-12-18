@@ -12,11 +12,14 @@ interface EvolvingCellContext {
   position: IPos
 }
 
-type surviveRule = (old: EvolvingCellContext) => boolean
-type riseupRule = (old: EvolvingCellContext) => boolean
+type livingCondition = (old: EvolvingCellContext) => boolean
+type riseupCondition = (old: EvolvingCellContext) => boolean
 
 function getAvgColor(board: GameBoard, pos: IPos): Color {
   const neighborsColors = getNeighbors(board, pos).map(cell => tinycolor(cell.overlayColor).toRgb())
+  if (neighborsColors.length < 0) {
+    return tinycolor('black').toHex8String()
+  }
   const average = arr => arr.reduce((value1, value2) => value1 + value2, 0) / arr.length
   const r = average(neighborsColors.map(c => c.r))
   const g = average(neighborsColors.map(c => c.g))
@@ -52,27 +55,27 @@ const getNeiborsCount = (context: EvolvingCellContext) =>
 const minimum = 2
 const maximum = 3
 
-const underPopulation: surviveRule = context => getNeiborsCount(context) < minimum
+const underPopulation: livingCondition = context => getNeiborsCount(context) < minimum
 
-const goodPopulation: surviveRule = (context: EvolvingCellContext) => {
+const goodPopulation: livingCondition = (context: EvolvingCellContext) => {
   const countOfNeighbors = getNeiborsCount(context)
   return (countOfNeighbors >= minimum && countOfNeighbors <= maximum)
 }
 
-const overcrowding: surviveRule = context => getNeiborsCount(context) > maximum
+const overcrowding: livingCondition = context => getNeiborsCount(context) > maximum
 
-const survives = (board: GameBoard) => (cell: ICell) => {
+const survives = (board: GameBoard, cell: ICell) => {
   const context = {
     board,
     position: cell,
   }
-  return underPopulation(context) && goodPopulation(context) && overcrowding(context)
+  if (goodPopulation(context)){
+    return true
+  }
+  return false
 }
 
-const reproduction: riseupRule = context => getNeiborsCount(context) === maximum
-
-const willrise = (board: GameBoard) => (position: IPos) => reproduction({ board, position })
-
+const willrise: riseupCondition = context => getNeiborsCount(context) === maximum
 
 const deadCell = {}
 const evolvePosition = (board: GameBoard, pos: IPos) => {
@@ -80,14 +83,14 @@ const evolvePosition = (board: GameBoard, pos: IPos) => {
   if (board.isValidPos(pos)) {
     const cell = board.cells[pos.x][pos.y]
 
-    if (survives(board)(cell)) {
+    if (survives(board, cell)) {
       const newCell = Object.assign({}, cell, { state: CellState.AliveStill })
       return newCell
     }
 
   } else {
 
-    if (willrise(board)(pos)) {
+    if (willrise({ board, position: pos })) {
       return createCell(pos.x, pos.y, '', CellState.AliveFromDeath, getAvgColor(board, pos))
     }
   }
