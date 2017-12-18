@@ -1,4 +1,3 @@
-import IGameState from './game-state'
 import IPlayer from '../../common/src/gamemodels/iplayer'
 import Vue from 'vue'
 import { Client } from './client'

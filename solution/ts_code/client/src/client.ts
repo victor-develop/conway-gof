@@ -1,4 +1,3 @@
-import IGameState from './game-state'
 import IPlayer from '../../common/src/gamemodels/iplayer'
 import IPos from '../../common/src/gamemodels/ipos'
 import { Board } from '../../common/src/gamemodels/board'
@@ -10,6 +9,7 @@ import { ClientState, InitialValue, ClientContext } from './client-state'
 import { apiEvents } from '../../common/src/api/api-events'
 import { playerEventType } from './event-types'
 import IErrorResponse from '../../common/src/api/IErrorResponse'
+import { IGameState } from '../../common/src/gamemodels/game-state';
 
 const logMessage = {
   DATA_BE_SENT: 'data to be sent',

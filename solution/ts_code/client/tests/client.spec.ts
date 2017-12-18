@@ -12,8 +12,8 @@ import { presetPatterns } from '../../common/src/gamemodels/preset-pattern'
 import IPos from '../../common/src/gamemodels/ipos'
 import { INotice } from '../src/inotice'
 import { mockGameStates } from './mocks/mock-game-state'
-import IGameState from '../src/game-state'
 import { clientContext } from './mocks/mock-client-context'
+import { IGameState } from '../../common/src/gamemodels/game-state'
 
 const mainTestTitle = 'Client test'
 const logger = new TempLogger(mainTestTitle)
