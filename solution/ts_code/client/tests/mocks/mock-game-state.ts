@@ -5,6 +5,7 @@ import { ILogger } from '../../../common/src/services'
 import createPlayer from '../../../common/tests/mocks/mock-player'
 import createCell from '../../../common/src/gamemodels/cell'
 import { CellState } from '../../../common/src/gamemodels/cell-state'
+import GameBoard from '../../../common/src/gamemodels/game-board';
 
 const w = 80
 const h = 60
@@ -20,7 +21,7 @@ const players = [
 // so I just disable the rule in the following code
 
 const gameTick1 = {
-  board: Board.create(w, h, [
+  board: GameBoard.create(w, h, [
     createCell(0, 1, 'aaa', CellState.AliveStill, 'red'),
     createCell(1, 1, 'aaa', CellState.AliveStill,'blue'),
     // tslint:disable-next-line:no-magic-numbers
@@ -29,7 +30,7 @@ const gameTick1 = {
 }
 
 const gameTick2 = {
-  board: Board.create(w, h, [
+  board: GameBoard.create(w, h, [
     createCell(1, 0, 'aaa', CellState.AliveStill, 'red'),
     createCell(1, 1, 'aaa', CellState.AliveStill,'blue'),
     // tslint:disable-next-line:no-magic-numbers
@@ -45,10 +46,6 @@ const fullState: IGameState = {
 }
 
 export const mockGameStates = {
-  boardOnly: {
-    updateAt: 1513368397117,
-    board: Board.create(w, h, presetPatterns[1]),
-  },
   playersOnly: {
     updateAt: 1513368397117,
     players,
