@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@types/socket.io": "1.4.31",
+    "@types/socket.io-client": "1.4.32",
     "@types/tinycolor2": "1.4.0",
     "eventemitter3": "3.0.0",
     "shortid": "2.2.8",
