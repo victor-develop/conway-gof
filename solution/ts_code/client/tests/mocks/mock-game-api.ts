@@ -2,7 +2,7 @@ import { IGameApi } from '../../src/gameapi/IGameApi'
 import IResponse from '../../../common/src/api/IResponse'
 import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
-import { IEventBus } from '../../src/ievent-bus'
+import { IEventBus } from '../../../common/src/ievent-bus'
 import { apiEvents } from '../../../common/src/api/api-events'
 import IErrorResponse from '../../../common/src/api/IErrorResponse'
 
