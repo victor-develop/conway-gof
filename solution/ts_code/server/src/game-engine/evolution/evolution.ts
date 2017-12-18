@@ -102,13 +102,13 @@ export const evolveBoard = (board: GameBoard) => {
   const positions = xs.map(x => ys.map(y => { return { x, y } }))
   .reduce((posList, pos) => posList.concat(pos, []))
 
-  const outputCells: ICell[] = []
+  const newBoard = GameBoard.create(board.width, board.height, [])
   positions.forEach((pos) => {
     const cell = evolvePosition(board, pos)
     if (cell !== deadCell) {
-      outputCells.push(<ICell>cell)
+      newBoard.addCell(<ICell>cell)
     }
   })
 
-  return outputCells
+  return newBoard
 }
