@@ -46,13 +46,6 @@ describe('Client test', () => {
           assert.deepEqual(clientPlayers, mockGameStates.playersOnly.players)
           done()
         })
-/*
-      Client
-        
-        .then((client) => {
-
-        })
-*/
     })
   })
 
