@@ -44,8 +44,11 @@
     "webpack": "3.10.0"
   },
   "dependencies": {
+    "@types/socket.io": "1.4.31",
     "@types/tinycolor2": "1.4.0",
     "eventemitter3": "3.0.0",
+    "shortid": "2.2.8",
+    "socket.io": "2.0.4",
     "vue": "2.5.10"
   }
 }
