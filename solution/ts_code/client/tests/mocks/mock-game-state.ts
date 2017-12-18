@@ -1,11 +1,11 @@
-import IGameState from '../../src/game-state'
 import { presetPatterns, presetPatternBoards } from '../../../common/src/gamemodels/preset-pattern'
 import { Board } from '../../../common/src/gamemodels/board'
 import { ILogger } from '../../../common/src/services'
 import createPlayer from '../../../common/tests/mocks/mock-player'
 import createCell from '../../../common/src/gamemodels/cell'
 import { CellState } from '../../../common/src/gamemodels/cell-state'
-import GameBoard from '../../../common/src/gamemodels/game-board';
+import GameBoard from '../../../common/src/gamemodels/game-board'
+import { IGameState } from '../../../common/src/gamemodels/game-state'
 
 const w = 80
 const h = 60

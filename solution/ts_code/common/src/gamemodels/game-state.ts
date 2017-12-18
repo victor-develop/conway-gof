@@ -11,3 +11,8 @@ export interface IGameState {
   presetPatternBoards: Board[]
 }
 
+export interface IPartialGameState_Evolution {
+  updateAt: unixtime,
+  board: GameBoard
+}
+
