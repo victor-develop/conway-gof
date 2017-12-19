@@ -1,91 +1,87 @@
-# Project Title
+# Multi-player Conway's Game of Life
 
-One Paragraph of project description goes here
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This is a web-based game: Conway's Game of Life, developed as the specification at https://hackmd.io/s/SyXikdg_g#full-stack--backend-developer--eng-manager
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+To run this game locally, you should have Docker installed. You can download and install from https://www.docker.com/get-docker
 
-```
-Give examples
-```
+At the time of development I am using version `17.09.0-ce-win33`
 
-### Installing
 
-A step by step series of examples that tell you have to get a development env running
+## Getting Started
 
-Say what the step will be
+Execute the following commands for the first time of use
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
+```sh
+ // clone repository
+ git clone ...
+ // start docker
+ docker-compose -f docker-compose.ini.yml up
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+This will install node modules for your folder and exit process when finished.
 
-## Running the tests
+Then you type 
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+```sh
+docker-compose up
 ```
 
-### And coding style tests
+Now you can go to `localhost:8080` and start playing the game. To try out multi-players just open another browser window
 
-Explain what these tests test and why
+### local development
+Enter docker with
 
+```sh
+docker-compose exec conway /bin/bash
+cd solution
 ```
-Give an example
+And then, in the bash shell, you may:
+
+ - lint the code style: `npm run lint`
+ - run tests: `npm run test`
+ - have automated monitor on .ts file changes and restart server: `npm run dev`
+
+### deploy to Heroku
+
+You must have heroku CLI installed.
+
+```sh
+heroku create
+heroku push master
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+And then check out the web url provided in the console.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [express](https://expressjs.com/) - Web server
+* [socketIo](https://socket.io/) - widely used lib for real time connection
+* [Vue](https://vuejs.org/) - Front end framework
+* [Typescript](https://www.typescriptlang.org/index.html)
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+I picked these into the tech stack since each item above has its pretty big communities. Supports and documentation can be searched online easily. 
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+  [SemVer](http://semver.org/) is used for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Design Decisions
 
-Why do i curry some class constructor with a create() method?
- - To separate functional dependencies(e.g. logger) and business-logic dependencies
+Why do i curry sometimes curry a class constructor with a create() method?
+ - Some params are needed due to dependency injection, some are needed due to business logic. Use curry to separate functional dependencies(e.g. logger) and business-logic dependencies for reusability.
 
-## Code naming convention
+## TODOs
+
+__common/src/api/__`apiEvents` contains keys representing client->server and server->client, better sepearate them in later versions.
+
+## Additional Code naming convention
+
+Type and interface should be prepended a `I`, i.e. `IFoo`, `IBar`, etc.
 
 All follows airbnb-base lint standard as specified in `tslint.json`, and some extra stuff:
 
  - For class member assessors like getter/setter, e.g. class `Foo` has a private member `bar`, then its getter should has its class name prepended with first letter lowercased, i.e. `fooBar` as its getter name
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 

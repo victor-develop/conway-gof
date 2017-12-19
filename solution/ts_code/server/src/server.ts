@@ -2,7 +2,10 @@ import * as express from 'express'
 import * as http from 'http'
 import ILogger from '../../common/src/ilogger'
 import * as socketIo from 'socket.io'
-import { socketEvents } from '../../common/src/api/socket-events';
+import { socketEvents } from '../../common/src/api/socket-events'
+import { Game } from './game-engine/game'
+import { createGame } from './services';
+import { setApiService } from './game-engine/api-service';
 
 export default class Server {
   private appInstance: express.Application
@@ -10,6 +13,7 @@ export default class Server {
   private logger: ILogger
   private portInUse: string
   private socketIo: any
+  private gameInstance: Game
 
   constructor(aLogger: ILogger, port: string) {
     this.appInstance = express()
@@ -53,6 +57,9 @@ export default class Server {
         this.logger.info('Client disconnected')
       })
     })
+
+    this.gameInstance = createGame(this.logger)
+    setApiService(this.socketIo, this.logger, this.gameInstance.events)
 
     return this
   }

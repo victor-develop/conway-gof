@@ -18,4 +18,8 @@ describe('Game board evolution', () => {
 
     it('has an average color of its three neighbors')
   })
+
+  describe('test with a few patterns', () => {
+    it('should have correct evolution')
+  })
 })
