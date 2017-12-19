@@ -36,9 +36,17 @@ function boot() {
     },
   })
 
-  const tempLogger: ILogger = new TempLogger(logMessages.STARTING)
+  // utilize Vue's event feature
+  const mainEventBus: IEventBus = {
+    emit: (eventKey, ...args) => {
+      app.$emit(eventKey, ...args)
+    },
+    on: (eventKey: string, callback) => {
+      app.$on(eventKey, callback)
+    },
+  }
 
-  const mainEventBus: IEventBus = createEventBus()
+  const tempLogger: ILogger = new TempLogger(logMessages.STARTING)
 
   const aGameApi = mockGameApi(tempLogger, createEventBus())
 
