@@ -17,7 +17,8 @@ module.exports = {
   resolve: {
     extensions: [ '.tsx', '.ts' ],
     alias: {
-        'vue': 'vue/dist/vue.esm.browser.js'
+        'vue': 'vue/dist/vue.esm.browser.js',
+        'socket.io-client': 'socket.io-client/dist/socket.io.js'
     }
   },
   externals: {
