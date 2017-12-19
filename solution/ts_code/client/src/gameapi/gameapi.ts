@@ -77,6 +77,7 @@ export class GameApi implements IGameApi {
       throw new Error(errorMessages.CONNECT_BEFORE_EMIT)
     }
   }
+  
   public on(eventKey: string, callback: any) {
     if (this.socket) {
       this.socket.on(eventKey, callback)
