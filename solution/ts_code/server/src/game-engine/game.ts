@@ -13,6 +13,9 @@ import createCell from '../../../common/src/gamemodels/cell'
 import { CellState } from '../../../common/src/gamemodels/cell-state'
 import GameBoard from '../../../common/src/gamemodels/game-board'
 import IPos from '../../../common/src/gamemodels/ipos'
+import { presetPatternBoards } from '../../../common/src/gamemodels/preset-pattern'
+import { config } from '../config/config'
+import { initialGameState } from './initial-game-state'
 
 export type ISendPlayer = (player: IPlayer) => void
 
@@ -25,32 +28,17 @@ export const updateBoardEvent = {
 const jobConsumeInterval = 50
 
 export class Game {
+
   private evolveIntervalSecond: number
   private evolveFunc: (board: GameBoard) => GameBoard
-  private getRandomPattern: () => Pattern
+  private getRandomPattern: (board: GameBoard) => Pattern
   private currentEvolutionToken: number
-  state: IGameState
-  eventBus: IEventBus
-  logger: ILogger
-  jobQueue: Function[]
+  private state: IGameState
+  private eventBus: IEventBus
+  private logger: ILogger
+  private jobQueue: Function[]
 
-  public constructor(
-    logger: ILogger,
-    evolveFunc: (board: GameBoard) => GameBoard,
-    getRandomPattern: () => Pattern,
-    evolveInterval: number,
-    eventBus: IEventBus) {
-
-    this.logger = logger
-    this.evolveFunc = evolveFunc
-    this.getRandomPattern = getRandomPattern
-    this.evolveIntervalSecond = evolveInterval
-    this.eventBus = eventBus
-    this.jobQueue = []
-    this.init()
-  }
-
-  init() {
+  private init() {
     this.eventBus.on(apiEvents.newPlayerIn, (name, sendBack: ISendPlayer) =>
       this.newPlayer(name, sendBack))
 
@@ -72,7 +60,7 @@ export class Game {
     }, jobConsumeInterval)
   }
 
-  newPlayer(name: string, sendBack: ISendPlayer) {
+  private newPlayer(name: string, sendBack: ISendPlayer) {
     const color = ColorUtil.assignNew(this.state.players)
     const uid = shortid.generate()
     const player = createPlayer(name, color, uid)
@@ -82,19 +70,19 @@ export class Game {
     this.patchRandomCells(player)
   }
 
-  removePlayer(player: IPlayer) {
+  private removePlayer(player: IPlayer) {
     this.state.players = this.state.players.filter(p => p.uid !== player.uid)
     this.broadcastPlayers()
   }
 
-  broadcastPlayers() {
+  private broadcastPlayers() {
     const stateUpdate: IPartialGameState_Players = {
       players: this.state.players,
     }
     this.eventBus.emit(apiEvents.gameStateUpdate, stateUpdate)
   }
 
-  broadcastBoard() {
+  private broadcastBoard() {
     const newPartialState: IPartialGameState_Evolution = {
       updateAt: this.currentEvolutionToken,
       board: this.state.board,
@@ -111,26 +99,48 @@ export class Game {
     return newBoard
   }
 
-  playerPatchCells(player: IPlayer, positions: IPos[]) {
+  private playerPatchCells(player: IPlayer, positions: IPos[]) {
     this.pushNewBoard(() => this.patchCells(player, positions),updateBoardEvent.playerPatchCells)
   }
 
-  patchRandomCells(player: IPlayer) {
-    const pattern: Pattern = this.getRandomPattern()
+  private patchRandomCells(player: IPlayer) {
+    const pattern: Pattern = this.getRandomPattern(this.state.board)
     this.pushNewBoard(() => this.patchCells(player, pattern), updateBoardEvent.newPlayerIn)
   }
 
-  runEvolution() {
+  private runEvolution() {
     this.pushNewBoard(() => this.evolveFunc(this.state.board), updateBoardEvent.evolution)
   }
 
-  pushNewBoard(board: () => GameBoard, eventKey: string) {
+  private pushNewBoard(board: () => GameBoard, eventKey: string) {
     this.jobQueue.push(() => {
-      this.logger.info(board, `update the board due to ${eventKey}`)
+      const newBoard = board()
+      this.logger.info(newBoard, `update the board due to ${eventKey}`)
       const updateToken = Date.now()
       this.currentEvolutionToken = updateToken
-      this.state.board = board()
+      this.state.board = newBoard
       this.broadcastBoard()
     })
+  }
+
+  public get events(): IEventBus {
+    return this.eventBus
+  }
+
+  public constructor(
+    logger: ILogger,
+    evolveFunc: (board: GameBoard) => GameBoard,
+    getRandomPattern: (board: GameBoard) => Pattern,
+    evolveInterval: number,
+    eventBus: IEventBus) {
+
+    this.logger = logger
+    this.evolveFunc = evolveFunc
+    this.getRandomPattern = getRandomPattern
+    this.evolveIntervalSecond = evolveInterval
+    this.eventBus = eventBus
+    this.jobQueue = []
+    this.state = initialGameState()
+    this.init()
   }
 }
