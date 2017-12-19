@@ -23,14 +23,13 @@ export class Board {
     this.height = height
     this.hashCells = {}
 
-    this.listcells = positions
-    this.init()
+    this.initCells(positions)
   }
 
-  private init() {
+  private initCells(positions: IPos[]) {
     const self = this
     const hashCells = this.hashCells
-    self.listcells.forEach(posObj => self.addCell(posObj))
+    positions.forEach(posObj => self.addCell(posObj))
   }
 
   protected addCell(positionObj: IPos) {
@@ -58,10 +57,6 @@ export class Board {
     INIT_FAIL: 'fail to init a board',
   }
 
-  /**
-   * Actual cells
-   */
-  private listcells: IPos[]
 }
 
 const validatePositive = (arg, argName) => {
