@@ -1,5 +1,6 @@
 import { Pattern } from './ipattern'
 import { Board } from './board'
+import GameBoard from './game-board'
 
 /**
  *  refer to `https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns`
@@ -28,6 +29,11 @@ export const tub: Pattern = [
 ]
 
 export const presetPatterns: Pattern[] = [blinker, toad, tub]
+
+// TODO: make a real random generator
+export function makeRandomPattern(boad: GameBoard) {
+  return presetPatterns[1].filter(pos => (!boad.isValidPos(pos)))
+}
 
 const patternBoardWidth = 10
 const patternBoardHeight = 10
