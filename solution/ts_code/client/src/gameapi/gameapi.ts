@@ -7,6 +7,7 @@ import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 import { apiEvents } from '../../../common/src/api/api-events'
 import { EventEmitter } from 'eventemitter3'
+import TempLogger from '../../../common/src/temp-logger';
 
 const errorMessages = {
   CONNECT_BEFORE_PATCH: 'call connect() first in order to patch()',
@@ -14,46 +15,34 @@ const errorMessages = {
 }
 
 export class GameApi implements IGameApi {
-  private io: SocketIOClient.Socket
-  // connected socket
   private socket: SocketIOClient.Socket
   private socketOnReady: ((socket: SocketIOClient.Socket) => void)[]
+  private logger: ILogger
 
   public constructor() {
     this.socketOnReady = []
+    this.logger = new TempLogger('GameApi')
   }
 
   public connect(): Promise<IResponse> {
     return new Promise((resolve, reject) => {
-      this.io = socketIo()
-      this.io.on(socketEvents.connect, (socket) => {
-        const response: IResponse = {
-          success: true,
-          messages: ['connect to server in socket successfully'],
-          data: {
-            socketId: socket.id,
-          },
-        }
-        this.socket = socket
+      this.socket = socketIo()
+      this.logger.info({ enter: 'Jacky' })
+      this.socket.emit(socketEvents.enter, 'Jacky')
 
-        socket.emit(socketEvents.enter, 'Jacky')
+      const transferEvent = (eventKey: string) => {
+        this.socket.on(eventKey, (...args) => {
+          this.emit(eventKey, ...args)
+        })
+      }
 
-        const transferEvent = (eventKey: string) => {
-          this.socket.on(eventKey, (...args) => {
-            this.emit(eventKey, ...args)
-          })
-        }
+      transferEvent(apiEvents.context)
+      transferEvent(apiEvents.gameStateUpdate)
 
-        transferEvent(apiEvents.context)
-        transferEvent(apiEvents.gameStateUpdate)
-
-        while(this.socketOnReady.length > 0) {
-          const hook = this.socketOnReady.shift()
-          hook(this.socket)
-        }
-
-        resolve(response)
-      })
+      while(this.socketOnReady.length > 0) {
+        const hook = this.socketOnReady.shift()
+        hook(this.socket)
+      }
     })
   }
 
