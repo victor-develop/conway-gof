@@ -1,0 +1,69 @@
+
+> conway-game-of-life@0.0.0 dev /home/dev/solution
+> ./node_modules/nodemon/bin/nodemon.js --exec 'npm run build-serve' 
+
+[33m[nodemon] 1.12.5[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: /home/dev/solution/ts_code/**/*[39m
+[32m[nodemon] starting `npm run build-serve`[39m
+
+> conway-game-of-life@0.0.0 build-serve /home/dev/solution
+> npm run build && npm run debug
+
+
+> conway-game-of-life@0.0.0 build /home/dev/solution
+> npm run transpile && npm run pack
+
+
+> conway-game-of-life@0.0.0 transpile /home/dev/solution
+> node node_modules/typescript/lib/tsc
+
+
+> conway-game-of-life@0.0.0 pack /home/dev/solution
+> webpack
+
+Hash: f3a89ae595d9dc65fd9f
+Version: webpack 3.10.0
+Time: 4336ms
+                       Asset     Size  Chunks                    Chunk Names
+client/static/base.bundle.js  1.01 MB       0  [emitted]  [big]  client/static/base
+   [0] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [1] ./ts_code/client/src/client-state.ts 562 bytes {0} [built]
+   [2] ./ts_code/common/src/api/api-events.ts 273 bytes {0} [built]
+   [3] ./ts_code/common/src/temp-logger.ts 937 bytes {0} [built]
+   [4] ./ts_code/client/src/index.2.ts 2.25 kB {0} [built]
+   [9] ./ts_code/client/src/client.ts 2.67 kB {0} [built]
+  [10] ./ts_code/client/src/event-types.ts 150 bytes {0} [built]
+  [11] ./ts_code/client/tests/mocks/mock-game-api.ts 1.01 kB {0} [built]
+  [12] ./ts_code/client/src/event-bus.ts 245 bytes {0} [built]
+  [14] ./ts_code/client/src/gameapi/gameapi.ts 2.34 kB {0} [built]
+  [16] ./ts_code/common/src/api/socket-events.ts 202 bytes {0} [built]
+    + 6 hidden modules
+
+> conway-game-of-life@0.0.0 debug /home/dev/solution
+> node --inspect=0.0.0.0:5555 dist/server/src
+
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"msg":"listening on 8080 undefined","time":"2017-12-19T15:44:32.387Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"msg":"serving static files at /home/dev/solution/dist/client/static undefined","time":"2017-12-19T15:44:32.390Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"msg":"Connected client on port 8080 undefined","time":"2017-12-19T15:44:32.667Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:33.911Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:35.427Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:36.938Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:38.399Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:39.914Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:41.426Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:42.938Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:44.410Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:45.929Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:47.441Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:48.913Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:50.430Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:51.943Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:53.403Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:54.913Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:56.424Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:57.936Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"width":80,"height":60,"hashCells":{},"msg":"update the board due to evolution","time":"2017-12-19T15:44:59.397Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"msg":"Client disconnected undefined","time":"2017-12-19T15:44:59.611Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"level":30,"msg":"Connected client on port 8080 undefined","time":"2017-12-19T15:45:00.590Z","v":0}
+{"name":"rootLevelLogger","hostname":"6a6b14989f8f","pid":4414,"subLogger":"apiService - socketio","level":30,"msg":"Jacky received at server on enter","time":"2017-12-19T15:45:00.687Z","v":0}

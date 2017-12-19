@@ -51,7 +51,7 @@ export default class Server {
     this.logger.info(`listening on ${this.portInUse}`)
 
     this.socketIo.on(socketEvents.connect, (socket: any) => {
-      this.logger.info('Connected client on port %s.', this.port)
+      this.logger.info(`Connected client on port ${this.port}`)
 
       socket.on(socketEvents.disconnect, () => {
         this.logger.info('Client disconnected')

@@ -21,9 +21,9 @@ describe('Client test', () => {
 
   describe('server emits event to update client context', () => {
     it('should update current player information', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus())
+      const aGameApi = mockGameApi(logger, createEventBus(logger))
       Client
-        .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
+        .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
         .then((client) => {
           aGameApi.emit(apiEvents.context, clientContext.default)
           assert.deepEqual(client.clientState.context, clientContext.default)
@@ -34,10 +34,10 @@ describe('Client test', () => {
 
   describe('server emits event to update players list', () => {
     it('should update players list', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus())
+      const aGameApi = mockGameApi(logger, createEventBus(logger))
       const createClient = () => Client
       Client
-        .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
+        .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
         .then((client) => {
           aGameApi.emit(apiEvents.gameStateUpdate, mockGameStates.playersOnly)
           const clientPlayers = (<IGameState>client.clientState.game).players
@@ -50,10 +50,10 @@ describe('Client test', () => {
 
   describe('server emits event to update client game state', () => {
     it('should update game state after event fired', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus())
+      const aGameApi = mockGameApi(logger, createEventBus(logger))
       const aGameState = mockGameStates.full
       Client
-      .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
+      .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
       .then((client) => {
         aGameApi.emit(apiEvents.gameStateUpdate, aGameState)
         logger.info(client.clientState.game)
@@ -68,21 +68,21 @@ describe('Client test', () => {
     const positionsToPut = presetPatterns[1]
 
     it('should call gameApi.patch after event fired, and will fail by timeout', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus(), {
+      const aGameApi = mockGameApi(logger, createEventBus(logger), {
         patchCallback: (positions) => {
           assert.deepEqual(positions, positionsToPut)
           done()
         },
       })
       Client
-        .create(logger)(createEventBus(), initialClientState(), aGameApi, noticer)
+        .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
         .then((client) => {
           client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
         })
     })
 
     it('should notify user of error if gameApi.patch fails, and will fail by timeout', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus())
+      const aGameApi = mockGameApi(logger, createEventBus(logger))
       aGameApi.cells.patch = (positions: IPos[]) =>
         Promise.reject(mockGameApiResponse.failCellPatch)
 
@@ -91,7 +91,7 @@ describe('Client test', () => {
       }
 
       Client
-      .create(logger)(createEventBus(), initialClientState(), aGameApi, aNoticer)
+      .create(logger)(createEventBus(logger), initialClientState(), aGameApi, aNoticer)
       .then((client) => {
         client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
       })
