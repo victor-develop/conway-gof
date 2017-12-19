@@ -2,13 +2,13 @@ import 'mocha'
 import * as assert from 'assert'
 import * as supertest from 'supertest'
 import ILogger from '../../common/src/ilogger'
-import TempLogger from '../../common/src/temp-logger'
 import Server from '../src/server'
 import { config } from '../src/config/config'
 import * as cheerio from 'cheerio'
+import { logger } from '../src/helpers'
 
 const testPort = '3000'
-const testLogger = new TempLogger('hello test')
+const testLogger = logger
 const bootServer = () => new Server(testLogger,testPort)
 
 describe('Everything', () => {

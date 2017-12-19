@@ -1,5 +1,5 @@
 export const socketEvents = {
-  connect: 'connect',
+  connect: 'connection',
   enter: 'enter',
   disconnect: 'disconnect',
   error: 'error',

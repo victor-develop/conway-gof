@@ -1,10 +1,10 @@
 import 'mocha'
 import * as assert from 'assert'
 import { Board } from '../../../common/src/gamemodels/board'
-import TempLogger from '../../../common/src/temp-logger'
 import { presetPatterns } from '../../../common/src/gamemodels/preset-pattern'
+import { logger } from '../../../server/src/helpers'
 
-const testLogger = new TempLogger('Board test')
+const testLogger = logger
 
 describe('Board.create method', () => {
   const width = 10

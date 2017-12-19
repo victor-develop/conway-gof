@@ -1,7 +1,6 @@
 import 'mocha'
 import * as assert from 'assert'
 import { Client } from '../src/client'
-import TempLogger from '../../common/src/temp-logger'
 import { initialClientState } from '../src/client-state'
 import { mockGameApi, mockGameApiResponse } from './mocks/mock-game-api'
 import noticer from './mocks/mock-notice'
@@ -14,9 +13,9 @@ import { INotice } from '../src/inotice'
 import { mockGameStates } from './mocks/mock-game-state'
 import { clientContext } from './mocks/mock-client-context'
 import { IGameState } from '../../common/src/gamemodels/game-state'
+import { logger } from '../../server/src/helpers'
 
 const mainTestTitle = 'Client test'
-const logger = new TempLogger(mainTestTitle)
 
 describe('Client test', () => {
 
