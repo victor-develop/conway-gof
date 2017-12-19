@@ -8,6 +8,11 @@ import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 
 function apiService(io: SocketIO.Server, logger: ILogger, gameEventBus: IEventBus) {
+
+  io.on(socketEvents.error, (error) => {
+    logger.err(error, 'SocketIO client error')
+  })
+
   io.on(socketEvents.connect, (socket: any) => {
 
     io.on(socketEvents.enter, (name: string) => {

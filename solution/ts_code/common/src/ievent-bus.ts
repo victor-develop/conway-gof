@@ -1,4 +1,4 @@
 export interface IEventBus {
-  emit
+  emit: (eventKey: string, ...args) => any
   on: (eventKey: string, callback) => any
 }
