@@ -7,7 +7,7 @@ import { socketEvents } from '../../../common/src/api/socket-events'
 import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 
-function apiService(io: SocketIO.Server, logger: ILogger, gameEventBus: IEventBus) {
+export function setApiService(io: SocketIO.Server, logger: ILogger, gameEventBus: IEventBus) {
 
   io.on(socketEvents.error, (error) => {
     logger.err(error, 'SocketIO client error')
