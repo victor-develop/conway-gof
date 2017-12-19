@@ -7,11 +7,11 @@
         {
             "type": "node",
             "request": "attach",
-            "name": "Node in docker",
+            "name": "conway game of life",
             "address": "localhost",
             "port": 5555,
             "localRoot": "${workspaceFolder}/solution",
-            "remoteRoot": "/dev/solution"
+            "remoteRoot": "/home/dev/solution"
         }
     ]
 }
