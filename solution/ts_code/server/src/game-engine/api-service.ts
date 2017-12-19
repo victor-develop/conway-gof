@@ -17,6 +17,8 @@ export function setApiService(io: SocketIO.Server, logger: ILogger, gameEventBus
 
     io.on(socketEvents.enter, (name: string) => {
 
+      logger.info(name, `received at server on ${socketEvents.enter}`)
+
       const sendContextToPlayer: ISendPlayer = (currentPlayer: IPlayer) => {
         const context: ConnectedClientContext = { currentPlayer }
         socket.broadcast.to(socket.id).emit(apiEvents.context, context)

@@ -15,6 +15,7 @@ import { apiEvents } from '../../common/src/api/api-events'
 import { clientContext } from '../tests/mocks/mock-client-context'
 import { mockGameStates } from '../tests/mocks/mock-game-state'
 import { setInterval } from 'timers'
+import { GameApi } from './gameapi/gameapi';
 
 window.addEventListener('DOMContentLoaded', boot)
 
@@ -48,14 +49,16 @@ function boot() {
 
   const tempLogger: ILogger = new TempLogger(logMessages.STARTING)
 
+  const gameApi = new GameApi()
+
   const aGameApi = mockGameApi(tempLogger, createEventBus())
 
   const mockNotice: INotice = {
     notice: (<any>app).$notify,
   }
 
-  const resolveClient = Client.create(tempLogger)(mainEventBus, <any>app, aGameApi, mockNotice)
-
+  const resolveClient = Client.create(tempLogger)(mainEventBus, <any>app, gameApi, mockNotice)
+/*
   resolveClient
   .then((client) => {
     // simluate the server
@@ -77,4 +80,5 @@ function boot() {
       mutex = !mutex
     }, duration)
   })
+*/
 }

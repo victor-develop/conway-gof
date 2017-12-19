@@ -25,7 +25,7 @@ export class GameApi implements IGameApi {
 
   public connect(): Promise<IResponse> {
     return new Promise((resolve, reject) => {
-      this.io = socketIo(config.serverURL)
+      this.io = socketIo()
       this.io.on(socketEvents.connect, (socket) => {
         const response: IResponse = {
           success: true,
@@ -35,6 +35,8 @@ export class GameApi implements IGameApi {
           },
         }
         this.socket = socket
+
+        socket.emit(socketEvents.enter, 'Jacky')
 
         const transferEvent = (eventKey: string) => {
           this.socket.on(eventKey, (...args) => {
@@ -77,7 +79,7 @@ export class GameApi implements IGameApi {
       throw new Error(errorMessages.CONNECT_BEFORE_EMIT)
     }
   }
-  
+
   public on(eventKey: string, callback: any) {
     if (this.socket) {
       this.socket.on(eventKey, callback)
