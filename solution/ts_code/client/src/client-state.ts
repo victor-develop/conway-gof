@@ -21,6 +21,8 @@ export function initialClientState(): ClientState {
     context: {
       currentPlayer: InitialValue.instance,
     },
+    errors: [],
+    playername: '',
   }
 }
 
@@ -31,4 +33,9 @@ export interface ClientContext {
 export interface ClientState {
   game: InitialValue | IGameState
   context: ClientContext
+  errors: {
+    message: string,
+    data?: object,
+  }[],
+  playername: string
 }

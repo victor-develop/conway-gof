@@ -32,7 +32,7 @@ export class Client {
     this.gameApi.on(apiEvents.context, context => this.updateContext(context))
     this.gameApi.on(apiEvents.gameStateUpdate,
       (gameState: IGameState) => this.updateGameState(gameState))
-    this.gameApi.on(socketEvents.error, (err) => {
+    this.gameApi.on(socketEvents.connect_error, (err) => {
       (<any>this.state).errors.push({
         message: 'Server disconnected, you better refresh',
       })

@@ -64,6 +64,10 @@ export class GameApi implements IGameApi {
         this.emit(socketEvents.error, error)
       })
 
+      this.socket.on('connect_error', (error) => {
+        this.emit(socketEvents.connect_error, error)
+        this.socket.close()
+      })
       return resolve(this.socket)
     })
   }
@@ -75,7 +79,7 @@ export class GameApi implements IGameApi {
         throw new Error(errorMessages.CONNECT_BEFORE_PATCH)
       }
       this.socket.emit(apiEvents.newPlayerIn, profile)
-      //for reconnecting 
+      // for reconnecting 
       this.socket.on(socketEvents.connect, () => {
         this.socket.emit(apiEvents.newPlayerIn, profile)
       })
