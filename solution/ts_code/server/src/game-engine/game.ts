@@ -78,7 +78,7 @@ export class Game {
   private patchCells(player: IPlayer, positions: IPos[]): GameBoard {
     const makeCell = (pos: IPos) =>
       createCell(pos.x, pos.y, player.uid, CellState.AliveStill, player.color)
-    const newBoard = GameBoard.create(this.state.board.width, this.state.board.height, [])
+    const newBoard = GameBoard.clone(this.state.board)
     positions.forEach(pos => newBoard.addCell(makeCell(pos)))
     return newBoard
   }

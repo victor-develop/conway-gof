@@ -48,14 +48,14 @@ export class GameApi implements IGameApi {
 
       this.socket.on(apiEvents.gameStateUpdate, (gameState: IGameState) => {
         if (gameState.board) {
-          const board: Board = gameState.board
+          const board: GameBoard = gameState.board
           // deserialize the plain object to class
-          gameState.board = Object.assign(GameBoard.create(board.width, board.height, []), board)
+          gameState.board = (GameBoard.clone(board))
         }
         if (gameState.presetPatternBoards) {
           gameState.presetPatternBoards = gameState.presetPatternBoards
             .map(boardObj =>
-              Object.assign(Board.create(boardObj.width, boardObj.height,[]), boardObj))
+              Board.clone(boardObj))
         }
         this.emit(apiEvents.gameStateUpdate, gameState)
       })

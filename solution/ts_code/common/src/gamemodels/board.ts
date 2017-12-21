@@ -11,10 +11,19 @@ export interface HashCells {
 
 export class Board {
 
-  public static create = (width: number, height: number, positions: IPos[]) =>
+  public static create = (width: number, height: number,
+    positions: IPos[]) =>
       new Board(width, height, positions)
 
-  protected constructor(width: number, height: number, positions: IPos[]) {
+  /**
+   * It can also be used to convert a seriliazed board back to class
+   */
+  public static clone = (board: Board) => new Board(
+    board.width, board.height,[], board.hashCells,
+  )
+
+  protected constructor(width: number, height: number,
+    positions: IPos[], hashCells: HashCells = null) {
 
     validatePositive(width, 'width')
     validatePositive(height, 'height')
@@ -24,6 +33,11 @@ export class Board {
     this.hashCells = {}
 
     this.initCells(positions)
+    let copiedHashCells = {}
+    if (hashCells != null) {
+      copiedHashCells = JSON.parse(JSON.stringify(hashCells))
+    }
+    this.hashCells = Object.assign(this.hashCells, copiedHashCells)
   }
 
   private initCells(positions: IPos[]) {
@@ -35,6 +49,15 @@ export class Board {
   protected addCell(positionObj: IPos) {
     this.hashCells[positionObj.x] = this.hashCells[positionObj.x] || {}
     this.hashCells[positionObj.x][positionObj.y] = positionObj
+  }
+
+  public allPositions(): IPos[] {
+    const xs = [...Array(this.width).keys()]
+    const ys = [...Array(this.height).keys()]
+    // tslint:disable-next-line:ter-arrow-body-style
+    const positions = xs.map(x => ys.map((y) => { return { x, y } }))
+    .reduce((posList, pos) => posList.concat(pos, []))
+    return positions
   }
 
   public isValidPos(pos: IPos): boolean {
