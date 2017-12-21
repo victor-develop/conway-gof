@@ -34,19 +34,9 @@ function boot() {
 
   Vue.use(uiv)
 
-  // will be used as ClientState 
-
-  const vueState = {
-    errors: [
-      { id:1, message:'unkown error occur.' },
-      { id:2, message: 'you better refresh.' },
-    ],
-    playername: '',
-  }
-
   const app = new Vue({
     el: '#app',
-    data: Object.assign(vueState, initialClientState()),
+    data: initialClientState(),
     methods: {
       hasInit: item => (item !== InitialValue.instance),
       // tslint:disable-next-line:object-literal-shorthand
