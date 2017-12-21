@@ -5,7 +5,8 @@ import { CellState } from '../../../../common/src/gamemodels/cell-state'
 import { Board } from '../../../../common/src/gamemodels/board'
 import createCell from '../../../../common/src/gamemodels/cell'
 import { Color } from '../../../../common/src/gamemodels/color'
-
+import * as tinycolor from 'tinycolor2'
+import { ColorUtil } from '../color-util'
 
 interface EvolvingCellContext {
   board: GameBoard
@@ -15,16 +16,10 @@ interface EvolvingCellContext {
 type livingCondition = (old: EvolvingCellContext) => boolean
 type riseupCondition = (old: EvolvingCellContext) => boolean
 
+// TODO: move some logic to colo util
 function getAvgColor(board: GameBoard, pos: IPos): Color {
-  const neighborsColors = getNeighbors(board, pos).map(cell => tinycolor(cell.overlayColor).toRgb())
-  if (neighborsColors.length < 0) {
-    return tinycolor('black').toHex8String()
-  }
-  const average = arr => arr.reduce((value1, value2) => value1 + value2, 0) / arr.length
-  const r = average(neighborsColors.map(c => c.r))
-  const g = average(neighborsColors.map(c => c.g))
-  const b = average(neighborsColors.map(c => c.b))
-  return tinycolor({ r, g, b }).toHex8String()
+  const neighborsColors = getNeighbors(board, pos).map(cell => (cell.overlayColor))
+  return ColorUtil.getAverage(neighborsColors)
 }
 
 function getNeiborPositions(c: IPos): IPos[] {
