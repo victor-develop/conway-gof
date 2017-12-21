@@ -94,19 +94,12 @@ const evolvePosition = (board: GameBoard, pos: IPos) => {
 }
 
 export const evolveBoard = (board: GameBoard) => {
-  const xs = [...Array(board.width).keys()]
-  const ys = [...Array(board.height).keys()]
-  // tslint:disable-next-line:ter-arrow-parens
-  const positions = xs.map(x => ys.map(y => { return { x, y } }))
-  .reduce((posList, pos) => posList.concat(pos, []))
-
   const newBoard = GameBoard.create(board.width, board.height, [])
-  positions.forEach((pos) => {
+  board.allPositions().forEach((pos) => {
     const cell = evolvePosition(board, pos)
     if (cell !== deadCell) {
       newBoard.addCell(<ICell>cell)
     }
   })
-
   return newBoard
 }

@@ -30,9 +30,29 @@ export const tub: Pattern = [
 
 export const presetPatterns: Pattern[] = [blinker, toad, tub]
 
-// TODO: make a real random generator
-export function makeRandomPattern(boad: GameBoard) {
-  return presetPatterns[1].filter(pos => (!boad.isValidPos(pos)))
+
+export function makeRandomPattern(board: GameBoard) {
+  const subareaQty = 9
+  const subareas = [...Array(subareaQty).keys()]
+  const random = (min, max) => Math.floor(Math.random() * (max - min)) + min
+  const randomIndex = () => random(0, subareaQty - 1)
+  const areaWidth = board.width / subareaQty
+  const areaX = randomIndex() * areaWidth
+  const areaHeight = board.height / subareaQty
+  const areaY = randomIndex() * areaHeight
+  const areaPositions = board.allPositions().filter(pos =>
+     pos.x >= areaX && pos.x <= (areaX + areaWidth) &&
+     pos.y >= areaY && pos.y <= (areaY + areaHeight) &&
+     (!board.isValidPos(pos)
+  ))
+
+  // randomly delete half of the elements
+  // tslint:disable-next-line:no-magic-numbers
+  for(let i = 0; i < areaPositions.length/2; i++) {
+    const pickedIndex = Math.floor(Math.random() * areaPositions.length)
+    areaPositions.splice(pickedIndex, 1)
+  }
+  return areaPositions
 }
 
 const patternBoardWidth = 10
