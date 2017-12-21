@@ -59,7 +59,7 @@ export default class Server {
     })
 
     this.gameInstance = createGame(this.logger)
-    setApiService(this.socketIo, this.logger, this.gameInstance.events)
+    setApiService(this.socketIo, this.logger, this.gameInstance)
 
     return this
   }

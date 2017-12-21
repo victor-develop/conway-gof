@@ -5,6 +5,7 @@ import { ILogger } from '../../../common/src/services'
 import { IEventBus } from '../../../common/src/ievent-bus'
 import { apiEvents } from '../../../common/src/api/api-events'
 import IErrorResponse from '../../../common/src/api/IErrorResponse'
+import { IPlayerProfile } from '../../../common/src/api/i-player-profile'
 
 function response(uploadedData: any): IResponse {
   return {
@@ -29,10 +30,12 @@ export const mockGameApiResponse = {
 
 export interface mockGameApiCallbacks {
   patchCallback: (positions: IPos[]) => void
+  submitProfileCallback: (profile: IPlayerProfile) => any
 }
 
 const emptyCallbacks: mockGameApiCallbacks = {
   patchCallback: null,
+  submitProfileCallback: null,
 }
 
 export const mockGameApi = function(
@@ -44,6 +47,13 @@ export const mockGameApi = function(
     on: (...args: any[]) => eventBus.on.apply(eventBus, args),
     emit: (...args: any[]) => eventBus.emit.apply(eventBus,args),
     connect: () => Promise.resolve(emptyResponse),
+    currentPlayer: {
+      submitProfile: (profile: IPlayerProfile) => {
+        if (callbacks.submitProfileCallback) {
+          callbacks.submitProfileCallback(profile)
+        }
+      },
+    },
     cells: {
       patch: (positions: IPos[]) => {
         if (callbacks.patchCallback) {

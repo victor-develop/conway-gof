@@ -13,7 +13,11 @@ function wrapLogger(bunyanLogger: bunyan) : ILogger {
     err: (obj: any, msg: string) => {
       bunyanLogger.error(obj, msg)
     },
-    child: (name: string) => Promise.resolve(wrapLogger(bunyanLogger.child({ subLogger: name }))),
+    child: (name: string) => {
+      const childID = {}
+      childID[name] = name
+      return Promise.resolve(wrapLogger(bunyanLogger.child(childID)))
+    },
   }
 }
 

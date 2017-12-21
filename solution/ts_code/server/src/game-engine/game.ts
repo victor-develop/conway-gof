@@ -39,14 +39,6 @@ export class Game {
   private jobQueue: Function[]
 
   private init() {
-    this.eventBus.on(apiEvents.newPlayerIn, (name, sendBack: ISendPlayer) =>
-      this.newPlayer(name, sendBack))
-
-    this.eventBus.on(apiEvents.playerOut, (leaver: IPlayer) =>
-      this.removePlayer(leaver))
-
-    this.eventBus.on(updateBoardEvent.playerPatchCells,
-      (player, positions) => this.playerPatchCells(player, positions))
 
     setInterval(() => {
       this.runEvolution()
@@ -60,35 +52,27 @@ export class Game {
     }, jobConsumeInterval)
   }
 
-  private newPlayer(name: string, sendBack: ISendPlayer) {
+  public newPlayer(name: string): Promise<IPlayer> {
     const color = ColorUtil.assignNew(this.state.players)
     const uid = shortid.generate()
     const player = createPlayer(name, color, uid)
     this.state.players.push(player)
-    sendBack(player)
-    this.broadcastPlayers()
     this.patchRandomCells(player)
+    this.broadcastState()
+    return Promise.resolve(player)
   }
 
-  private removePlayer(player: IPlayer) {
+  public removePlayer(player: IPlayer) {
     this.state.players = this.state.players.filter(p => p.uid !== player.uid)
-    this.broadcastPlayers()
+    this.broadcastState()
   }
 
-  private broadcastPlayers() {
-    const stateUpdate: IPartialGameState_Players = {
-      players: this.state.players,
-    }
-    this.eventBus.emit(apiEvents.gameStateUpdate, stateUpdate)
+  public playerPatchCells(player: IPlayer, positions: IPos[]) {
+    this.pushNewBoard(() => this.patchCells(player, positions),updateBoardEvent.playerPatchCells)
   }
 
-  private broadcastBoard() {
-    const newPartialState: IPartialGameState_Evolution = {
-      updateAt: this.currentEvolutionToken,
-      board: this.state.board,
-    }
-    this.state = Object.assign({}, this.state, newPartialState)
-    this.eventBus.emit(apiEvents.gameStateUpdate, newPartialState)
+  private broadcastState() {
+    this.eventBus.emit(apiEvents.gameStateUpdate, this.state)
   }
 
   private patchCells(player: IPlayer, positions: IPos[]): GameBoard {
@@ -97,10 +81,6 @@ export class Game {
     const newBoard = GameBoard.create(this.state.board.width, this.state.board.height, [])
     positions.forEach(pos => newBoard.addCell(makeCell(pos)))
     return newBoard
-  }
-
-  private playerPatchCells(player: IPlayer, positions: IPos[]) {
-    this.pushNewBoard(() => this.patchCells(player, positions),updateBoardEvent.playerPatchCells)
   }
 
   private patchRandomCells(player: IPlayer) {
@@ -118,8 +98,9 @@ export class Game {
       this.logger.info(newBoard, `update the board due to ${eventKey}`)
       const updateToken = Date.now()
       this.currentEvolutionToken = updateToken
+      this.state.updateAt = updateToken
       this.state.board = newBoard
-      this.broadcastBoard()
+      this.broadcastState()
     })
   }
 
