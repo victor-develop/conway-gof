@@ -18,5 +18,6 @@ export interface IPartialGameState_Players {
 export interface IPartialGameState_Evolution {
   updateAt: unixtime,
   board: GameBoard
+  players: IPlayer[],
 }
 

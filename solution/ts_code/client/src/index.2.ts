@@ -1,5 +1,6 @@
 import IPlayer from '../../common/src/gamemodels/iplayer'
 import Vue from 'vue'
+import * as uiv from 'uiv'
 import { Client } from './client'
 import { ClientState, initialClientState, InitialValue } from './client-state'
 import TempLogger from '../../common/src/temp-logger'
@@ -17,6 +18,8 @@ import { mockGameStates } from '../tests/mocks/mock-game-state'
 import { setInterval } from 'timers'
 import { GameApi } from './gameapi/gameapi'
 import { logEventBus } from '../../common/src/attach-logger'
+import { playerEventType } from './event-types';
+import { IPlayerProfile } from '../../common/src/api/i-player-profile';
 
 window.addEventListener('DOMContentLoaded', boot)
 
@@ -29,12 +32,42 @@ function boot() {
   // from legacy js file
   (<any>window).setupVueComponents(Vue)
 
+  Vue.use(uiv)
+
   // will be used as ClientState 
+
+  const vueState = {
+    errors: [
+      { id:1, message:'unkown error occur.' },
+      { id:2, message: 'you better refresh.' },
+    ],
+    playername: '',
+  }
+
   const app = new Vue({
     el: '#app',
-    data: initialClientState(),
+    data: Object.assign(vueState, initialClientState()),
     methods: {
       hasInit: item => (item !== InitialValue.instance),
+      // tslint:disable-next-line:object-literal-shorthand
+      getName: function() {
+        return this.$prompt({
+          title: 'Welcome',
+          content: 'Please set a player name for yourself:',
+          // A simple input validator
+          // returns the err msg (not valid) or null (valid)
+          validator (value) {
+            return /\w+/.test(value) ? null : 'Letters only'
+          },
+        })
+        .then((name) => {
+          this.playername = name
+          return this.playername
+        })
+        .catch(() => {
+          this.getName()
+        })
+      },
     },
   })
 
@@ -52,13 +85,23 @@ function boot() {
 
   const gameApi = new GameApi()
 
-  const aGameApi = mockGameApi(tempLogger, createEventBus(tempLogger))
+  //const aGameApi = mockGameApi(tempLogger, createEventBus(tempLogger))
 
   const mockNotice: INotice = {
     notice: (<any>app).$notify,
   }
 
   const resolveClient = Client.create(tempLogger)(mainEventBus, <any>app, gameApi, mockNotice)
+  resolveClient
+    .then((client) => {
+      (<any>client.clientState).getName()
+      .then((name) => {
+        const profile: IPlayerProfile = {
+          name,
+        }
+        mainEventBus.emit(playerEventType.submitProfile, profile)
+      })
+    })
 /*
   resolveClient
   .then((client) => {

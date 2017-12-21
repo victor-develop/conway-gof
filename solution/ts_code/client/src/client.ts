@@ -9,7 +9,10 @@ import { ClientState, InitialValue, ClientContext } from './client-state'
 import { apiEvents } from '../../common/src/api/api-events'
 import { playerEventType } from './event-types'
 import IErrorResponse from '../../common/src/api/IErrorResponse'
-import { IGameState } from '../../common/src/gamemodels/game-state';
+import { IGameState } from '../../common/src/gamemodels/game-state'
+import { IPlayerProfile } from '../../common/src/api/i-player-profile'
+import { socketEvents } from '../../common/src/api/socket-events'
+import { error } from 'util'
 
 const logMessage = {
   DATA_BE_SENT: 'data to be sent',
@@ -29,9 +32,15 @@ export class Client {
     this.gameApi.on(apiEvents.context, context => this.updateContext(context))
     this.gameApi.on(apiEvents.gameStateUpdate,
       (gameState: IGameState) => this.updateGameState(gameState))
+    this.gameApi.on(socketEvents.error, (err) => {
+      (<any>this.state).errors.push({
+        message: 'Server disconnected, you better refresh',
+      })
+    })
     this.eventBus.on(playerEventType.putCellsAttempt,
       (positions: IPos[]) => this.attemptPatchCells(positions))
-
+    this.eventBus.on(playerEventType.submitProfile,
+      (profile: IPlayerProfile) => this.gameApi.currentPlayer.submitProfile(profile))
     return Promise.resolve(this)
   }
 
@@ -47,12 +56,13 @@ export class Client {
     }
 
     const oldState = (<IGameState>this.state.game)
-    if (newState.updateAt > oldState.updateAt) {
+    if (newState.updateAt >= oldState.updateAt) {
       this.state.game = Object.assign(this.state.game, newState)
     } else {
       this.logger.info({ oldState, newState }, logMessage.BELATED_STATE_RECEIVED)
     }
   }
+
 
   private attemptPatchCells(positions: IPos[]) {
     this.logger.child(this.attemptPatchCells.name)

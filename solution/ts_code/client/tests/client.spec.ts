@@ -73,6 +73,7 @@ describe('Client test', () => {
           assert.deepEqual(positions, positionsToPut)
           done()
         },
+        submitProfileCallback: null,
       })
       Client
         .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)

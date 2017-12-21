@@ -7,7 +7,14 @@ import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 import { apiEvents } from '../../../common/src/api/api-events'
 import { EventEmitter } from 'eventemitter3'
-import TempLogger from '../../../common/src/temp-logger';
+import TempLogger from '../../../common/src/temp-logger'
+import { IEventBus } from '../../../common/src/ievent-bus'
+import { createEventBus } from '../event-bus'
+import { Board } from '../../../common/src/gamemodels/board'
+import { IPlayerProfile } from '../../../common/src/api/i-player-profile'
+import { IGameState } from '../../../common/src/gamemodels/game-state'
+import GameBoard from '../../../common/src/gamemodels/game-board'
+
 
 const errorMessages = {
   CONNECT_BEFORE_PATCH: 'call connect() first in order to patch()',
@@ -18,32 +25,61 @@ export class GameApi implements IGameApi {
   private socket: SocketIOClient.Socket
   private socketOnReady: ((socket: SocketIOClient.Socket) => void)[]
   private logger: ILogger
+  private eventBus: IEventBus
 
   public constructor() {
     this.socketOnReady = []
     this.logger = new TempLogger('GameApi')
+    this.eventBus = createEventBus(this.logger)
   }
 
-  public connect(): Promise<IResponse> {
+  public connect(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.socket = socketIo()
-      this.logger.info({ enter: 'Jacky' })
-      this.socket.emit(socketEvents.enter, 'Jacky')
 
       const transferEvent = (eventKey: string) => {
         this.socket.on(eventKey, (...args) => {
+          this.logger.info(`${eventKey} fired`)
           this.emit(eventKey, ...args)
         })
       }
 
       transferEvent(apiEvents.context)
-      transferEvent(apiEvents.gameStateUpdate)
 
-      while(this.socketOnReady.length > 0) {
-        const hook = this.socketOnReady.shift()
-        hook(this.socket)
-      }
+      this.socket.on(apiEvents.gameStateUpdate, (gameState: IGameState) => {
+        if (gameState.board) {
+          const board: Board = gameState.board
+          // deserialize the plain object to class
+          gameState.board = Object.assign(GameBoard.create(board.width, board.height, []), board)
+        }
+        if (gameState.presetPatternBoards) {
+          gameState.presetPatternBoards = gameState.presetPatternBoards
+            .map(boardObj =>
+              Object.assign(Board.create(boardObj.width, boardObj.height,[]), boardObj))
+        }
+        this.emit(apiEvents.gameStateUpdate, gameState)
+      })
+
+      this.socket.on(socketEvents.error, (error) => {
+        this.emit(socketEvents.error, error)
+      })
+
+      return resolve(this.socket)
     })
+  }
+
+
+  public currentPlayer = {
+    submitProfile: (profile: IPlayerProfile) => {
+      if (!this.socket) {
+        throw new Error(errorMessages.CONNECT_BEFORE_PATCH)
+      }
+      this.socket.emit(apiEvents.newPlayerIn, profile)
+      //for reconnecting 
+      this.socket.on(socketEvents.connect, () => {
+        this.socket.emit(apiEvents.newPlayerIn, profile)
+      })
+    },
   }
 
   public cells = {
@@ -62,21 +98,12 @@ export class GameApi implements IGameApi {
   }
 
   public emit(eventKey: string, ...args) {
-    if (this.socket) {
-      this.socket.emit(eventKey, ...args)
-    } else {
-      throw new Error(errorMessages.CONNECT_BEFORE_EMIT)
-    }
+    this.eventBus.emit(eventKey, ...args)
   }
 
   public on(eventKey: string, callback: any) {
-    if (this.socket) {
-      this.socket.on(eventKey, callback)
-      return
-    }
-    this.socketOnReady.push((socket) => {
-      socket.on(eventKey, callback)
-    })
+    const log = () => this.logger.info({ eventKey }, 'socket event mounted')
+    this.eventBus.on(eventKey, callback)
   }
 }
 

@@ -1,4 +1,5 @@
 function setupVueComponents(Vue) {
+  Vue.use(window.uiv)
   Vue.component('player-banner', {
     template:`<span>
                 <span v-if="player.uid == currentPlayer.uid">></span>

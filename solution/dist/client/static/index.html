@@ -5,7 +5,7 @@
     <title>Conway s Game of Life</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/site.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.10/vue.js"></script>
+
     <script type="text/javascript" src="//unpkg.com/uiv/dist/uiv.min.js"></script>
     <script src="vuecomponents.js"></script>
     <script src="base.bundle.js"></script>
@@ -19,6 +19,9 @@
             Conway's Game of Life
           </h3>
         </div>
+      </div>
+      <div class="row notification-bar">
+        <alert v-for="err in errors" type="danger" >{{ err.message }}</alert>
       </div>
       <div class="row">
         <div class="col-md-8">
