@@ -1,6 +1,7 @@
 import IPlayer from '../../common/src/gamemodels/iplayer'
 import { Board } from '../../common/src/gamemodels/board'
 import { IGameState } from '../../common/src/gamemodels/i-game-state'
+import { presetPatternBoards } from '../../common/src/gamemodels/preset-pattern'
 
 export class InitialValue {
   private static singleton: InitialValue
@@ -20,14 +21,17 @@ export function initialClientState(): ClientState {
     game: InitialValue.instance,
     context: {
       currentPlayer: InitialValue.instance,
+      presetPatternBoards,
     },
     errors: [],
     playername: '',
+    selectedPattern: InitialValue.instance,
   }
 }
 
 export interface ClientContext {
   currentPlayer: InitialValue | IPlayer
+  presetPatternBoards: Board[],
 }
 
 export interface ClientState {
@@ -38,5 +42,6 @@ export interface ClientState {
     data?: object,
     notified: boolean,
   }[],
-  playername: string
+  playername: string,
+  selectedPattern: InitialValue | Board
 }

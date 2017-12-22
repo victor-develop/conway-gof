@@ -8,6 +8,5 @@ export function initialGameState(): IGameState {
     updateAt: Date.now(),
     players: [],
     board:GameBoard.create(config.game.boardWidth, config.game.boardHeight, []),
-    presetPatternBoards,
   }
 }

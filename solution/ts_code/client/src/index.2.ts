@@ -20,6 +20,7 @@ import { GameApi } from './gameapi/gameapi'
 import { logEventBus } from '../../common/src/attach-logger'
 import { playerEventType } from './event-types';
 import { IPlayerProfile } from '../../common/src/api/i-player-profile';
+import { Board } from '../../common/src/gamemodels/board';
 
 window.addEventListener('DOMContentLoaded', boot)
 
@@ -39,8 +40,21 @@ function boot() {
     methods: {
       hasInit: item => (item !== InitialValue.instance),
       // tslint:disable-next-line:object-literal-shorthand
-      putPosition: function(position: IPos) {
-        this.$emit(playerEventType.putCellsAttempt, [position])
+      putPosition: function(point: IPos) {
+        if (this.selectedPattern !== InitialValue.instance) {
+          const shiftedPositions = (<Board>this.selectedPattern).validPositions()
+            .map((pos) => {
+              const shiftedPosition = { x: pos.x + point.x, y: pos.y + point.y }
+              return shiftedPosition
+            })
+          this.selectedPattern = InitialValue.instance
+          return this.$emit(playerEventType.putCellsAttempt, shiftedPositions)
+        }
+        return this.$emit(playerEventType.putCellsAttempt, [point])
+      },
+      // tslint:disable-next-line:object-literal-shorthand
+      selectPattern: function(board) {
+        this.selectedPattern = board
       },
       // tslint:disable-next-line:object-literal-shorthand
       getName: function() {
@@ -90,7 +104,7 @@ function boot() {
 
   const gameApi = new GameApi()
 
-  //const aGameApi = mockGameApi(tempLogger, createEventBus(tempLogger))
+  // const aGameApi = mockGameApi(tempLogger, createEventBus(tempLogger))
 
   const mockNotice: INotice = {
     notice: (<any>app).$notify,

@@ -1,6 +1,6 @@
 import { setInterval, clearInterval } from 'timers'
 import { IEventBus } from '../../../common/src/ievent-bus'
-import { IGameState, IPartialGameState_Evolution, IPartialGameState_Players } from '../../../common/src/gamemodels/i-game-state'
+import { IGameState } from '../../../common/src/gamemodels/i-game-state'
 import { apiEvents } from '../../../common/src/api/api-events'
 import createPlayer from '../../../common/tests/mocks/mock-player'
 import * as shortid from 'shortid'
@@ -17,6 +17,7 @@ import { presetPatternBoards } from '../../../common/src/gamemodels/preset-patte
 import { config } from '../config/config'
 import { initialGameState } from './initial-game-state'
 import IResponse from '../../../common/src/api/IResponse';
+import IPlayerContext from '../../../common/src/gamemodels/iplayer-context';
 
 export type ISendPlayer = (player: IPlayer) => void
 
@@ -58,14 +59,17 @@ export class Game {
     }
   }
 
-  public newPlayer(name: string): Promise<IPlayer> {
+  public newPlayer(name: string): Promise<IPlayerContext> {
     const color = ColorUtil.assignNew(this.state.players)
     const uid = shortid.generate()
     const player = createPlayer(name, color, uid)
     this.state.players.push(player)
     this.patchRandomCells(player)
     this.broadcastState()
-    return Promise.resolve(player)
+    return Promise.resolve({
+      player,
+      presetPatternBoards,
+    })
   }
 
   public removePlayer(player: IPlayer) {

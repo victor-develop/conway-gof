@@ -60,6 +60,23 @@ export class Board {
     return positions
   }
 
+  public validPositions(): IPos[] {
+    const positions: IPos[] = []
+    const base = 10
+    // tslint:disable-next-line:forin
+    for(const x in this.hashCells) {
+      // tslint:disable-next-line:forin
+      for(const y in this.hashCells[x]) {
+        const position = {
+          x: parseInt(x, base),
+          y: parseInt(y, base),
+        }
+        positions.push(position)
+      }
+    }
+    return positions
+  }
+
   public isValidPos(pos: IPos): boolean {
     if ((this.hashCells[pos.x] &&
        this.hashCells[pos.x][pos.y])) {

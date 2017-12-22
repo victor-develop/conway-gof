@@ -1,4 +1,3 @@
-import { presetPatterns, presetPatternBoards } from '../../../common/src/gamemodels/preset-pattern'
 import { Board } from '../../../common/src/gamemodels/board'
 import { ILogger } from '../../../common/src/services'
 import createPlayer from '../../../common/tests/mocks/mock-player'
@@ -42,7 +41,6 @@ const fullState: IGameState = {
   updateAt: 1513368397117,
   board: gameTick1.board,
   players,
-  presetPatternBoards,
 }
 
 export const mockGameStates = {

@@ -26,8 +26,8 @@ export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Gam
       socket.on(apiEvents.newPlayerIn, (profile: IPlayerProfile) => {
 
         game.newPlayer(profile.name)
-          .then((currentPlayer) => {
-
+          .then((playerContext) => {
+            const currentPlayer = playerContext.player
             const removePlayer = () => game.removePlayer(currentPlayer)
 
             socket.on(socketEvents.disconnect, removePlayer)
@@ -42,7 +42,7 @@ export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Gam
               logger.err({ currentPlayer, error }, 'Something wrong with player\'s socket connection')
             })
 
-            socket.emit(apiEvents.context, { currentPlayer })
+            socket.emit(apiEvents.context, playerContext)
           })
       })
     })

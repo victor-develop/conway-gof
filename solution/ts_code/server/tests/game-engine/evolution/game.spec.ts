@@ -4,8 +4,9 @@ import { logger } from '../../../src/helpers'
 import { createGame } from '../../../src/services'
 import { presetPatternBoards, blinker } from '../../../../common/src/gamemodels/preset-pattern'
 import * as assert from 'assert'
-import IResponse from '../../../../common/src/api/IResponse';
-import { TempLogger, ILogger } from '../../../../common/src/services';
+import IResponse from '../../../../common/src/api/IResponse'
+import { TempLogger, ILogger } from '../../../../common/src/services'
+import IPlayerContext from '../../../../common/src/gamemodels/iplayer-context'
 
 
 describe('Server Game test', () => {
@@ -28,7 +29,8 @@ describe('Server Game test', () => {
     it('should reject the player\'s attempt', (done) => {
       const game = createGame(logger)
       game.newPlayer('TestMan')
-        .then((testMan) => {
+        .then((context: IPlayerContext) => {
+          const testMan = context.player
           return game.playerPatchCells(testMan, blinker)
             .then((firstResponse: IResponse) => {
               assert.equal(firstResponse.success, true)

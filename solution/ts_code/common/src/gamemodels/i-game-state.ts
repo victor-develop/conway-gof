@@ -8,16 +8,4 @@ export interface IGameState {
   updateAt: unixtime,
   players: IPlayer[],
   board: GameBoard,
-  presetPatternBoards: Board[]
 }
-
-export interface IPartialGameState_Players {
-  players
-}
-
-export interface IPartialGameState_Evolution {
-  updateAt: unixtime,
-  board: GameBoard
-  players: IPlayer[],
-}
-

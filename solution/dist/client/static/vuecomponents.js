@@ -44,7 +44,7 @@ function setupVueComponents(Vue) {
 
   // TODO: feature: explore borderless board
   Vue.component('game-board', {
-    template: `<table class="board">
+    template: `<table class="board game-board">
                 <tbody>
                   <tr v-for="h in board.height">
                     <td v-for="w in board.width" v-on:click="putPosition(w-1, h-1)">
@@ -64,23 +64,28 @@ function setupVueComponents(Vue) {
 
   Vue.component('pattern-board', {
     template:`
-    <table class="board pattern-board">
-    <tbody>
-        <tr v-for="h in board.height">
-          <td v-for="w in board.width"  >
-            <color-pos class="pattern-pos" :color=color v-if="hasValue(w-1, h-1)" ></color-pos>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <popover content="Click on game board to place this pattern" trigger="manual" v-model="selected">
+      <table class="board pattern-board" type="primary" v-on:click="select(board)">
+      <tbody>
+          <tr v-for="h in board.height">
+            <td v-for="w in board.width"  >
+              <color-pos class="pattern-pos" :color=color v-if="hasValue(w-1, h-1)" ></color-pos>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </popover>
     `,
-    props: ['color', 'board'],
+    props: ['color', 'board', 'selected'],
     methods: {
       hasValue: function(x, y) {
         const offsetX = parseInt(this.board.width/3);
         const offsetY = parseInt(this.board.height/3);
         return this.board.isValidPos({ x: x - offsetX, y: y - offsetY });
       },
+      select: function(board) {
+        this.$emit('select', board)
+      }
     },
   })
 }

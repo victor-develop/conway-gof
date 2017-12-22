@@ -14,6 +14,8 @@ import { Board } from '../../../common/src/gamemodels/board'
 import { IPlayerProfile } from '../../../common/src/api/i-player-profile'
 import { IGameState } from '../../../common/src/gamemodels/i-game-state'
 import GameBoard from '../../../common/src/gamemodels/game-board'
+import IPlayerContext from '../../../common/src/gamemodels/iplayer-context';
+import { ClientContext } from '../client-state';
 
 
 const errorMessages = {
@@ -37,25 +39,21 @@ export class GameApi implements IGameApi {
     return new Promise((resolve, reject) => {
       this.socket = socketIo()
 
-      const transferEvent = (eventKey: string) => {
-        this.socket.on(eventKey, (...args) => {
-          this.logger.info(`${eventKey} fired`)
-          this.emit(eventKey, ...args)
-        })
-      }
-
-      transferEvent(apiEvents.context)
+      this.socket.on(apiEvents.context, (context: IPlayerContext) => {
+        // deserialize the object
+        const clientContext: ClientContext = {
+          currentPlayer: context.player,
+          presetPatternBoards: context.presetPatternBoards
+            .map(boardObj => Board.clone(boardObj)),
+        }
+        this.emit(apiEvents.context, clientContext)
+      })
 
       this.socket.on(apiEvents.gameStateUpdate, (gameState: IGameState) => {
         if (gameState.board) {
           const board: GameBoard = gameState.board
           // deserialize the plain object to class
           gameState.board = (GameBoard.clone(board))
-        }
-        if (gameState.presetPatternBoards) {
-          gameState.presetPatternBoards = gameState.presetPatternBoards
-            .map(boardObj =>
-              Board.clone(boardObj))
         }
         this.emit(apiEvents.gameStateUpdate, gameState)
       })
