@@ -1,4 +1,4 @@
-import { setInterval } from 'timers'
+import { setInterval, clearInterval } from 'timers'
 import { IEventBus } from '../../../common/src/ievent-bus'
 import { IGameState, IPartialGameState_Evolution, IPartialGameState_Players } from '../../../common/src/gamemodels/game-state'
 import { apiEvents } from '../../../common/src/api/api-events'
@@ -16,6 +16,7 @@ import IPos from '../../../common/src/gamemodels/ipos'
 import { presetPatternBoards } from '../../../common/src/gamemodels/preset-pattern'
 import { config } from '../config/config'
 import { initialGameState } from './initial-game-state'
+import IResponse from '../../../common/src/api/IResponse';
 
 export type ISendPlayer = (player: IPlayer) => void
 
@@ -40,16 +41,21 @@ export class Game {
 
   private init() {
 
-    setInterval(() => {
+    const evolveLoop = setInterval(() => {
       this.runEvolution()
     }, this.evolveIntervalSecond)
 
-    setInterval(() => {
+    const jobQLoop = setInterval(() => {
       if (this.jobQueue.length > 0) {
         const job = this.jobQueue.pop()
         job()
       }
     }, jobConsumeInterval)
+
+    this.stop = () => {
+      clearInterval(evolveLoop)
+      clearInterval(jobQLoop)
+    }
   }
 
   public newPlayer(name: string): Promise<IPlayer> {
@@ -68,24 +74,58 @@ export class Game {
   }
 
   public playerPatchCells(player: IPlayer, positions: IPos[]) {
-    this.pushNewBoard(() => this.patchCells(player, positions),updateBoardEvent.playerPatchCells)
+    return new Promise((resolve, reject) => {
+      const callback = (rejectedPositions) => {
+        if (rejectedPositions.length > 0) {
+          resolve({
+            success: false,
+            messages: 'Some positions cannot be patched with you cell. They may be taken by others cells already',
+            data: { rejectedPositions },
+          })
+        } else {
+          const successResponse: IResponse = {
+            success: true,
+            messages: [],
+            data: null,
+          }
+          resolve(successResponse)
+        }
+      }
+
+      this.pushNewBoard(() => this.patchCells(player, positions, callback),
+        updateBoardEvent.playerPatchCells)
+    })
   }
 
   private broadcastState() {
     this.eventBus.emit(apiEvents.gameStateUpdate, this.state)
   }
 
-  private patchCells(player: IPlayer, positions: IPos[]): GameBoard {
+  private patchCells(player: IPlayer, positions: IPos[], callback): GameBoard {
     const makeCell = (pos: IPos) =>
       createCell(pos.x, pos.y, player.uid, CellState.AliveStill, player.color)
     const newBoard = GameBoard.clone(this.state.board)
-    positions.forEach(pos => newBoard.addCell(makeCell(pos)))
+    const rejectedPositions = []
+    positions.forEach((pos) => {
+      if (newBoard.isValidPos(pos)) {
+        rejectedPositions.push(pos)
+      } else {
+        newBoard.addCell(makeCell(pos))
+      }
+    })
+    callback(rejectedPositions)
     return newBoard
   }
 
   private patchRandomCells(player: IPlayer) {
     const pattern: Pattern = this.getRandomPattern(this.state.board)
-    this.pushNewBoard(() => this.patchCells(player, pattern), updateBoardEvent.newPlayerIn)
+    const callback = (rejectedPositions: Array<IPos>) => {
+      if (rejectedPositions.length > 0) {
+        this.logger.info('some random cells failed to be patch for a new player')
+      }
+    }
+    this.pushNewBoard(() =>
+      this.patchCells(player, pattern, callback), updateBoardEvent.newPlayerIn)
   }
 
   private runEvolution() {
@@ -106,6 +146,10 @@ export class Game {
 
   public get events(): IEventBus {
     return this.eventBus
+  }
+
+  public stop() {
+
   }
 
   public constructor(

@@ -9,7 +9,7 @@ const devConfig: IConfig = {
   staticDir: path.resolve(serverRoot, '..', 'client', 'static'),
   serverURL: `localhost:${port}`,
   game: {
-    evolveInterval: 1500,
+    evolveInterval: 3000,
     boardWidth: 80,
     boardHeight: 60,
   },

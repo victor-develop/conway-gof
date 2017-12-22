@@ -35,6 +35,7 @@ export class Client {
     this.gameApi.on(socketEvents.connect_error, (err) => {
       (<any>this.state).errors.push({
         message: 'Server disconnected, you better refresh',
+        notified: false,
       })
     })
     this.eventBus.on(playerEventType.putCellsAttempt,

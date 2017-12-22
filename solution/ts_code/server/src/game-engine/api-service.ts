@@ -33,8 +33,9 @@ export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Gam
             socket.on(socketEvents.disconnect, removePlayer)
             socket.on(apiEvents.playerOut, removePlayer)
 
-            socket.on(apiEvents.playerPatchCell, (positions: IPos[]) => {
+            socket.on(apiEvents.playerPatchCell, (positions: IPos[], callback) => {
               game.playerPatchCells(currentPlayer, positions)
+                .then(response => callback(response))
             })
 
             socket.on(socketEvents.error, (error) => {

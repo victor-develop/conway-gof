@@ -1,4 +1,12 @@
 import 'mocha'
+import { Game } from '../../../src/game-engine/game'
+import { logger } from '../../../src/helpers'
+import { createGame } from '../../../src/services'
+import { presetPatternBoards, blinker } from '../../../../common/src/gamemodels/preset-pattern'
+import * as assert from 'assert'
+import IResponse from '../../../../common/src/api/IResponse';
+import { TempLogger, ILogger } from '../../../../common/src/services';
+
 
 describe('Server Game test', () => {
   describe('When a player A connects', () => {
@@ -13,6 +21,25 @@ describe('Server Game test', () => {
       describe('player A patch some cells', () => {
         it('player B got his board updated')
       })
+    })
+  })
+
+  describe('When a player try to patch cells on existed positions', () => {
+    it('should reject the player\'s attempt', (done) => {
+      const game = createGame(logger)
+      game.newPlayer('TestMan')
+        .then((testMan) => {
+          return game.playerPatchCells(testMan, blinker)
+            .then((firstResponse: IResponse) => {
+              assert.equal(firstResponse.success, true)
+              return game.playerPatchCells(testMan, blinker)
+                .then((response: IResponse) => {
+                  assert.equal(response.success, false)
+                  game.stop()
+                  done()
+                })
+            })
+        })
     })
   })
 })

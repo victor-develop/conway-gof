@@ -36,6 +36,7 @@ export interface ClientState {
   errors: {
     message: string,
     data?: object,
+    notified: boolean,
   }[],
   playername: string
 }

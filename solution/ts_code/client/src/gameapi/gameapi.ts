@@ -91,13 +91,14 @@ export class GameApi implements IGameApi {
       if (!this.socket) {
         throw new Error(errorMessages.CONNECT_BEFORE_PATCH)
       }
-      this.socket.emit(apiEvents.playerPatchCell, positions)
-      const response: IResponse = {
-        success: true,
-        messages: [],
-        data: {},
-      }
-      return Promise.resolve(response)
+      return new Promise((resolve, reject) => {
+        this.socket.emit(apiEvents.playerPatchCell, positions, (response: IResponse) => {
+          if (response.success) {
+            return resolve(response)
+          }
+          return reject(response)
+        })
+      })
     },
   }
 

@@ -29,10 +29,9 @@ const logMessages = {
 
 function boot() {
 
+  Vue.use(uiv);
   // from legacy js file
   (<any>window).setupVueComponents(Vue)
-
-  Vue.use(uiv)
 
   const app = new Vue({
     el: '#app',
@@ -51,19 +50,31 @@ function boot() {
           // A simple input validator
           // returns the err msg (not valid) or null (valid)
           validator (value) {
-            return /\w+/.test(value) ? null : 'Letters only'
+            return /^[a-zA-z]+$/.test(value) ? null : 'You must give a name composed of letters only'
           },
         })
         .then((name) => {
           this.playername = name
           return this.playername
         })
-        .catch(() => {
-          this.getName()
-        })
+        .catch(() => this.getName())
       },
     },
   })
+
+  const notifyErrors = () => {
+    const errorsToNotify = app.errors.filter(err => !err.notified)
+
+    errorsToNotify.forEach((err) => {
+      (<any>app).$notify({
+        type:'danger',
+        content: err.message,
+      })
+      err.notified = true
+    })
+    window.requestAnimationFrame(notifyErrors)
+  }
+  notifyErrors()
 
   const tempLogger: ILogger = new TempLogger(logMessages.STARTING)
 
