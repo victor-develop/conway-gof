@@ -1,6 +1,6 @@
 import { setInterval, clearInterval } from 'timers'
 import { IEventBus } from '../../../common/src/ievent-bus'
-import { IGameState, IPartialGameState_Evolution, IPartialGameState_Players } from '../../../common/src/gamemodels/game-state'
+import { IGameState, IPartialGameState_Evolution, IPartialGameState_Players } from '../../../common/src/gamemodels/i-game-state'
 import { apiEvents } from '../../../common/src/api/api-events'
 import createPlayer from '../../../common/tests/mocks/mock-player'
 import * as shortid from 'shortid'

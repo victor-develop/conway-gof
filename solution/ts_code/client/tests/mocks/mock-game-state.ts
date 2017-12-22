@@ -5,7 +5,7 @@ import createPlayer from '../../../common/tests/mocks/mock-player'
 import createCell from '../../../common/src/gamemodels/cell'
 import { CellState } from '../../../common/src/gamemodels/cell-state'
 import GameBoard from '../../../common/src/gamemodels/game-board'
-import { IGameState } from '../../../common/src/gamemodels/game-state'
+import { IGameState } from '../../../common/src/gamemodels/i-game-state'
 
 const w = 80
 const h = 60

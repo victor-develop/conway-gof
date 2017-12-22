@@ -12,7 +12,7 @@ import { IEventBus } from '../../../common/src/ievent-bus'
 import { createEventBus } from '../event-bus'
 import { Board } from '../../../common/src/gamemodels/board'
 import { IPlayerProfile } from '../../../common/src/api/i-player-profile'
-import { IGameState } from '../../../common/src/gamemodels/game-state'
+import { IGameState } from '../../../common/src/gamemodels/i-game-state'
 import GameBoard from '../../../common/src/gamemodels/game-board'
 
 

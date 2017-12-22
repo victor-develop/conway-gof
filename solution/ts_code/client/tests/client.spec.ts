@@ -12,7 +12,7 @@ import IPos from '../../common/src/gamemodels/ipos'
 import { INotice } from '../src/inotice'
 import { mockGameStates } from './mocks/mock-game-state'
 import { clientContext } from './mocks/mock-client-context'
-import { IGameState } from '../../common/src/gamemodels/game-state'
+import { IGameState } from '../../common/src/gamemodels/i-game-state'
 import { logger } from '../../server/src/helpers'
 
 const mainTestTitle = 'Client test'

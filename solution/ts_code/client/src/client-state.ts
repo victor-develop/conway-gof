@@ -1,6 +1,6 @@
 import IPlayer from '../../common/src/gamemodels/iplayer'
 import { Board } from '../../common/src/gamemodels/board'
-import { IGameState } from '../../common/src/gamemodels/game-state'
+import { IGameState } from '../../common/src/gamemodels/i-game-state'
 
 export class InitialValue {
   private static singleton: InitialValue
