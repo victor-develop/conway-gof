@@ -1,5 +1,5 @@
 function setupVueComponents(Vue) {
-  Vue.use(window.uiv)
+
   Vue.component('player-banner', {
     template:`<span>
                 <span v-if="player.uid == currentPlayer.uid">></span>
@@ -47,14 +47,19 @@ function setupVueComponents(Vue) {
     template: `<table class="board">
                 <tbody>
                   <tr v-for="h in board.height">
-                    <td v-for="w in board.width">
+                    <td v-for="w in board.width" v-on:click="putPosition(w-1, h-1)">
                       <cell :x=w-1 :y=h-1 :board=board></cell>
                     </td>
                   </tr>
                 </tbody>
               </table>
             `,
-    props: ['board']
+    props: ['board'],
+    methods: {
+      putPosition: function(x, y) {
+        this.$emit('put-position', {x, y})
+      },
+    }
   });
 
   Vue.component('pattern-board', {
@@ -62,7 +67,7 @@ function setupVueComponents(Vue) {
     <table class="board pattern-board">
     <tbody>
         <tr v-for="h in board.height">
-          <td v-for="w in board.width">
+          <td v-for="w in board.width"  >
             <color-pos class="pattern-pos" :color=color v-if="hasValue(w-1, h-1)" ></color-pos>
           </td>
         </tr>

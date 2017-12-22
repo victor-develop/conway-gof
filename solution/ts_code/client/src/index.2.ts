@@ -40,6 +40,10 @@ function boot() {
     methods: {
       hasInit: item => (item !== InitialValue.instance),
       // tslint:disable-next-line:object-literal-shorthand
+      putPosition: function(position: IPos) {
+        this.$emit(playerEventType.putCellsAttempt, [position])
+      },
+      // tslint:disable-next-line:object-literal-shorthand
       getName: function() {
         return this.$prompt({
           title: 'Welcome',
