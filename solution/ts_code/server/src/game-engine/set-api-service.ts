@@ -1,5 +1,5 @@
 import { IEventBus } from '../../../common/src/ievent-bus'
-import { ISendPlayer, Game } from './game'
+import { Game } from './game'
 import { apiEvents } from '../../../common/src/api/api-events'
 import IPlayer from '../../../common/src/gamemodels/iplayer'
 import { ConnectedClientContext } from '../../../common/src/gamemodels/connected-client-context'
@@ -13,18 +13,25 @@ export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Gam
   const gameEventBus = game.events
 
   const setup = (logger: ILogger) => {
+
+    logger.info('setting up ApiService with Game instance')
+
     io.on(socketEvents.error, (error) => {
       logger.err(error, 'SocketIO client error')
     })
 
     gameEventBus.on(apiEvents.gameStateUpdate, (gameState) => {
+      logger.info(apiEvents.gameStateUpdate, 'ready to emit gamestateupdate')
+      // broadcast to everyone
       io.emit(apiEvents.gameStateUpdate, gameState)
     })
 
+    logger.info('mount connect event')
     io.on(socketEvents.connect, (socket: any) => {
+      logger.info(socketEvents.connect, 'event captured')
 
       socket.on(apiEvents.newPlayerIn, (profile: IPlayerProfile) => {
-
+        logger.info(apiEvents.newPlayerIn, 'event captured')
         game.newPlayer(profile.name)
           .then((playerContext) => {
             const currentPlayer = playerContext.player
@@ -46,7 +53,8 @@ export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Gam
           })
       })
     })
+    return Promise.resolve(io)
   }
-  toplogger.child('apiService - socketio')
+  return toplogger.child('apiService - socketio')
     .then(setup)
 }
