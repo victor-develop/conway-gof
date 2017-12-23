@@ -3,5 +3,4 @@ export const socketEvents = {
   disconnect: 'disconnect',
   error: 'error',
   connect_error: 'connect_error',
-  ping: 'ping',
 }

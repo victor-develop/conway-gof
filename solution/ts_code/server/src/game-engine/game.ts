@@ -16,10 +16,10 @@ import IPos from '../../../common/src/gamemodels/ipos'
 import { presetPatternBoards } from '../../../common/src/gamemodels/preset-pattern'
 import { config } from '../config/config'
 import { initialGameState } from './initial-game-state'
-import IResponse from '../../../common/src/api/IResponse';
-import IPlayerContext from '../../../common/src/gamemodels/iplayer-context';
+import IResponse from '../../../common/src/api/IResponse'
+import IPlayerContext from '../../../common/src/gamemodels/iplayer-context'
+import { IIntervalLoopSetter } from './i-interval-loop'
 
-export type ISendPlayer = (player: IPlayer) => void
 
 export const updateBoardEvent = {
   newPlayerIn: apiEvents.newPlayerIn,
@@ -27,11 +27,11 @@ export const updateBoardEvent = {
   playerPatchCells: 'player-patch-cells',
 }
 
-const jobConsumeInterval = 50
+const jobConsumeInterval = 10
 
 export class Game {
 
-  private evolveIntervalSecond: number
+  private evolveIntervalMilleSecond: number
   private evolveFunc: (board: GameBoard) => GameBoard
   private getRandomPattern: (board: GameBoard) => Pattern
   private currentEvolutionToken: number
@@ -40,11 +40,22 @@ export class Game {
   private logger: ILogger
   private jobQueue: Function[]
 
-  private init() {
+  private init(evolveTimer: IIntervalLoopSetter, jobQueueTimer: IIntervalLoopSetter) {
 
+    const evolve = evolveTimer(() => {
+      this.runEvolution()
+    }, this.evolveIntervalMilleSecond)
+
+    const jobQLoop = jobQueueTimer(() => {
+      if (this.jobQueue.length > 0) {
+        const job = this.jobQueue.pop()
+        job()
+      }
+    }, jobConsumeInterval)
+/*
     const evolveLoop = setInterval(() => {
       this.runEvolution()
-    }, this.evolveIntervalSecond)
+    }, this.evolveIntervalMilleSecond)
 
     const jobQLoop = setInterval(() => {
       if (this.jobQueue.length > 0) {
@@ -52,10 +63,14 @@ export class Game {
         job()
       }
     }, jobConsumeInterval)
+*/
+
+    jobQLoop.start()
+    evolve.start()
 
     this.stop = () => {
-      clearInterval(evolveLoop)
-      clearInterval(jobQLoop)
+      evolve.stop()
+      jobQLoop.stop()
     }
   }
 
@@ -152,24 +167,24 @@ export class Game {
     return this.eventBus
   }
 
-  public stop() {
-
-  }
+  public stop: Function
 
   public constructor(
     logger: ILogger,
     evolveFunc: (board: GameBoard) => GameBoard,
     getRandomPattern: (board: GameBoard) => Pattern,
     evolveInterval: number,
-    eventBus: IEventBus) {
+    eventBus: IEventBus,
+    evolveTimer: IIntervalLoopSetter,
+    jobQueueTimer: IIntervalLoopSetter) {
 
     this.logger = logger
     this.evolveFunc = evolveFunc
     this.getRandomPattern = getRandomPattern
-    this.evolveIntervalSecond = evolveInterval
+    this.evolveIntervalMilleSecond = evolveInterval
     this.eventBus = eventBus
     this.jobQueue = []
     this.state = initialGameState()
-    this.init()
+    this.init(evolveTimer, jobQueueTimer)
   }
 }

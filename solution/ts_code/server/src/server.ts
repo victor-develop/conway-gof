@@ -5,7 +5,7 @@ import * as socketIo from 'socket.io'
 import { socketEvents } from '../../common/src/api/socket-events'
 import { Game } from './game-engine/game'
 import { createGame } from './services'
-import { setApiService } from './game-engine/api-service'
+import { setApiService } from './game-engine/set-api-service'
 
 export default class Server {
   private appInstance: express.Application
