@@ -3,9 +3,9 @@ import { Game } from '../../src/game-engine/game'
 import { evolveBoard } from '../../src/game-engine/evolution/evolution'
 import { makeRandomPattern } from '../../../common/src/gamemodels/preset-pattern'
 import { config } from '../../src/config/config'
-import { createEventBus } from '../../../client/src/event-bus'
 import { IEventBus } from '../../../common/src/ievent-bus'
 import { IIntervalLoopSetter, IIntervalLoop } from '../../src/game-engine/i-interval-loop'
+import { createEventBus } from '../../../common/src/create-event-bus'
 
 
 export type manualIntervalLoopSetter = (eventBus: IEventBus) => IIntervalLoopSetter
