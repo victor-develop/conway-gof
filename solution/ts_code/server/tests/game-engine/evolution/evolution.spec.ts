@@ -1,8 +1,33 @@
 import 'mocha'
+import GameBoard from '../../../../common/src/gamemodels/game-board'
+import { config } from '../../../src/config/config'
+import createCell from '../../../../common/src/gamemodels/cell'
+import { CellState } from '../../../../common/src/gamemodels/cell-state'
+import { evolvePosition, DeadCell } from '../../../src/game-engine/evolution/evolution'
+import * as assert from 'assert'
+import ICell from '../../../../common/src/gamemodels/icell'
+import { testSamples } from './data'
 
-describe('Game board evolution', () => {
+const cell = (x: number, y:number) =>
+  createCell(x, y, 'doesntmatter', CellState.AliveStill, '#ffffff')
+
+const makeTestBoard = (cells: ICell[]) => GameBoard.create(
+  config.game.boardWidth, config.game.boardHeight, cells)
+
+describe('evolvePosition() test', () => {
+
+  const assertDeath = (board: GameBoard, aCell: ICell) => {
+    const result = evolvePosition(board, aCell)
+    assert.equal(result, DeadCell.instance)
+  }
+
   describe('under-population: live cell with fewer than two live neighbors', () => {
-    it('dies')
+    it('dies', (done) => {
+      testSamples.oneNeighborsBoards.forEach((item) => {
+        assertDeath(GameBoard.clone(item.board), item.cell)
+      })
+      done()
+    })
   })
 
   describe('live cell with two or three live neighbors', () => {
