@@ -7,6 +7,7 @@ import { socketEvents } from '../../../common/src/api/socket-events'
 import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 import { IPlayerProfile } from '../../../common/src/api/i-player-profile'
+import { logEventBus } from '../../../common/src/attach-logger';
 
 export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Game) {
 
@@ -16,40 +17,40 @@ export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Gam
 
     logger.info('setting up ApiService with Game instance')
 
-    io.on(socketEvents.error, (error) => {
+    const loggedIo = logEventBus(logger, io)
+
+    loggedIo.on(socketEvents.error, (error) => {
       logger.err(error, 'SocketIO client error')
     })
 
     gameEventBus.on(apiEvents.gameStateUpdate, (gameState) => {
-      logger.info(apiEvents.gameStateUpdate, 'ready to emit gamestateupdate')
       // broadcast to everyone
-      io.emit(apiEvents.gameStateUpdate, gameState)
+      loggedIo.emit(apiEvents.gameStateUpdate, gameState)
     })
 
-    logger.info('mount connect event')
-    io.on(socketEvents.connect, (socket: any) => {
-      logger.info(socketEvents.connect, 'event captured')
+    loggedIo.on(socketEvents.connect, (socket: any) => {
+      const loggedSocket = logEventBus(logger, socket)
 
-      socket.on(apiEvents.newPlayerIn, (profile: IPlayerProfile) => {
+      loggedSocket.on(apiEvents.newPlayerIn, (profile: IPlayerProfile) => {
         logger.info(apiEvents.newPlayerIn, 'event captured')
         game.newPlayer(profile.name)
           .then((playerContext) => {
             const currentPlayer = playerContext.player
             const removePlayer = () => game.removePlayer(currentPlayer)
 
-            socket.on(socketEvents.disconnect, removePlayer)
-            socket.on(apiEvents.playerOut, removePlayer)
+            loggedSocket.on(socketEvents.disconnect, removePlayer)
+            loggedSocket.on(apiEvents.playerOut, removePlayer)
 
-            socket.on(apiEvents.playerPatchCell, (positions: IPos[], callback) => {
+            loggedSocket.on(apiEvents.playerPatchCell, (positions: IPos[], callback) => {
               game.playerPatchCells(currentPlayer, positions)
                 .then(response => callback(response))
             })
 
-            socket.on(socketEvents.error, (error) => {
+            loggedSocket.on(socketEvents.error, (error) => {
               logger.err({ currentPlayer, error }, 'Something wrong with player\'s socket connection')
             })
 
-            socket.emit(apiEvents.context, playerContext)
+            loggedSocket.emit(apiEvents.context, playerContext)
           })
       })
     })
