@@ -18,22 +18,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "1": {
-            "x": 0,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "1": {
-          "0": {
-            "x": 1,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -52,25 +36,9 @@
       "height": 60,
       "hashCells": {
         "0": {
-          "0": {
-            "x": 0,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "1": {
             "x": 0,
             "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "1": {
-          "0": {
-            "x": 1,
-            "y": 0,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -99,22 +67,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "1": {
-          "1": {
-            "x": 1,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "3": {
-            "x": 1,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -132,23 +84,9 @@
       "height": 60,
       "hashCells": {
         "0": {
-          "2": {
-            "x": 0,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "3": {
             "x": 0,
             "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "4": {
-            "x": 0,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -176,22 +114,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "5": {
-            "x": 0,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "1": {
-          "5": {
-            "x": 1,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -210,25 +132,9 @@
       "height": 60,
       "hashCells": {
         "0": {
-          "4": {
-            "x": 0,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "5": {
             "x": 0,
             "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "1": {
-          "4": {
-            "x": 1,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -257,22 +163,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "1": {
-          "5": {
-            "x": 1,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "7": {
-            "x": 1,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -292,22 +182,6 @@
         "0": {
           "7": {
             "x": 0,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "1": {
-          "6": {
-            "x": 1,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "7": {
-            "x": 1,
             "y": 7,
             "uid": "doesntmatter",
             "state": 0,
@@ -336,22 +210,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "9": {
-            "x": 0,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "1": {
-          "7": {
-            "x": 1,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -370,13 +228,6 @@
       "height": 60,
       "hashCells": {
         "0": {
-          "8": {
-            "x": 0,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "9": {
             "x": 0,
             "y": 9,
@@ -384,15 +235,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "1": {
-          "10": {
-            "x": 1,
-            "y": 10,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -417,22 +259,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "2": {
-          "0": {
-            "x": 2,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "1": {
-            "x": 2,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -449,27 +275,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "0": {
-          "1": {
-            "x": 0,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "1": {
           "1": {
             "x": 1,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "2": {
-          "1": {
-            "x": 2,
             "y": 1,
             "uid": "doesntmatter",
             "state": 0,
@@ -491,27 +299,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "0": {
-          "1": {
-            "x": 0,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "1": {
           "2": {
             "x": 1,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "2": {
-          "2": {
-            "x": 2,
             "y": 2,
             "uid": "doesntmatter",
             "state": 0,
@@ -533,28 +323,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "0": {
-          "2": {
-            "x": 0,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "1": {
           "3": {
             "x": 1,
             "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "2": {
-          "4": {
-            "x": 2,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -575,28 +347,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "0": {
-          "5": {
-            "x": 0,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "1": {
           "4": {
             "x": 1,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "2": {
-          "5": {
-            "x": 2,
-            "y": 5,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -617,23 +371,7 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "0": {
-          "5": {
-            "x": 0,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "1": {
-          "4": {
-            "x": 1,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "5": {
             "x": 1,
             "y": 5,
@@ -665,22 +403,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "2": {
-          "5": {
-            "x": 2,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "6": {
-            "x": 2,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -704,22 +426,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "8": {
-            "x": 1,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "2": {
-          "7": {
-            "x": 2,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -738,24 +444,8 @@
       "height": 60,
       "hashCells": {
         "1": {
-          "7": {
-            "x": 1,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "8": {
             "x": 1,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "2": {
-          "8": {
-            "x": 2,
             "y": 8,
             "uid": "doesntmatter",
             "state": 0,
@@ -784,22 +474,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "10": {
-            "x": 1,
-            "y": 10,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "2": {
-          "10": {
-            "x": 2,
-            "y": 10,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -824,22 +498,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "1": {
-            "x": 2,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "3": {
-          "0": {
-            "x": 3,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -857,26 +515,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "1": {
-          "0": {
-            "x": 1,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "2": {
           "1": {
             "x": 2,
             "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "2": {
-            "x": 2,
-            "y": 2,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -897,27 +539,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "1": {
-          "3": {
-            "x": 1,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "2": {
           "2": {
             "x": 2,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "3": {
-          "2": {
-            "x": 3,
             "y": 2,
             "uid": "doesntmatter",
             "state": 0,
@@ -946,22 +570,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "4": {
-            "x": 2,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "3": {
-          "3": {
-            "x": 3,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -979,26 +587,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "1": {
-          "3": {
-            "x": 1,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "2": {
           "4": {
             "x": 2,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "5": {
-            "x": 2,
-            "y": 5,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1019,28 +611,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "1": {
-          "6": {
-            "x": 1,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "2": {
           "5": {
             "x": 2,
             "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "3": {
-          "4": {
-            "x": 3,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1061,27 +635,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "1": {
-          "7": {
-            "x": 1,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "2": {
           "6": {
             "x": 2,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "3": {
-          "6": {
-            "x": 3,
             "y": 6,
             "uid": "doesntmatter",
             "state": 0,
@@ -1111,22 +667,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "3": {
-          "6": {
-            "x": 3,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "7": {
-            "x": 3,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -1143,28 +683,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "1": {
-          "9": {
-            "x": 1,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "2": {
           "8": {
             "x": 2,
             "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "3": {
-          "7": {
-            "x": 3,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1185,28 +707,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "1": {
-          "8": {
-            "x": 1,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "2": {
           "9": {
             "x": 2,
             "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "3": {
-          "8": {
-            "x": 3,
-            "y": 8,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1227,22 +731,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "0": {
-            "x": 2,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "1": {
-            "x": 2,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "0": {
             "x": 3,
@@ -1274,22 +762,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "2": {
-            "x": 3,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "4": {
-          "0": {
-            "x": 4,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -1307,26 +779,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "2": {
-            "x": 2,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "2": {
             "x": 3,
             "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "3": {
-            "x": 3,
-            "y": 3,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1347,27 +803,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "2": {
-            "x": 2,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "3": {
             "x": 3,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "4": {
-          "3": {
-            "x": 4,
             "y": 3,
             "uid": "doesntmatter",
             "state": 0,
@@ -1389,26 +827,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "4": {
-            "x": 2,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "4": {
             "x": 3,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "5": {
-            "x": 3,
-            "y": 5,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1429,27 +851,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "4": {
-            "x": 2,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "5": {
             "x": 3,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "4": {
-          "5": {
-            "x": 4,
             "y": 5,
             "uid": "doesntmatter",
             "state": 0,
@@ -1471,28 +875,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "7": {
-            "x": 2,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "6": {
             "x": 3,
             "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "4": {
-          "7": {
-            "x": 4,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1513,28 +899,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "6": {
-            "x": 2,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "7": {
             "x": 3,
             "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "4": {
-          "6": {
-            "x": 4,
-            "y": 6,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1555,28 +923,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "7": {
-            "x": 2,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "8": {
             "x": 3,
             "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "4": {
-          "7": {
-            "x": 4,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1597,27 +947,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "2": {
-          "9": {
-            "x": 2,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "3": {
           "9": {
             "x": 3,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "4": {
-          "9": {
-            "x": 4,
             "y": 9,
             "uid": "doesntmatter",
             "state": 0,
@@ -1639,27 +971,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "3": {
-          "1": {
-            "x": 3,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "4": {
           "0": {
             "x": 4,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "5": {
-          "0": {
-            "x": 5,
             "y": 0,
             "uid": "doesntmatter",
             "state": 0,
@@ -1682,25 +996,9 @@
       "height": 60,
       "hashCells": {
         "4": {
-          "0": {
-            "x": 4,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "1": {
             "x": 4,
             "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "5": {
-          "2": {
-            "x": 5,
-            "y": 2,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1721,22 +1019,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "3": {
-          "1": {
-            "x": 3,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "2": {
-            "x": 3,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "4": {
           "2": {
             "x": 4,
@@ -1761,28 +1043,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "3": {
-          "4": {
-            "x": 3,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "4": {
           "3": {
             "x": 4,
             "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "5": {
-          "4": {
-            "x": 5,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1803,26 +1067,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "3": {
-          "4": {
-            "x": 3,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "4": {
           "4": {
             "x": 4,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "5": {
-            "x": 4,
-            "y": 5,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1844,25 +1092,9 @@
       "height": 60,
       "hashCells": {
         "4": {
-          "4": {
-            "x": 4,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "5": {
             "x": 4,
             "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "5": {
-          "4": {
-            "x": 5,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1883,28 +1115,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "3": {
-          "6": {
-            "x": 3,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "4": {
           "6": {
             "x": 4,
             "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "5": {
-          "7": {
-            "x": 5,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -1925,22 +1139,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "3": {
-          "7": {
-            "x": 3,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "8": {
-            "x": 3,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "4": {
           "7": {
             "x": 4,
@@ -1966,25 +1164,9 @@
       "height": 60,
       "hashCells": {
         "4": {
-          "7": {
-            "x": 4,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "8": {
             "x": 4,
             "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "5": {
-          "7": {
-            "x": 5,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2005,26 +1187,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "3": {
-          "9": {
-            "x": 3,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "4": {
           "9": {
             "x": 4,
             "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "10": {
-            "x": 4,
-            "y": 10,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2045,26 +1211,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "4": {
-          "1": {
-            "x": 4,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "5": {
           "0": {
             "x": 5,
             "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "1": {
-            "x": 5,
-            "y": 1,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2085,28 +1235,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "4": {
-          "0": {
-            "x": 4,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "5": {
           "1": {
             "x": 5,
             "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "6": {
-          "2": {
-            "x": 6,
-            "y": 2,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2128,24 +1260,8 @@
       "height": 60,
       "hashCells": {
         "5": {
-          "1": {
-            "x": 5,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "2": {
             "x": 5,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "6": {
-          "2": {
-            "x": 6,
             "y": 2,
             "uid": "doesntmatter",
             "state": 0,
@@ -2167,22 +1283,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "4": {
-          "2": {
-            "x": 4,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "4": {
-            "x": 4,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "5": {
           "3": {
             "x": 5,
@@ -2207,27 +1307,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "4": {
-          "3": {
-            "x": 4,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "5": {
           "4": {
             "x": 5,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "6": {
-          "4": {
-            "x": 6,
             "y": 4,
             "uid": "doesntmatter",
             "state": 0,
@@ -2249,27 +1331,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "4": {
-          "5": {
-            "x": 4,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "5": {
           "5": {
             "x": 5,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "6": {
-          "5": {
-            "x": 6,
             "y": 5,
             "uid": "doesntmatter",
             "state": 0,
@@ -2299,22 +1363,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "6": {
-          "6": {
-            "x": 6,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "7": {
-            "x": 6,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -2334,22 +1382,6 @@
         "5": {
           "7": {
             "x": 5,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "8": {
-            "x": 5,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "6": {
-          "7": {
-            "x": 6,
             "y": 7,
             "uid": "doesntmatter",
             "state": 0,
@@ -2378,22 +1410,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "9": {
-            "x": 5,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "6": {
-          "7": {
-            "x": 6,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -2411,22 +1427,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "4": {
-          "8": {
-            "x": 4,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "9": {
-            "x": 4,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "5": {
           "9": {
             "x": 5,
@@ -2451,22 +1451,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "5": {
-          "0": {
-            "x": 5,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "1": {
-            "x": 5,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "6": {
           "0": {
             "x": 6,
@@ -2491,28 +1475,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "5": {
-          "0": {
-            "x": 5,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "6": {
           "1": {
             "x": 6,
             "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "7": {
-          "0": {
-            "x": 7,
-            "y": 0,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2541,22 +1507,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "7": {
-          "1": {
-            "x": 7,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "2": {
-            "x": 7,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -2573,26 +1523,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "5": {
-          "3": {
-            "x": 5,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "6": {
           "3": {
             "x": 6,
             "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "4": {
-            "x": 6,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2613,28 +1547,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "5": {
-          "3": {
-            "x": 5,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "6": {
           "4": {
             "x": 6,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "7": {
-          "5": {
-            "x": 7,
-            "y": 5,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2662,22 +1578,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "6": {
-            "x": 6,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "7": {
-          "4": {
-            "x": 7,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -2696,23 +1596,9 @@
       "height": 60,
       "hashCells": {
         "6": {
-          "5": {
-            "x": 6,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "6": {
             "x": 6,
             "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "7": {
-            "x": 6,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2733,28 +1619,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "5": {
-          "6": {
-            "x": 5,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "6": {
           "7": {
             "x": 6,
             "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "7": {
-          "8": {
-            "x": 7,
-            "y": 8,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2782,22 +1650,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "9": {
-            "x": 6,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "7": {
-          "8": {
-            "x": 7,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -2819,22 +1671,6 @@
           "9": {
             "x": 6,
             "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "10": {
-            "x": 6,
-            "y": 10,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "7": {
-          "10": {
-            "x": 7,
-            "y": 10,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2855,28 +1691,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "1": {
-            "x": 6,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
           "0": {
             "x": 7,
             "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "1": {
-            "x": 8,
-            "y": 1,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2897,23 +1715,7 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "1": {
-            "x": 6,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
-          "0": {
-            "x": 7,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "1": {
             "x": 7,
             "y": 1,
@@ -2937,26 +1739,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "3": {
-            "x": 6,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
           "2": {
             "x": 7,
             "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "3": {
-            "x": 7,
-            "y": 3,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -2977,28 +1763,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "2": {
-            "x": 6,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
           "3": {
             "x": 7,
             "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "4": {
-            "x": 8,
-            "y": 4,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3019,28 +1787,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "3": {
-            "x": 6,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
           "4": {
             "x": 7,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "3": {
-            "x": 8,
-            "y": 3,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3061,27 +1811,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "6": {
-            "x": 6,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
           "5": {
             "x": 7,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "5": {
-            "x": 8,
             "y": 5,
             "uid": "doesntmatter",
             "state": 0,
@@ -3110,22 +1842,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "7": {
-            "x": 7,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "6": {
-            "x": 8,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -3150,22 +1866,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "8": {
-            "x": 7,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "8": {
-            "x": 8,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -3183,27 +1883,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "8": {
-            "x": 6,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
           "8": {
             "x": 7,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "8": {
-            "x": 8,
             "y": 8,
             "uid": "doesntmatter",
             "state": 0,
@@ -3225,28 +1907,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "6": {
-          "9": {
-            "x": 6,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "7": {
           "9": {
             "x": 7,
             "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "8": {
-          "10": {
-            "x": 8,
-            "y": 10,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3267,28 +1931,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "7": {
-          "0": {
-            "x": 7,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "8": {
           "0": {
             "x": 8,
             "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "9": {
-          "1": {
-            "x": 9,
-            "y": 1,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3309,23 +1955,7 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "7": {
-          "0": {
-            "x": 7,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "8": {
-          "0": {
-            "x": 8,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "1": {
             "x": 8,
             "y": 1,
@@ -3357,22 +1987,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "9": {
-          "2": {
-            "x": 9,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "3": {
-            "x": 9,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -3389,22 +2003,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "7": {
-          "2": {
-            "x": 7,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "3": {
-            "x": 7,
-            "y": 3,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "8": {
           "3": {
             "x": 8,
@@ -3429,28 +2027,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "7": {
-          "5": {
-            "x": 7,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "8": {
           "4": {
             "x": 8,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "9": {
-          "5": {
-            "x": 9,
-            "y": 5,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3471,22 +2051,6 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "7": {
-          "4": {
-            "x": 7,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "5": {
-            "x": 7,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "8": {
           "5": {
             "x": 8,
@@ -3518,22 +2082,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "7": {
-            "x": 8,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "9": {
-          "7": {
-            "x": 9,
-            "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -3552,25 +2100,9 @@
       "height": 60,
       "hashCells": {
         "8": {
-          "6": {
-            "x": 8,
-            "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "7": {
             "x": 8,
             "y": 7,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "9": {
-          "8": {
-            "x": 9,
-            "y": 8,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3591,28 +2123,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "7": {
-          "8": {
-            "x": 7,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "8": {
           "8": {
             "x": 8,
             "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "9": {
-          "7": {
-            "x": 9,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3633,28 +2147,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "7": {
-          "8": {
-            "x": 7,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "8": {
           "9": {
             "x": 8,
             "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "9": {
-          "10": {
-            "x": 9,
-            "y": 10,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3675,28 +2171,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "8": {
-          "0": {
-            "x": 8,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "9": {
           "0": {
             "x": 9,
             "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "10": {
-          "1": {
-            "x": 10,
-            "y": 1,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3725,22 +2203,6 @@
             "state": 0,
             "overlayColor": "#ffffff"
           }
-        },
-        "10": {
-          "0": {
-            "x": 10,
-            "y": 0,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "1": {
-            "x": 10,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
         }
       }
     }
@@ -3757,23 +2219,7 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "8": {
-          "2": {
-            "x": 8,
-            "y": 2,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "9": {
-          "1": {
-            "x": 9,
-            "y": 1,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "2": {
             "x": 9,
             "y": 2,
@@ -3804,22 +2250,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "4": {
-            "x": 9,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "10": {
-          "4": {
-            "x": 10,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -3837,28 +2267,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "8": {
-          "4": {
-            "x": 8,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "9": {
           "4": {
             "x": 9,
             "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "10": {
-          "3": {
-            "x": 10,
-            "y": 3,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3879,27 +2291,9 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "8": {
-          "4": {
-            "x": 8,
-            "y": 4,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "9": {
           "5": {
             "x": 9,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "10": {
-          "5": {
-            "x": 10,
             "y": 5,
             "uid": "doesntmatter",
             "state": 0,
@@ -3921,28 +2315,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "8": {
-          "5": {
-            "x": 8,
-            "y": 5,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "9": {
           "6": {
             "x": 9,
             "y": 6,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "10": {
-          "5": {
-            "x": 10,
-            "y": 5,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -3970,22 +2346,6 @@
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
-          },
-          "8": {
-            "x": 9,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "10": {
-          "8": {
-            "x": 10,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
           }
         }
       }
@@ -4003,28 +2363,10 @@
       "width": 80,
       "height": 60,
       "hashCells": {
-        "8": {
-          "9": {
-            "x": 8,
-            "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
         "9": {
           "8": {
             "x": 9,
             "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          }
-        },
-        "10": {
-          "7": {
-            "x": 10,
-            "y": 7,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"
@@ -4046,23 +2388,9 @@
       "height": 60,
       "hashCells": {
         "9": {
-          "8": {
-            "x": 9,
-            "y": 8,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
           "9": {
             "x": 9,
             "y": 9,
-            "uid": "doesntmatter",
-            "state": 0,
-            "overlayColor": "#ffffff"
-          },
-          "10": {
-            "x": 9,
-            "y": 10,
             "uid": "doesntmatter",
             "state": 0,
             "overlayColor": "#ffffff"

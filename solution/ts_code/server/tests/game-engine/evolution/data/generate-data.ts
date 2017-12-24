@@ -32,8 +32,13 @@ fs.writeFileSync(cellsPath, JSON.stringify(cells))
 
 const logger = new TempLogger('generate boards with neighbors for cells')
 
-function generateNeighborsBoards(aCell: ICell, count: number, includeSelf: boolean = true) {
-  const neighborPositions = getNeiborPositions(aCell)
+function generateNeighborsBoard(aCell: ICell, count: number, includeSelf: boolean = true) {
+  const neighborPositions = getNeiborPositions(aCell).filter(pos => pos.x>=0 && pos.y >=0)
+
+  if (neighborPositions.length < count) {
+    return null
+  }
+
   const someNeighbors = pickRandom(neighborPositions, { count })
     .map(pos => cell(pos.x, pos.y))
 
@@ -56,7 +61,15 @@ function generateNeighborsBoards(aCell: ICell, count: number, includeSelf: boole
 }
 
 const makeNeighborsBoards = (neighborsCount: number) =>
-  cells.map(c => generateNeighborsBoards(c, neighborsCount))
+  cells.map(c => generateNeighborsBoard(c, neighborsCount)).filter(board => board != null)
+
+const zeroNeighborBoards = cells.map((c) => {
+  const pack = {
+    cell: c,
+    board: GameBoard.create(config.game.boardWidth, config.game.boardHeight, [c]),
+  }
+  return pack
+})
 
 const oneNeighborsBoards = makeNeighborsBoards(1)
 // tslint:disable-next-line:no-magic-numbers
@@ -72,8 +85,10 @@ const multipleNeighborsBoards = [4, 5, 6, 7, 8]
     }
     return pack
   })
-// tslint:disable-next-line:no-magic-numbers
-const deadCellWithThreeNeighbors = cells.map(c => generateNeighborsBoards(c, 3, false))
+const deadCellWithThreeNeighbors = cells
+  // tslint:disable-next-line:no-magic-numbers
+  .map(c => generateNeighborsBoard(c, 3, false))
+  .filter(board => board != null)
 
 const writeFileCallback = (path: string) => (err) => {
   if (err) {
@@ -85,6 +100,9 @@ const writeFileCallback = (path: string) => (err) => {
 const writeFile = (path: string, obj: any) =>
   // tslint:disable-next-line:no-magic-numbers
   fs.writeFile(path, JSON.stringify(obj, null, 2), writeFileCallback(path))
+
+const zeroNeighborBoardsPath = './zero-neighbor-boards.json'
+writeFile(zeroNeighborBoardsPath, zeroNeighborBoards)
 
 const oneNeighborsBoardsPath = './one-neighbor-boards.json'
 writeFile(oneNeighborsBoardsPath, oneNeighborsBoards)
