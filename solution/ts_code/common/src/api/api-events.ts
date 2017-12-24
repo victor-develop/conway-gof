@@ -4,4 +4,5 @@ export const apiEvents = {
   playerOut: 'player-out',
   gameStateUpdate: 'game-state-update',
   playerPatchCell: 'player-patch-cell',
+  connectError: 'connect-error',
 }

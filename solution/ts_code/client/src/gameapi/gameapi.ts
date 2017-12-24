@@ -16,12 +16,14 @@ import { IGameState } from '../../../common/src/gamemodels/i-game-state'
 import GameBoard from '../../../common/src/gamemodels/game-board'
 import IPlayerContext from '../../../common/src/gamemodels/iplayer-context';
 import { ClientContext } from '../client-state';
+import IErrorResponse from '../../../common/src/api/IErrorResponse';
 
 
 const errorMessages = {
   CONNECT_BEFORE_PATCH: 'call connect() first in order to patch()',
   CONNECT_BEFORE_EMIT: 'call connect() first before emitting events',
 }
+
 
 export class GameApi implements IGameApi {
   private socket: SocketIOClient.Socket
@@ -37,36 +39,15 @@ export class GameApi implements IGameApi {
 
   public connect(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.socket = socketIo()
-
-      this.socket.on(apiEvents.context, (context: IPlayerContext) => {
-        // deserialize the object
-        const clientContext: ClientContext = {
-          currentPlayer: context.player,
-          presetPatternBoards: context.presetPatternBoards
-            .map(boardObj => Board.clone(boardObj)),
-        }
-        this.emit(apiEvents.context, clientContext)
-      })
-
-      this.socket.on(apiEvents.gameStateUpdate, (gameState: IGameState) => {
-        if (gameState.board) {
-          const board: GameBoard = gameState.board
-          // deserialize the plain object to class
-          gameState.board = (GameBoard.clone(board))
-        }
-        this.emit(apiEvents.gameStateUpdate, gameState)
-      })
-
-      this.socket.on(socketEvents.error, (error) => {
-        this.emit(socketEvents.error, error)
-      })
-
-      this.socket.on('connect_error', (error) => {
-        this.emit(socketEvents.connect_error, error)
-        this.socket.close()
-      })
-      return resolve(this.socket)
+      try {
+        this.socket = socketIo()
+        this.onSocketReady(this.socket)
+        return resolve(this.socket)
+      } catch (err) {
+        this.logger.err(err, 'Unable to setup socket io')
+        this.emit(apiEvents.connectError)
+        return reject(err)
+      }
     })
   }
 
@@ -103,6 +84,36 @@ export class GameApi implements IGameApi {
   public on(eventKey: string, callback: any) {
     const log = () => this.logger.info({ eventKey }, 'socket event mounted')
     this.eventBus.on(eventKey, callback)
+  }
+
+  private onSocketReady(socket) {
+    this.socket.on(apiEvents.context, (context: IPlayerContext) => {
+      // deserialize the object
+      const clientContext: ClientContext = {
+        currentPlayer: context.player,
+        presetPatternBoards: context.presetPatternBoards
+          .map(boardObj => Board.clone(boardObj)),
+      }
+      this.emit(apiEvents.context, clientContext)
+    })
+
+    this.socket.on(apiEvents.gameStateUpdate, (gameState: IGameState) => {
+      if (gameState.board) {
+        const board: GameBoard = gameState.board
+        // deserialize the plain object to class
+        gameState.board = (GameBoard.clone(board))
+      }
+      this.emit(apiEvents.gameStateUpdate, gameState)
+    })
+
+    this.socket.on(socketEvents.error, (error) => {
+      this.emit(socketEvents.error, error)
+    })
+
+    this.socket.on('connect_error', (error) => {
+      this.emit(apiEvents.connectError, error)
+      this.socket.close()
+    })
   }
 }
 

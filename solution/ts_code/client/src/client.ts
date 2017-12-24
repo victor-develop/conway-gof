@@ -11,7 +11,6 @@ import { playerEventType } from './event-types'
 import IErrorResponse from '../../common/src/api/IErrorResponse'
 import { IGameState } from '../../common/src/gamemodels/i-game-state'
 import { IPlayerProfile } from '../../common/src/api/i-player-profile'
-import { socketEvents } from '../../common/src/api/socket-events'
 import { error } from 'util'
 
 const logMessage = {
@@ -32,7 +31,7 @@ export class Client {
     this.gameApi.on(apiEvents.context, context => this.updateContext(context))
     this.gameApi.on(apiEvents.gameStateUpdate,
       (gameState: IGameState) => this.updateGameState(gameState))
-    this.gameApi.on(socketEvents.connect_error, (err) => {
+    this.gameApi.on(apiEvents.connectError, (err) => {
       (<any>this.state).errors.push({
         message: 'Server disconnected, you better refresh',
         notified: false,
