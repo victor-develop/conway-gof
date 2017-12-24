@@ -1,4 +1,4 @@
 export const playerEventType = {
-  putCellsAttempt: 'put-cells-attempt',
+  patchCellsAttempt: 'patch-cells-attempt',
   submitProfile: 'submit-profile',
 }

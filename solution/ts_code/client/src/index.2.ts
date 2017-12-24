@@ -40,7 +40,7 @@ function boot() {
     methods: {
       hasInit: item => (item !== InitialValue.instance),
       // tslint:disable-next-line:object-literal-shorthand
-      putPosition: function(point: IPos) {
+      patchPosition: function(point: IPos) {
         if (this.selectedPattern !== InitialValue.instance) {
           const shiftedPositions = (<Board>this.selectedPattern).validPositions()
             .map((pos) => {
@@ -48,9 +48,9 @@ function boot() {
               return shiftedPosition
             })
           this.selectedPattern = InitialValue.instance
-          return this.$emit(playerEventType.putCellsAttempt, shiftedPositions)
+          return this.$emit(playerEventType.patchCellsAttempt, shiftedPositions)
         }
-        return this.$emit(playerEventType.putCellsAttempt, [point])
+        return this.$emit(playerEventType.patchCellsAttempt, [point])
       },
       // tslint:disable-next-line:object-literal-shorthand
       selectPattern: function(board) {

@@ -82,7 +82,7 @@ function runTest(aLogger) {
         Client
           .create(aLogger)(createEventBus(aLogger), initialClientState(), aGameApi, noticer)
           .then((client) => {
-            client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
+            client.clientEvent.emit(playerEventType.patchCellsAttempt, positionsToPut)
           })
       })
 
@@ -98,7 +98,7 @@ function runTest(aLogger) {
         Client
         .create(aLogger)(createEventBus(aLogger), initialClientState(), aGameApi, aNoticer)
         .then((client) => {
-          client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
+          client.clientEvent.emit(playerEventType.patchCellsAttempt, positionsToPut)
         })
       })
     })

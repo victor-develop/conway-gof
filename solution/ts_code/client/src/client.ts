@@ -16,7 +16,7 @@ import { error } from 'util'
 
 const logMessage = {
   DATA_BE_SENT: 'data to be sent',
-  FAIL_PUT_CELL: 'fail to put cells',
+  FAIL_PATCH_CELL: 'fail to patch cells',
   GAME_NOT_INIT_YET: 'game is not initialized yet',
   BELATED_STATE_RECEIVED: 'a overdue IGameState update is received',
 }
@@ -38,7 +38,7 @@ export class Client {
         notified: false,
       })
     })
-    this.eventBus.on(playerEventType.putCellsAttempt,
+    this.eventBus.on(playerEventType.patchCellsAttempt,
       (positions: IPos[]) => this.attemptPatchCells(positions))
     this.eventBus.on(playerEventType.submitProfile,
       (profile: IPlayerProfile) => this.gameApi.currentPlayer.submitProfile(profile))
@@ -73,7 +73,7 @@ export class Client {
       this.gameApi
         .cells.patch(positions)
         .catch((err: IErrorResponse) => {
-          transactionLogger.err(err, logMessage.FAIL_PUT_CELL)
+          transactionLogger.err(err, logMessage.FAIL_PATCH_CELL)
           this.noticer.notice(err.messages)
         })
     })
