@@ -4,6 +4,7 @@
   "description": "A multi-player conway-game-of-life.",
   "main": "dist/server/index.js",
   "scripts": {
+    "copy-test-data": "cp ts_code/server/tests/game-engine/evolution/data/*.json dist/server/tests/game-engine/evolution/data/",
     "transpile": "node node_modules/typescript/lib/tsc",
     "pack": "./node_modules/.bin/webpack",
     "build": "npm run transpile && npm run pack",
@@ -13,6 +14,7 @@
     "serve": "node dist/server/src",
     "lint": "node_modules/tslint/bin/tslint ts_code/**/*.ts",
     "test": "npm run transpile && node_modules/mocha/bin/mocha dist/**/*.spec.js",
+    "debug-test": "npm run transpile && node_modules/mocha/bin/mocha --inspect=0.0.0.0:5555 dist/**/*.spec.js",
     "heroku-deploy": "npm install && npm run build && npm run serve"
   },
   "keywords": [
@@ -35,7 +37,9 @@
     "cheerio": "1.0.0-rc.2",
     "express": "4.16.2",
     "mocha": "4.0.1",
+    "ndjson": "1.5.0",
     "nodemon": "1.12.5",
+    "pick-random": "2.0.0",
     "supertest": "3.0.0",
     "ts-loader": "3.2.0",
     "tslint": "5.8.0",

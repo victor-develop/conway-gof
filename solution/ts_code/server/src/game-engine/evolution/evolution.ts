@@ -16,13 +16,13 @@ interface EvolvingCellContext {
 type livingCondition = (old: EvolvingCellContext) => boolean
 type riseupCondition = (old: EvolvingCellContext) => boolean
 
-// TODO: move some logic to colo util
+
 function getAvgColor(board: GameBoard, pos: IPos): Color {
   const neighborsColors = getNeighbors(board, pos).map(cell => (cell.overlayColor))
   return ColorUtil.getAverage(neighborsColors)
 }
 
-function getNeiborPositions(c: IPos): IPos[] {
+export function getNeiborPositions(c: IPos): IPos[] {
   return [
     // upward row
     { x: c.x - 1, y: c.y - 1 },
@@ -38,7 +38,7 @@ function getNeiborPositions(c: IPos): IPos[] {
   ]
 }
 
-const getNeighbors = (board: GameBoard, position: IPos) =>
+export const getNeighbors = (board: GameBoard, position: IPos) =>
   getNeiborPositions(position)
   .filter(pos => board.isValidPos(pos))
   .map(pos => <ICell>board.cells[pos.x][pos.y])
@@ -72,8 +72,14 @@ const survives = (board: GameBoard, cell: ICell) => {
 
 const willrise: riseupCondition = context => getNeiborsCount(context) === maximum
 
-const deadCell = {}
-const evolvePosition = (board: GameBoard, pos: IPos) => {
+export class DeadCell {
+  private static singleton: DeadCell = new DeadCell()
+  public static get instance(): DeadCell {
+    return this.singleton
+  }
+}
+
+export function evolvePosition(board: GameBoard, pos: IPos): ICell | DeadCell {
 
   if (board.isValidPos(pos)) {
     const cell = board.cells[pos.x][pos.y]
@@ -90,14 +96,14 @@ const evolvePosition = (board: GameBoard, pos: IPos) => {
     }
   }
 
-  return deadCell
+  return DeadCell.instance
 }
 
 export const evolveBoard = (board: GameBoard) => {
   const newBoard = GameBoard.create(board.width, board.height, [])
   board.allPositions().forEach((pos) => {
     const cell = evolvePosition(board, pos)
-    if (cell !== deadCell) {
+    if (cell !== DeadCell.instance) {
       newBoard.addCell(<ICell>cell)
     }
   })

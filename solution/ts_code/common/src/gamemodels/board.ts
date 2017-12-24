@@ -87,7 +87,7 @@ export class Board {
 
   public width: number
   public height: number
-  protected hashCells: HashCells
+  public hashCells: HashCells
 
   public get cells(): HashCells {
     return this.hashCells

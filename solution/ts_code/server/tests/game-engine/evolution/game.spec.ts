@@ -16,33 +16,6 @@ const assertNewPlayerContext = (newPlayerName: string ,context: IPlayerContext) 
 }
 
 describe('Server Game test', () => {
-  describe('newPlayer()', () => {
-
-    const game = createGame(logger())
-
-    it('player A receives context information from server', (done) => {
-      const playerA = 'player A'
-      game.newPlayer(playerA)
-      .then((context: IPlayerContext) => {
-        assertNewPlayerContext(playerA, context)
-        game.stop()
-        done()
-      })
-    })
-
-    it('player A receives the current game state')
-
-    describe('player B comes in', () => {
-      it('player A got his players list updated')
-      it('player B receives context information')
-      it('player B got his players list synced')
-
-      describe('player A patch some cells', () => {
-        it('player B got his board updated')
-      })
-    })
-  })
-
   describe('When a player try to patch cells on existed positions', () => {
     it('should reject the player\'s attempt', (done) => {
       // test pattern blinker always stays the same
@@ -61,6 +34,9 @@ describe('Server Game test', () => {
                   done()
                 })
             })
+        })
+        .catch(() => {
+          game.stop()
         })
     })
   })

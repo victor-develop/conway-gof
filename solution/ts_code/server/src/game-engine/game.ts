@@ -52,18 +52,6 @@ export class Game {
         job()
       }
     }, jobConsumeInterval)
-/*
-    const evolveLoop = setInterval(() => {
-      this.runEvolution()
-    }, this.evolveIntervalMilleSecond)
-
-    const jobQLoop = setInterval(() => {
-      if (this.jobQueue.length > 0) {
-        const job = this.jobQueue.pop()
-        job()
-      }
-    }, jobConsumeInterval)
-*/
 
     jobQLoop.start()
     evolve.start()
