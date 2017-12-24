@@ -26,11 +26,6 @@ export default class Server {
 
   private mountRoutes(): void {
     const router = express.Router()
-    router.get('/hello-world', (req, res) => {
-      res.json({
-        message: 'Hello World',
-      })
-    })
     this.appInstance.use('/', router)
   }
 
