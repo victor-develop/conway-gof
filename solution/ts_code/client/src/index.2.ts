@@ -17,7 +17,7 @@ import { clientContext } from '../tests/mocks/mock-client-context'
 import { mockGameStates } from '../tests/mocks/mock-game-state'
 import { setInterval } from 'timers'
 import { GameApi } from './gameapi/gameapi'
-import { logEventBus } from '../../common/src/attach-logger'
+import { logEventBus } from '../../common/src/log-event-bus'
 import { playerEventType } from './event-types';
 import { IPlayerProfile } from '../../common/src/api/i-player-profile';
 import { Board } from '../../common/src/gamemodels/board';

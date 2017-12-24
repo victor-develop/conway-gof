@@ -7,7 +7,7 @@ import { evolveBoard } from './game-engine/evolution/evolution'
 import { makeRandomPattern } from '../../common/src/gamemodels/preset-pattern'
 import { config } from './config/config'
 import { EventEmitter } from 'eventemitter3'
-import { logEventBus } from '../../common/src/attach-logger'
+import { logEventBus } from '../../common/src/log-event-bus'
 import { setInterval, clearInterval } from 'timers'
 import { IIntervalLoopSetter } from './game-engine/i-interval-loop'
 

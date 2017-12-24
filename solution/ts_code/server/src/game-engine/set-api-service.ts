@@ -7,7 +7,7 @@ import { socketEvents } from '../../../common/src/api/socket-events'
 import IPos from '../../../common/src/gamemodels/ipos'
 import { ILogger } from '../../../common/src/services'
 import { IPlayerProfile } from '../../../common/src/api/i-player-profile'
-import { logEventBus } from '../../../common/src/attach-logger';
+import { logEventBus } from '../../../common/src/log-event-bus'
 
 export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Game) {
 
