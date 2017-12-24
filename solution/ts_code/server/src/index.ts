@@ -1,5 +1,5 @@
 import Server from './server'
-import { logger } from './helpers'
+import { logger } from './logger'
 import { config } from './config/config'
 
 const defaultPort = '8080'

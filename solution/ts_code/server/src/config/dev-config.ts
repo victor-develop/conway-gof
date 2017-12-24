@@ -13,6 +13,9 @@ const devConfig: IConfig = {
     boardWidth: 80,
     boardHeight: 60,
   },
+  rootLevelLoggerOpts: {
+    name: 'Development Log',
+  },
 }
 
 export { devConfig }

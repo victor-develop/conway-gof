@@ -10,7 +10,7 @@ import { IPlayerProfile } from '../../../../common/src/api/i-player-profile'
 import * as assert from 'assert'
 import { mockGameToolset } from '../../mocks/mock-game'
 import { IGameState } from '../../../../common/src/gamemodels/i-game-state'
-import { logger } from '../../../src/helpers'
+import { logger } from '../../../src/logger'
 
 // const logger = new TempLogger('set-api-service test')
 

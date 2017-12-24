@@ -5,7 +5,7 @@ import ILogger from '../../common/src/ilogger'
 import Server from '../src/server'
 import { config } from '../src/config/config'
 import * as cheerio from 'cheerio'
-import { logger } from '../src/helpers'
+import { logger } from '../src/logger'
 
 const testPort = '3000'
 const testLogger = logger

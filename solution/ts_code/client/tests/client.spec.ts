@@ -13,7 +13,7 @@ import { INotice } from '../src/inotice'
 import { mockGameStates } from './mocks/mock-game-state'
 import { clientContext } from './mocks/mock-client-context'
 import { IGameState } from '../../common/src/gamemodels/i-game-state'
-import { logger } from '../../server/src/helpers'
+import { logger } from '../../server/src/logger'
 
 const mainTestTitle = 'Client test'
 

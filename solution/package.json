@@ -13,7 +13,7 @@
     "dev": "./node_modules/nodemon/bin/nodemon.js --exec 'npm run build-serve' ",
     "serve": "node dist/server/src",
     "lint": "node_modules/tslint/bin/tslint ts_code/**/*.ts",
-    "test": "npm run copy-test-data && npm run transpile && node_modules/mocha/bin/mocha dist/**/*.spec.js",
+    "test": "npm run copy-test-data && npm run transpile && NODE_ENV=test node_modules/mocha/bin/mocha dist/**/*.spec.js",
     "debug-test": "npm run transpile && node_modules/mocha/bin/mocha --inspect=0.0.0.0:5555 dist/**/*.spec.js",
     "heroku-deploy": "npm install && npm run build && npm run serve"
   },
