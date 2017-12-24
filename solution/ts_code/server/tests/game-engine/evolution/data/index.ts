@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { encoding } from './settings'
-import { serverRoot } from '../../../../src/helpers'
+import { serverRoot } from '../../../../src/server-root'
 
 function readJson(file: string): any {
   const fullPath = path.resolve(serverRoot, 'tests', 'game-engine', 'evolution', 'data', file)

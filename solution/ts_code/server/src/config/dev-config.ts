@@ -1,5 +1,5 @@
 import { IConfig } from './iconfig'
-import { serverRoot } from '../helpers'
+import { serverRoot } from '../server-root'
 import * as path from 'path'
 
 const port = process.env.PORT

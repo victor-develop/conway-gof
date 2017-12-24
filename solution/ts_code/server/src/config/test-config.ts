@@ -1,6 +1,6 @@
 import * as bunyan from 'bunyan'
 import { IConfig } from './iconfig'
-import { serverRoot } from '../helpers'
+import { serverRoot } from '../server-root'
 import * as path from 'path'
 import { devConfig } from './dev-config'
 
