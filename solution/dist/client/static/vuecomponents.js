@@ -47,7 +47,7 @@ function setupVueComponents(Vue) {
     template: `<table class="board game-board">
                 <tbody>
                   <tr v-for="h in board.height">
-                    <td v-for="w in board.width" v-on:click="putPosition(w-1, h-1)">
+                    <td v-for="w in board.width" v-on:click="patchPosition(w-1, h-1)">
                       <cell :x=w-1 :y=h-1 :board=board></cell>
                     </td>
                   </tr>
@@ -56,8 +56,8 @@ function setupVueComponents(Vue) {
             `,
     props: ['board'],
     methods: {
-      putPosition: function(x, y) {
-        this.$emit('put-position', {x, y})
+      patchPosition: function(x, y) {
+        this.$emit('patch-position', {x, y})
       },
     }
   });
