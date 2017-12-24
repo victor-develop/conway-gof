@@ -44,6 +44,7 @@ And then, in the bash shell, you may:
  - have automated monitor on .ts file changes and restart server: `npm run dev`
 
 ### deploy to Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 You must have heroku CLI installed.
 

@@ -1,7 +1,7 @@
 {
   "name": "Conway's Game of Life",
   "description": "",
-  "repository": "",
-  "logo": "",
+  "repository": "https://github.com/victor-develop/conway-gof",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
   "keywords": ["node", "conway", "gof"]
 }
