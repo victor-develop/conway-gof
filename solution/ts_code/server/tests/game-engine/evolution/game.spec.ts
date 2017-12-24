@@ -9,9 +9,9 @@ import IPlayerContext from '../../../../common/src/gamemodels/iplayer-context'
 import { logger } from '../../../src/logger'
 
 logger.child('Game Test')
-  .then(subLogger => runTest)
+  .then(runTest)
 
-function runTest() {
+function runTest(aLogger) {
 
   const assertNewPlayerContext = (newPlayerName: string ,context: IPlayerContext) => {
     assert.equal(context.player.name, newPlayerName)
@@ -23,7 +23,7 @@ function runTest() {
     describe('When a player try to patch cells on existed positions', () => {
       it('should reject the player\'s attempt', (done) => {
         // test pattern blinker always stays the same
-        const game = createGame(logger)
+        const game = createGame(aLogger)
         game.newPlayer('TestMan')
           .then((context: IPlayerContext) => {
             const testMan = context.player

@@ -5,9 +5,10 @@ import * as path from 'path'
 import { devConfig } from './dev-config'
 
 const logStartTime = new Date(Date.now())
+const unixTimeDivider = 1000
 const logStartTimeString =
   logStartTime.getFullYear() + '_' + logStartTime.getMonth() +
-  '_' +logStartTime.getUTCDate() + '_' + logStartTime.getUTCSeconds()
+  '_' +logStartTime.getUTCDate() + '_' + Math.floor(logStartTime.getTime()/unixTimeDivider)
 
 const rootLevelLoggerOpts: bunyan.LoggerOptions = {
   name: 'Test Log',

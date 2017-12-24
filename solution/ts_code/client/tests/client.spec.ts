@@ -17,86 +17,91 @@ import { logger } from '../../server/src/logger'
 
 const mainTestTitle = 'Client test'
 
-describe('Client test', () => {
+logger.child(mainTestTitle)
+  .then(runTest)
 
-  describe('server emits event to update client context', () => {
-    it('should update current player information', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus(logger))
-      Client
-        .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
-        .then((client) => {
-          aGameApi.emit(apiEvents.context, clientContext.default)
-          assert.deepEqual(client.clientState.context, clientContext.default)
-          done()
-        })
-    })
-  })
+function runTest(aLogger) {
+  describe('Client test', () => {
 
-  describe('server emits event to update players list', () => {
-    it('should update players list', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus(logger))
-      const createClient = () => Client
-      Client
-        .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
-        .then((client) => {
-          aGameApi.emit(apiEvents.gameStateUpdate, mockGameStates.playersOnly)
-          const clientPlayers = (<IGameState>client.clientState.game).players
-          logger.info(clientPlayers)
-          assert.deepEqual(clientPlayers, mockGameStates.playersOnly.players)
-          done()
-        })
-    })
-  })
-
-  describe('server emits event to update client game state', () => {
-    it('should update game state after event fired', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus(logger))
-      const aGameState = mockGameStates.full
-      Client
-      .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
-      .then((client) => {
-        aGameApi.emit(apiEvents.gameStateUpdate, aGameState)
-        logger.info(client.clientState.game)
-        assert.deepEqual(client.clientState.game, aGameState)
-        done()
+    describe('server emits event to update client context', () => {
+      it('should update current player information', (done) => {
+        const aGameApi = mockGameApi(aLogger, createEventBus(aLogger))
+        Client
+          .create(aLogger)(createEventBus(aLogger), initialClientState(), aGameApi, noticer)
+          .then((client) => {
+            aGameApi.emit(apiEvents.context, clientContext.default)
+            assert.deepEqual(client.clientState.context, clientContext.default)
+            done()
+          })
       })
     })
-  })
 
-  describe('IPlayer try to patch some cells', () => {
-
-    const positionsToPut = presetPatterns[1]
-
-    it('should call gameApi.patch after event fired, and will fail by timeout', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus(logger), {
-        patchCallback: (positions) => {
-          assert.deepEqual(positions, positionsToPut)
-          done()
-        },
-        submitProfileCallback: null,
+    describe('server emits event to update players list', () => {
+      it('should update players list', (done) => {
+        const aGameApi = mockGameApi(aLogger, createEventBus(aLogger))
+        const createClient = () => Client
+        Client
+          .create(aLogger)(createEventBus(aLogger), initialClientState(), aGameApi, noticer)
+          .then((client) => {
+            aGameApi.emit(apiEvents.gameStateUpdate, mockGameStates.playersOnly)
+            const clientPlayers = (<IGameState>client.clientState.game).players
+            aLogger.info(clientPlayers)
+            assert.deepEqual(clientPlayers, mockGameStates.playersOnly.players)
+            done()
+          })
       })
-      Client
-        .create(logger)(createEventBus(logger), initialClientState(), aGameApi, noticer)
+    })
+
+    describe('server emits event to update client game state', () => {
+      it('should update game state after event fired', (done) => {
+        const aGameApi = mockGameApi(aLogger, createEventBus(aLogger))
+        const aGameState = mockGameStates.full
+        Client
+        .create(aLogger)(createEventBus(aLogger), initialClientState(), aGameApi, noticer)
+        .then((client) => {
+          aGameApi.emit(apiEvents.gameStateUpdate, aGameState)
+          aLogger.info(client.clientState.game)
+          assert.deepEqual(client.clientState.game, aGameState)
+          done()
+        })
+      })
+    })
+
+    describe('IPlayer try to patch some cells', () => {
+
+      const positionsToPut = presetPatterns[1]
+
+      it('should call gameApi.patch after event fired, and will fail by timeout', (done) => {
+        const aGameApi = mockGameApi(aLogger, createEventBus(aLogger), {
+          patchCallback: (positions) => {
+            assert.deepEqual(positions, positionsToPut)
+            done()
+          },
+          submitProfileCallback: null,
+        })
+        Client
+          .create(aLogger)(createEventBus(aLogger), initialClientState(), aGameApi, noticer)
+          .then((client) => {
+            client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
+          })
+      })
+
+      it('should notify user of error if gameApi.patch fails, and will fail by timeout', (done) => {
+        const aGameApi = mockGameApi(aLogger, createEventBus(aLogger))
+        aGameApi.cells.patch = (positions: IPos[]) =>
+          Promise.reject(mockGameApiResponse.failCellPatch)
+
+        const aNoticer: INotice = {
+          notice: (messages) => { done() },
+        }
+
+        Client
+        .create(aLogger)(createEventBus(aLogger), initialClientState(), aGameApi, aNoticer)
         .then((client) => {
           client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
         })
-    })
-
-    it('should notify user of error if gameApi.patch fails, and will fail by timeout', (done) => {
-      const aGameApi = mockGameApi(logger, createEventBus(logger))
-      aGameApi.cells.patch = (positions: IPos[]) =>
-        Promise.reject(mockGameApiResponse.failCellPatch)
-
-      const aNoticer: INotice = {
-        notice: (messages) => { done() },
-      }
-
-      Client
-      .create(logger)(createEventBus(logger), initialClientState(), aGameApi, aNoticer)
-      .then((client) => {
-        client.clientEvent.emit(playerEventType.putCellsAttempt, positionsToPut)
       })
     })
   })
+}
 
-})

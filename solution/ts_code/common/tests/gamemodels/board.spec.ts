@@ -2,9 +2,6 @@ import 'mocha'
 import * as assert from 'assert'
 import { Board } from '../../../common/src/gamemodels/board'
 import { presetPatterns } from '../../../common/src/gamemodels/preset-pattern'
-import { logger } from '../../../server/src/logger'
-
-const testLogger = logger
 
 describe('Board.create method', () => {
   const width = 10

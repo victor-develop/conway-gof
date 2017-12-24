@@ -11,102 +11,109 @@ import * as assert from 'assert'
 import { mockGameToolset } from '../../mocks/mock-game'
 import { IGameState } from '../../../../common/src/gamemodels/i-game-state'
 import { logger } from '../../../src/logger'
+import { ILogger } from '../../../../common/src/services'
 
-// const logger = new TempLogger('set-api-service test')
+const testKey = 'setApiService() test'
 
-describe('setApiService', () => {
+logger.child(testKey)
+  .then(runTest)
 
-  // this is required for following async tests to be detected
-  it('Activate mocha', (done) => {
-    done()
-  })
+function runTest(testLogger: ILogger) {
 
-  logger.child('mockSocketIo').then((mockSocketIoLogger) => {
-    // mock the root socketIO object
-    const mockSocketIo = createEventBus(mockSocketIoLogger)
-    const aMockGameToolset = mockGameToolset(logger)
+  describe('setApiService', () => {
 
-    setApiService(<any>mockSocketIo, logger, aMockGameToolset.game)
-      .then(() => {
-        describe('start socket connection with player A', () => {
-          // mock the server-client connection
-          const mockSocket = createEventBus(logger)
+    // this is required for following async tests to be detected
+    it('Activate mocha', (done) => {
+      done()
+    })
 
-          // send the socket to the Game object
-          mockSocketIo.emit(socketEvents.connect, mockSocket)
+    testLogger.child('mockSocketIo').then((mockSocketIoLogger) => {
+      // mock the root socketIO object
+      const mockSocketIo = createEventBus(mockSocketIoLogger)
+      const aMockGameToolset = mockGameToolset(testLogger)
 
-          describe('player A submits profile to server', () => {
+      setApiService(<any>mockSocketIo, testLogger, aMockGameToolset.game)
+        .then(() => {
+          describe('start socket connection with player A', () => {
+            // mock the server-client connection
+            const mockSocket = createEventBus(testLogger)
 
-            const profile: IPlayerProfile = {
-              name: 'Player A',
-            }
+            // send the socket to the Game object
+            mockSocketIo.emit(socketEvents.connect, mockSocket)
 
-            const submitProfile = () => mockSocket.emit(apiEvents.newPlayerIn, profile)
+            describe('player A submits profile to server', () => {
 
-            it('player A receives context information and initial game state from server', (done) => {
-              const monitor = createEventBus(logger)
-              mockSocket.on(apiEvents.context, (context: IPlayerContext) => {
-                assert.equal(context.player.name, profile.name)
-                assert.ok(context.player.color)
-                assert.ok(context.player.uid)
-                assert.ok(context.presetPatternBoards)
-                monitor.emit('done', apiEvents.context)
+              const profile: IPlayerProfile = {
+                name: 'Player A',
+              }
+
+              const submitProfile = () => mockSocket.emit(apiEvents.newPlayerIn, profile)
+
+              it('player A receives context information and initial game state from server', (done) => {
+                const monitor = createEventBus(testLogger)
+                mockSocket.on(apiEvents.context, (context: IPlayerContext) => {
+                  assert.equal(context.player.name, profile.name)
+                  assert.ok(context.player.color)
+                  assert.ok(context.player.uid)
+                  assert.ok(context.presetPatternBoards)
+                  monitor.emit('done', apiEvents.context)
+                })
+
+                let tested = false
+                mockSocketIo.on(apiEvents.gameStateUpdate, (gamestate: IGameState) => {
+                  if (!tested) {
+                    assert.deepEqual(gamestate.board.cells, {})
+                    assert.equal(gamestate.players.length, 1)
+                    assert.equal(gamestate.players[0].name, profile.name)
+                    assert.ok(gamestate.updateAt)
+                    tested = true
+                    monitor.emit('done', apiEvents.gameStateUpdate)
+                  }
+                })
+
+                const checked = {}
+                monitor.on('done', (eventkey) => {
+                  checked[eventkey] = true
+                  if (checked[apiEvents.context] && checked[apiEvents.gameStateUpdate]) {
+                    done()
+                  }
+                })
+
+                submitProfile()
               })
-              // prevent multiple times of calling done()
-              let tested = false
-              mockSocketIo.on(apiEvents.gameStateUpdate, (gamestate: IGameState) => {
-                if (!tested) {
-                  assert.deepEqual(gamestate.board.cells, {})
-                  assert.equal(gamestate.players.length, 1)
-                  assert.equal(gamestate.players[0].name, profile.name)
-                  assert.ok(gamestate.updateAt)
-                  tested = true
-                  monitor.emit('done', apiEvents.gameStateUpdate)
-                }
+
+              let randomCellsGot = false
+              let evolutionGot = false
+
+              it('player A receives game state data with random cells on the board', (done) => {
+                mockSocketIo.on(apiEvents.gameStateUpdate, (gamestate: IGameState) => {
+                  if (!randomCellsGot) {
+                    assert.notDeepEqual(gamestate.board.cells, {})
+                    assert.ok(gamestate.board)
+                    done()
+                    randomCellsGot = true
+                  }
+                })
+                aMockGameToolset.jobQueueEvent.emit('tick')
               })
 
-              const checked = {}
-              monitor.on('done', (eventkey) => {
-                checked[eventkey] = true
-                if (checked[apiEvents.context] && checked[apiEvents.gameStateUpdate]) {
-                  done()
-                }
+              it('player A receives game state data from server for each round of evolution', (done) => {
+                mockSocketIo.on(apiEvents.gameStateUpdate, (gamestate: IGameState) => {
+                  if (!evolutionGot) {
+                    assert.notDeepEqual(gamestate.board.cells, {})
+                    assert.ok(gamestate.board)
+                    done()
+                    evolutionGot = true
+                  }
+                })
+                // trigger one round of evolution
+                aMockGameToolset.evolveEvent.emit('tick')
+                aMockGameToolset.jobQueueEvent.emit('tick')
               })
-
-              submitProfile()
             })
 
-            let randomCellsGot = false
-            let evolutionGot = false
-
-            it('player A receives game state data with random cells on the board', (done) => {
-              mockSocketIo.on(apiEvents.gameStateUpdate, (gamestate: IGameState) => {
-                if (!randomCellsGot) {
-                  assert.notDeepEqual(gamestate.board.cells, {})
-                  assert.ok(gamestate.board)
-                  done()
-                  randomCellsGot = true
-                }
-              })
-              aMockGameToolset.jobQueueEvent.emit('tick')
-            })
-
-            it('player A receives game state data from server for each round of evolution', (done) => {
-              mockSocketIo.on(apiEvents.gameStateUpdate, (gamestate: IGameState) => {
-                if (!evolutionGot) {
-                  assert.notDeepEqual(gamestate.board.cells, {})
-                  assert.ok(gamestate.board)
-                  done()
-                  evolutionGot = true
-                }
-              })
-              // trigger one round of evolution
-              aMockGameToolset.evolveEvent.emit('tick')
-              aMockGameToolset.jobQueueEvent.emit('tick')
-            })
           })
-
         })
-      })
+    })
   })
-})
+}
