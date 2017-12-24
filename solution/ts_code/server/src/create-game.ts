@@ -13,6 +13,7 @@ import { IIntervalLoopSetter } from './game-engine/i-interval-loop'
 
 /**
  * resolve dependecies and create a game instance
+ * a wrapper for coveniently construct a game object
  */
 export function createGame(logger: ILogger): Game {
 

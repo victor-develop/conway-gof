@@ -1,7 +1,7 @@
 import 'mocha'
 import TempLogger from '../../../../common/src/temp-logger'
 import { createEventBus } from '../../../../client/src/event-bus'
-import { createGame } from '../../../src/services'
+import { createGame } from '../../../src/create-game'
 import { apiEvents } from '../../../../common/src/api/api-events'
 import { socketEvents } from '../../../../common/src/api/socket-events'
 import { setApiService } from '../../../src/game-engine/set-api-service'

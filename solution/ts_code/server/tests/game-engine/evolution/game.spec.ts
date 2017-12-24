@@ -1,6 +1,6 @@
 import 'mocha'
 import { Game } from '../../../src/game-engine/game'
-import { createGame } from '../../../src/services'
+import { createGame } from '../../../src/create-game'
 import { presetPatternBoards, blinker } from '../../../../common/src/gamemodels/preset-pattern'
 import * as assert from 'assert'
 import IResponse from '../../../../common/src/api/IResponse'
