@@ -2,70 +2,126 @@
 
 This is a web-based game: Conway's Game of Life, developed as the specification at https://hackmd.io/s/SyXikdg_g#full-stack--backend-developer--eng-manager
 
-### Prerequisites
-
-To run this game locally, you should have Docker installed. You can download and install from https://www.docker.com/get-docker
-
-At the time of development I am using version `17.09.0-ce-win33`
-
-
-## Getting Started
-
-Execute the following commands for the first time of use
-
-```sh
- // clone repository
- git clone ...
- // start docker
- docker-compose -f docker-compose.ini.yml up
-```
-
-This will install node modules for your folder and exit process when finished.
-
-Then you type 
-
-```sh
-docker-compose up
-```
-
-Now you can go to `localhost:8080` and start playing the game. To try out multi-players just open another browser window
-
-### local development
-Enter docker with
-
-```sh
-docker-compose exec conway /bin/bash
-cd solution
-```
-And then, in the bash shell, you may:
-
- - lint the code style: `npm run lint`
- - run tests: `npm run test`
- - have automated monitor on .ts file changes and restart server: `npm run dev`
-
-### deploy to Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-You must have heroku CLI installed.
-
-```sh
-heroku create
-heroku push master
-```
-And then check out the web url provided in the console.
-
 ## Built With
 
 * [express](https://expressjs.com/) - Web server
 * [socketIo](https://socket.io/) - widely used lib for real time connection
 * [Vue](https://vuejs.org/) - Front end framework
 * [Typescript](https://www.typescriptlang.org/index.html)
+* [Webpack](https://webpack.js.org/) - front end assets bundling
 
-I picked these into the tech stack since each item above has its pretty big communities. Supports and documentation can be searched online easily. 
+## deploy to Heroku
+
+#### The Automated way
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+#### The manual way
+
+You must have a heroku account and a heroku CLI installed. See https://devcenter.heroku.com/articles/heroku-cli
+
+```sh
+git clone https://github.com/victor-develop/conway-gof.git
+cd conway-gof
+heroku create
+heroku push master
+```
+And then check out the web url provided in the console.
+
+## Local-machine development
+
+### Prerequisites
+
+To run this game locally, you should have Docker installed. You can download and install from https://www.docker.com/get-docker
+
+At the time of development I am using version `17.09.0` on Windows machine. Docker should work aross different platforms
+
+
+### Getting Started
+
+#### The first time of use
+
+ - Clone the repository and enter the directory root
+
+  ```sh
+  git clone https://github.com/victor-develop/conway-gof.git
+  cd conway-gof
+  ```
+ - Run Docker
+
+  ```sh
+    docker-compose up -d
+  ```
+ - Enter the bash of the docker image
+
+  ```sh
+    docker-compose exec conway /bin/bash
+  ```
+ - You shall be at the /home/dev now. The `package.json` at root directory is __NOT__ the package.json for this project. This is just a file created for Heroku's requirement to deploy the app successfully. Instead, you should go to `solution` folder to see the real package.json, where the project source code stays, like below.
+
+ - Install npm dependencies
+
+  ```sh
+    cd solution
+    npm install
+  ```
+ - boost the server
+
+  ```sh
+    // still at `solution` directory
+    npm run dev
+  ```
+
+  Now you can go to `localhost:8080` and start playing the game. To try out multi-players just open another browser window
+
+#### local development
+Enter the shell with
+
+```sh
+docker-compose exec conway /bin/bash
+cd solution
+```
+And then, in the bash shell, you may:
+ - __run tests__: `npm run test`
+ - __development with live-reloaded server__: `npm run dev`
+
+
+## Source Code Overview
+
+#### Directory Structure
+
+The source code is mostly under `./solution/ts_code/`, divided into 3 mainjor parts: __client__, __common__, and __server__, which will be transpiled into JS under `./solution/dist/` with corresponding folder structure
+
+```sh
+
+./                          # config of docker, webpack, nodemon, typescript, tslint, etc.
+├─.vscode                   # vscode debug config
+├─docker
+│  └─docker-image
+└─solution                  # source code and compiled/transpiled files
+    ├─dist                  # mainly contains files transpiled from ./solution/ts_code
+    │  ├─client
+    │  │  ├─static          # NOTE: The 'static' files contains static content which need not transpliling
+    │  ├─common
+    │  └─server
+    ├─node_modules
+    └─ts_code               # Typescript source code
+        ├─client            # client-side code, running in browsers
+        │  ├─src
+        │  └─tests
+        ├─common            # reusable components/classes for both front and back ends
+        │  ├─src
+        │  └─tests
+        └─server            # server-side code, running in Node.js
+            ├─src
+            │  ├─config     # project configurations
+            └─tests
+
+```
 
 ## Versioning
 
-  [SemVer](http://semver.org/) is used for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+  [SemVer](http://semver.org/) is used for versioning. 
 
 ## Design Decisions
 
