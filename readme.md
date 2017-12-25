@@ -41,31 +41,31 @@ At the time of development I am using version `17.09.0` on Windows machine. Dock
 
 #### The first time of use
 
- - Clone the repository and enter the directory root
+- Clone the repository and enter the directory root
 
   ```sh
   git clone https://github.com/victor-develop/conway-gof.git
   cd conway-gof
   ```
- - Run Docker
+- Run Docker
 
   ```sh
     docker-compose up -d
   ```
- - Enter the bash of the docker image
+- Enter the bash of the docker image
 
   ```sh
     docker-compose exec conway /bin/bash
   ```
- - You shall be at the /home/dev now. The `package.json` at root directory is __NOT__ the package.json for this project. This is just a file created for Heroku's requirement to deploy the app successfully. Instead, you should go to `solution` folder to see the real package.json, where the project source code stays, like below.
+- You shall be at the /home/dev now. The `package.json` at root directory is __NOT__ the package.json for this project. This is just a file created for Heroku's requirement to deploy the app successfully. Instead, you should go to `solution` folder to see the real package.json, where the project source code stays, like below.
 
- - Install npm dependencies
+- Install npm dependencies
 
   ```sh
     cd solution
     npm install
   ```
- - boost the server
+- boost the server
 
   ```sh
     // still at `solution` directory
@@ -82,15 +82,23 @@ docker-compose exec conway /bin/bash
 cd solution
 ```
 And then, in the bash shell, you may:
- - __run tests__: `npm run test`
- - __development with live-reloaded server__: `npm run dev`
+ - __run tests__: 
+
+  ```sh
+    npm run test
+  ```
+ - __development with live-reload server__: 
+ 
+  ```sh
+    npm run dev
+  ```
 
 
-## Source Code Overview
+## Implementation Details
 
 #### Directory Structure
 
-The source code is mostly under `./solution/ts_code/`, divided into 3 mainjor parts: __client__, __common__, and __server__, which will be transpiled into JS under `./solution/dist/` with corresponding folder structure
+The source code is mostly under `./solution/ts_code/`, divided into 3 mainjor parts: __client__, __common__, and __server__, which will be transpiled into JS under `./solution/dist/` with corresponding folder structure. Webpack will also transplie and place a bundled front-end .js into `dist/client`.  __HOWEVER__, The `./solution/dist/client/static` is __NOT only__ a folder for transpliled content, but also some static assets like __index.html, .js, .css__ and so on. These are legacy files which are not yet integrated into the bundling process. It is not a good practice to mix genereted files and source files together, so these static assests may probably be moved out from `dist` and get packed into webpack bundle sometime later.
 
 ```sh
 
