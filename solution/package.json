@@ -15,7 +15,7 @@
     "lint": "node_modules/tslint/bin/tslint ts_code/**/*.ts",
     "test": "npm run transpile && npm run copy-test-data && NODE_ENV=test node_modules/mocha/bin/mocha dist/**/*.spec.js",
     "debug-test": "npm run transpile && node_modules/mocha/bin/mocha --inspect=0.0.0.0:5555 dist/**/*.spec.js",
-    "heroku-deploy": "npm install && npm run build && npm run serve"
+    "heroku-deploy": "NPM_CONFIG_PRODUCTION=false npm install && npm run build && npm run serve"
   },
   "keywords": [
     "conway",
