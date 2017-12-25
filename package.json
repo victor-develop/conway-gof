@@ -4,7 +4,7 @@
   "description": "NOTE: this pacakge.json is for heroku deployment only. Go to solution/ for real package.json",
   "main": "index.js",
   "scripts": {
-    "start": "cd solution && NPM_CONFIG_PRODUCTION=false npm run heroku-deploy"
+    "start": "cd solution && npm run heroku-deploy"
   },
   "author": "Victor <victor.develop@outlook.com>",
   "license": "MIT"

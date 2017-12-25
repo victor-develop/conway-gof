@@ -3,5 +3,11 @@
   "description": "",
   "repository": "https://github.com/victor-develop/conway-gof",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
-  "keywords": ["node", "conway", "gof"]
+  "keywords": ["node", "conway", "gof"],
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "node in production environment",
+      "value": false
+    }
+  }
 }
