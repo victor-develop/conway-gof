@@ -58,18 +58,6 @@
     "socket.io": "2.0.4",
     "tinycolor2": "1.4.1",
     "uiv": "0.15.1",
-    "vue": "2.5.10",
-    "@types/express": "4.0.39",
-    "@types/node": "8.0.58",
-    "@types/shortid": "0.0.29",
-    "express": "4.16.2",
-    "mocha": "4.0.1",
-    "nodemon": "1.12.5",
-    "pick-random": "2.0.0",
-    "ts-loader": "3.2.0",
-    "tslint": "5.8.0",
-    "tslint-config-airbnb-base": "0.1.0",
-    "typescript": "2.6.2",
-    "webpack": "3.10.0"    
+    "vue": "2.5.10"
   }
 }
