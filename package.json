@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cd solution && npm run heroku-deploy",
-    "heroku-postbuild": "cd solution && npm install"
+    "heroku-postbuild": "cd solution && npm install && npm run build"
   },
   "author": "Victor <victor.develop@outlook.com>",
   "license": "MIT"
