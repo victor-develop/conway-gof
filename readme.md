@@ -180,9 +180,14 @@ To enable easier testing and debug, the following items were intentionally desig
 By using these injection you can simulate a completely predicatable test against the state changes of the game board. See `./solution/ts_code/server/tests/set-api-service.spec.ts`
 
 #### Events
-Different components depend on `IEventBus` to coordinates with each other. For example:
-- server and clients talks using `ApiEvents`
-- at client side, `:Client` and `:GameApi` communicates with `ApiEvents` and `playerEventType`
+
+Different components depend on `IEventBus` to coordinates with each other. Theses files defined the event keys:
+
+ - `apiEvents`: ./solution/ts_code/common/src/api/api-events
+ - `socketEvents`: ./solution/ts_code/common/src/api/socket-events
+
+The major events happened between server and clients is shown below (error events omitted):
+
 
 #### Logging
 This project used [bunyan](https://github.com/trentm/node-bunyan) for logging implementation of the `ILogger` interface. 
@@ -191,22 +196,42 @@ This project used [bunyan](https://github.com/trentm/node-bunyan) for logging im
 
  - During tests it will output logs to `./solution/dist/server/tests/ouput_xxxxx.txt` depending on the datetime at runtime.
 
-The whole application starts with one root level logger, and different places in the application may spawn a subLogger by using `logger.child(customKey: stirng)`, and all the json output by the sublogger will have the property __customKey__ you can track with.
+The whole application starts with one root level logger, and different places in the application may spawn a child logger by using `logger.child(customKey: stirng)`, and all the json output by the child logger will have the property __customKey__ you can track with.
 
-All the event buses, as well as socket-io in the application should be already attached with a logger by `./solution/common/src/log-event-bus.ts`. Every time when an event, e.g. `apiEvents.gameStateUpdate` is registerd with a handler or emmited, the event will be logged as well as the arguments passed through. You can easily track the application on your heroku deployment by redirecting `heroku logs` to you own disk. You can also use some json search and filter techniques provided by [bunyan cli](https://github.com/trentm/node-bunyan#cli-usage)
 
+All the event buses, as well as socket-io in the application should be already attached with a logger by `./solution/common/src/log-event-bus.ts`. Every time when an event, e.g. `apiEvents.gameStateUpdate` is registerd with a handler or emmited, the event will be automatically logged as well as the arguments passed through. You can easily track the application on your heroku deployment by redirecting `heroku logs` to you own disk. You can also use some json search and filter techniques provided by [bunyan cli](https://github.com/trentm/node-bunyan#cli-usage)
+
+For example, a root level log is like this
+
+```javascript
+{"name":"Development Log","hostname":"6a6b14989f8f","pid":464,"level":30,"msg":"listening on 8080 undefined","time":"2017-12-26T07:41:16.694Z","v":0}
+```
+
+And a child logger by spawned by `logger.child('apiService - socketio')`  looks like this, as you can see it has a property named `apiService - socketio`. This is a sample log when a handler is registered(mounted) on the __error__ event.
+
+```javascript
+{"name":"Development Log","hostname":"6a6b14989f8f","pid":464,"apiService - socketio":"apiService - socketio","level":30,"eventKey":"error","msg":"event mounted on 1514274076702","time":"2017-12-26T07:41:16.702Z","v":0}
+```
+
+And here is another sample log when the event __game-state-update__ is emitted.
+
+```javascript
+{"name":"Development Log","hostname":"6a6b14989f8f","pid":464,"level":30,"eventKey":"game-state-update","args":[{"updateAt":1514274121728,"players":[{"uid":"S1h76OkXf","name":"Plaki","color":"#a5c359"}]}],"msg":"event emitted 1514274121728","time":"2017-12-26T07:42:01.728Z","v":0}
+```
 
 ## Versioning
 
   [SemVer](http://semver.org/) is used for versioning. 
 
-## Potential TODOs
+## TODOs
 
- - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
- - __dist/client/static__: Move it somewher else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
- - At client side, `Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `Client` does not need to know anything about `GameApi`, but just has to simply expose its methods to `GameApi`, then `GameApi` will call `Client` according to different events. By doing so `Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `Game` does not know anything about the api object, in fact there is not even a real class named `ApiService`, just used the function `setApiService` to set tup the `Game`'s behaviour according to different events.
- - Currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a borded which can dynamically shrink and enlarge its border according to the cells it has, of course then the client intereface should also support world-exploring feature.
- - For production environment, use `pm2` to restart process in case of exit, and add health monitor like [appmetrics](https://github.com/RuntimeTools/appmetrics)
+  - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
+  - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
+  - at client side, `Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `Client` does not need to know anything about `GameApi`, but just has to simply expose its methods to `GameApi`, then `GameApi` will call `Client` according to different events. By doing so `Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `Game` does not know anything about the api object, in fact there is not even a real class named `ApiService`, just used the function `setApiService` to set tup the `Game`'s behaviour according to different events.
+  - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
+  - better error messages to players
+  - a log reader to organize and present the logs nicely
+  - For production environment, use `pm2` to restart process in case of exit, and add health monitor like [appmetrics](https://github.com/RuntimeTools/appmetrics)
 
 
 ## License
