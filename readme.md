@@ -279,6 +279,8 @@ And here is another sample log when the event __game-state-update__ is emitted.
 ```
 
 ## Known Limitations & TODOs
+  - Data from client side has not been validated yet. For example, an object without desired properties sent from client side may leads to app crash, this may happen in cases, e.g. if scripts on browser side is modified by a thrid-party software.
+
   - Currently the server broadcasts the whole grid together with the list of players to clients to ensure syncronization. A better approach(with more effort) would be only sending the updated data for most clients in stable connection and let clients which fails to syncronize request for whole-state update. For example, the client may check for an increamental sync-id transmitted from server, if the difference is more than 1, the client requests for whole-state update. 
 
   - The game instance runs and the game world evolves endlessly together with the server regardless of the existence of player. This is a waste. When there is no player, the game instance can stopped until a new player enters. But it has to store the state somewhere in advance and reloads it, calculating how many rounds of interval it has stopped for and directly evolve for that many times to recover to the right state it should be at. 
