@@ -62,5 +62,8 @@ export const mockGameApi = function(
         return Promise.resolve(response(positions))
       },
     },
+    disconnect() {
+      return
+    },
   }
 }

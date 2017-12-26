@@ -51,6 +51,12 @@ export class GameApi implements IGameApi {
     })
   }
 
+  public disconnect(): any {
+    if (this.socket) {
+      this.socket.close()
+    }
+  }
+
 
   public currentPlayer = {
     submitProfile: (profile: IPlayerProfile) => {
@@ -111,8 +117,8 @@ export class GameApi implements IGameApi {
     })
 
     this.socket.on('connect_error', (error) => {
+      this.disconnect()
       this.emit(apiEvents.connectError, error)
-      this.socket.close()
     })
   }
 }

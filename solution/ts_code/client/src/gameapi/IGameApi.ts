@@ -6,6 +6,7 @@ import { IPlayerProfile } from '../../../common/src/api/i-player-profile'
 
 export interface IGameApi extends IEventBus {
   connect: () => Promise<IResponse>
+  disconnect: () => any
   currentPlayer: {
     submitProfile: (profile: IPlayerProfile) => any,
   }

@@ -53,7 +53,7 @@ export function setVueApp() {
   })
 
   const notifyErrors = () => {
-    const errorsToNotify = app.errors.filter(err => !err.notified)
+    const errorsToNotify = app.errors.filter(err => (err.notified !== true))
 
     errorsToNotify.forEach((err) => {
       (<any>app).$notify({

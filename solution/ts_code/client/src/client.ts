@@ -20,6 +20,10 @@ const logMessage = {
   BELATED_STATE_RECEIVED: 'a overdue IGameState update is received',
 }
 
+const errorMessages = {
+  DISCONNECT_RETRY: 'Server disconnected. Try refresh the page',
+}
+
 export class Client {
   private eventBus: IEventBus
   private state: ClientState
@@ -33,8 +37,7 @@ export class Client {
       (gameState: IGameState) => this.updateGameState(gameState))
     this.gameApi.on(apiEvents.connectError, (err) => {
       (<any>this.state).errors.push({
-        message: 'Server disconnected, you better refresh',
-        notified: false,
+        message: errorMessages.DISCONNECT_RETRY,
       })
     })
     this.eventBus.on(playerEventType.patchCellsAttempt,
@@ -61,6 +64,26 @@ export class Client {
     } else {
       this.logger.info({ oldState, newState }, logMessage.BELATED_STATE_RECEIVED)
     }
+
+    this.enforceConsistency()
+  }
+
+  private enforceConsistency() {
+    this.verifyPlayers()
+  }
+
+  private verifyPlayers() {
+    if (this.state.context.currentPlayer !== InitialValue.instance) {
+      const players = (<IGameState>this.state.game).players
+      const myself = <IPlayer>this.state.context.currentPlayer
+      const hasMyself = players.filter(p => p.uid === myself.uid).length > 0
+      if (!hasMyself) {
+        this.gameApi.disconnect()
+        this.state.errors.push({
+          message: errorMessages.DISCONNECT_RETRY,
+        })
+      }
+    }
   }
 
 
@@ -68,7 +91,6 @@ export class Client {
     this.logger.child(this.attemptPatchCells.name)
     .then((transactionLogger) => {
       transactionLogger.info({ positions }, logMessage.DATA_BE_SENT)
-
       this.gameApi
         .cells.patch(positions)
         .catch((err: IErrorResponse) => {
@@ -98,13 +120,6 @@ export class Client {
     this.noticer = noticer
   }
 
-  public get clientState(): ClientState {
-    return this.state
-  }
-
-  public get clientEvent(): IEventBus {
-    return this.eventBus
-  }
 
   public static eventTypes = {
     INIT_READY: 'init-ready',

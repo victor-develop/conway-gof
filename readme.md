@@ -206,7 +206,7 @@ A function that takes a board as input and output a "evolved" board with a list 
 
 ![Game Class Diagram](./docs/game-class.png)
 
-The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happen which will enqueue an update function.
+The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 2 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happen which will enqueue an update function.
 
 ![events updating the game board](./docs/game-board-update.png)
 
@@ -277,12 +277,10 @@ And here is another sample log when the event __game-state-update__ is emitted.
 {"name":"Development Log","hostname":"6a6b14989f8f","pid":464,"level":30,"eventKey":"game-state-update","args":[{"updateAt":1514274121728,"players":[{"uid":"S1h76OkXf","name":"Plaki","color":"#a5c359"}]}],"msg":"event emitted 1514274121728","time":"2017-12-26T07:42:01.728Z","v":0}
 ```
 
-## Versioning
-
-  [SemVer](http://semver.org/) is used for versioning. 
+## Known Limitations
+ - Currently the server broadcast the whole grid together with the list of players to clients to ensure syncronization. A better approach(with more effort) would be only sending the updated data for most clients in stable connection and let clients which fails to syncronize request whole-state update. 
 
 ## TODOs
-
   - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
   - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
   - at client side, `Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `Client` does not need to know anything about `GameApi`, but just has to simply expose its methods to `GameApi`, then `GameApi` will call `Client` according to different events. By doing so `Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `Game` does not know anything about the api object, in fact there is not even a real class named `ApiService`, just used the function `setApiService` to set tup the `Game`'s behaviour according to different events.

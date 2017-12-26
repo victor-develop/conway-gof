@@ -41,7 +41,7 @@ function boot() {
   const resolveClient = Client.create(tempLogger)(mainEventBus, <any>app, gameApi, noticer)
   resolveClient
     .then((client) => {
-      (<any>client.clientState).getName()
+      app.getName()
       .then((name) => {
         const profile: IPlayerProfile = {
           name,

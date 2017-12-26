@@ -40,7 +40,7 @@ export interface ClientState {
   errors: {
     message: string,
     data?: object,
-    notified: boolean,
+    notified?: boolean,
   }[],
   playername: string,
   selectedPattern: InitialValue | Board
