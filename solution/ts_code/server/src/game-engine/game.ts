@@ -157,6 +157,19 @@ export class Game {
 
   public stop: Function
 
+  /**
+   * Creation of the class
+   * 
+   * @param logger 
+   * @param evolveFunc - a function takes a board and returned a transformed board,
+   *                     supposingly, the evolution loggic
+   * @param getRandomPattern - a function that generates random positions for a board
+   * @param evolveInterval - how long will a board evolve naturally
+   * @param eventBus - for broadcasting states
+   * @param evolveTimer - a wrapper of setInterval function, used to run evolution periodically
+   * @param jobQueueTimer - a wrapper of setInterval function,
+   *                        used to consume the job queue perdiodically
+   */
   public constructor(
     logger: ILogger,
     evolveFunc: (board: GameBoard) => GameBoard,
