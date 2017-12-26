@@ -278,12 +278,11 @@ And here is another sample log when the event __game-state-update__ is emitted.
 ```
 
 ## Known Limitations
- - Currently the server broadcast the whole grid together with the list of players to clients to ensure syncronization. A better approach(with more effort) would be only sending the updated data for most clients in stable connection and let clients which fails to syncronize request whole-state update. 
+ - Currently the server broadcast the whole grid together with the list of players to clients to ensure syncronization. A better approach(with more effort) would be only sending the updated data for most clients in stable connection and let clients which fails to syncronize request for whole-state update. 
 
 ## TODOs
   - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
   - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
-  - at client side, `Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `Client` does not need to know anything about `GameApi`, but just has to simply expose its methods to `GameApi`, then `GameApi` will call `Client` according to different events. By doing so `Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `Game` does not know anything about the api object, in fact there is not even a real class named `ApiService`, just used the function `setApiService` to set tup the `Game`'s behaviour according to different events.
   - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
   - better error messages to players
   - a log reader to organize and present the logs nicely
