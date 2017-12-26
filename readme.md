@@ -31,7 +31,7 @@
 
 # Multi-player Conway's Game of Life
 
-This is a web-based multi-player game: Conway's Game of Life.
+This is a web-based multi-player game: [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Examples_of_patterns).
 
 This game is a world of cells on 2-d grid. The world is having endless rounds of natural evolution, e.g. 3 seconds for a round, according to the following rules:
 
@@ -206,7 +206,9 @@ A function that takes a board as input and output a "evolved" board with a list 
 
 ![Game Class Diagram](./docs/game-class.png)
 
-The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 2 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happen which will enqueue an update function.
+The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. 
+
+Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 2 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happen which will enqueue an update function.
 
 ![events updating the game board](./docs/game-board-update.png)
 
