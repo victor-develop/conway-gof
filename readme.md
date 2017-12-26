@@ -165,18 +165,18 @@ The real time connection is currently implemented with __SocketIO__, but can als
 #### Core components
 
 ##### GameBoard
-GameBoard is esstially a list of __alive__ cells (pratically, arranged in hash map but not list) plus the world border: width and height. Dead cells are not stored, but they will be stored once they come back to life according to reproduction rule. Cells are arranged in (0,0)-started 2-d grid plain.
+GameBoard is esstially a list of __alive__ cells plus the world border: width and height. Dead cells are not stored, but they will be stored once they come back to life according to reproduction rule. Cells are arranged in (0,0)-started 2-d grid plain.
 
 ![game models](./docs/game-board-models.svg)
 
 ##### evolveBoard
-A function that takes a board as input and output a "evolved" board with lists of cells updated.
+A function that takes a board as input and output a "evolved" board with a list of cells updated.
 
 ##### Game
 
 ![Game Class Diagram](./docs/game-class.png)
 
-The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happened which will enqueue an update function.
+The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happen which will enqueue an update function.
 
 ![events updating the game board](./docs/game-board-update.png)
 
@@ -192,7 +192,17 @@ By using these injection you can simulate a completely predicatable test against
 
 #### Events
 
-Different components depend on `IEventBus` to coordinates with each other. Theses files defined the event keys:
+Different components depend on `IEventBus` to coordinates with each other.
+
+```typescript
+// .\solution\ts_code\common\src\ievent-bus.ts
+export interface IEventBus {
+  emit: (eventKey: string, ...args) => any
+  on: (eventKey: string, callback) => any
+}
+```
+
+Theses files defined the event keys:
 
  - `apiEvents`: ./solution/ts_code/common/src/api/api-events
  - `socketEvents`: ./solution/ts_code/common/src/api/socket-events
