@@ -33,7 +33,7 @@ export class Game {
 
   private evolveIntervalMilleSecond: number
   private evolveFunc: (board: GameBoard) => GameBoard
-  private getRandomPattern: (board: GameBoard) => Pattern
+  private makeRandomPattern: (board: GameBoard) => Pattern
   private currentEvolutionToken: number
   private state: IGameState
   private eventBus: IEventBus
@@ -125,7 +125,7 @@ export class Game {
   }
 
   private patchRandomCells(player: IPlayer) {
-    const pattern: Pattern = this.getRandomPattern(this.state.board)
+    const pattern: Pattern = this.makeRandomPattern(this.state.board)
     const callback = (rejectedPositions: Array<IPos>) => {
       if (rejectedPositions.length > 0) {
         this.logger.info('some random cells failed to be patch for a new player')
@@ -163,7 +163,7 @@ export class Game {
    * @param logger 
    * @param evolveFunc - a function takes a board and returned a transformed board,
    *                     supposingly, the evolution loggic
-   * @param getRandomPattern - a function that generates random positions for a board
+   * @param makeRandomPattern - a function that generates random positions for a board
    * @param evolveInterval - how long will a board evolve naturally
    * @param eventBus - for broadcasting states
    * @param evolveTimer - a wrapper of setInterval function, used to run evolution periodically
@@ -173,7 +173,7 @@ export class Game {
   public constructor(
     logger: ILogger,
     evolveFunc: (board: GameBoard) => GameBoard,
-    getRandomPattern: (board: GameBoard) => Pattern,
+    makeRandomPattern: (board: GameBoard) => Pattern,
     evolveInterval: number,
     eventBus: IEventBus,
     evolveTimer: IIntervalLoopSetter,
@@ -181,7 +181,7 @@ export class Game {
 
     this.logger = logger
     this.evolveFunc = evolveFunc
-    this.getRandomPattern = getRandomPattern
+    this.makeRandomPattern = makeRandomPattern
     this.evolveIntervalMilleSecond = evolveInterval
     this.eventBus = eventBus
     this.jobQueue = []
