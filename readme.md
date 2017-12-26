@@ -1,3 +1,34 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Multi-player Conway's Game of Life](#multi-player-conways-game-of-life)
+  - [Built With](#built-with)
+  - [Deploy to Heroku](#deploy-to-heroku)
+      - [The Automated way](#the-automated-way)
+      - [The Manual way](#the-manual-way)
+  - [Local-machine development](#local-machine-development)
+    - [Prerequisites](#prerequisites)
+    - [Getting Started](#getting-started)
+      - [The first time of use](#the-first-time-of-use)
+      - [local development](#local-development)
+  - [Implementation Details](#implementation-details)
+      - [Directory Structure](#directory-structure)
+        - [The `dist/client/static`](#the-distclientstatic)
+      - [Application Architecture](#application-architecture)
+      - [Core components](#core-components)
+        - [GameBoard](#gameboard)
+        - [evolveBoard](#evolveboard)
+        - [Game](#game)
+      - [Events](#events)
+      - [Logging](#logging)
+  - [Versioning](#versioning)
+  - [TODOs](#todos)
+  - [License](#license)
+  - [Acknowledgments](#acknowledgments)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Multi-player Conway's Game of Life
 
 This is a web-based multi-player game: Conway's Game of Life.
@@ -202,7 +233,7 @@ export interface IEventBus {
 }
 ```
 
-Theses files defined the event keys:
+These files defined the event keys:
 
  - `apiEvents`: ./solution/ts_code/common/src/api/api-events
  - `socketEvents`: ./solution/ts_code/common/src/api/socket-events
@@ -221,7 +252,11 @@ This project used [bunyan](https://github.com/trentm/node-bunyan) for logging im
 The whole application starts with one root level logger, and different places in the application may spawn a child logger by using `logger.child(customKey: string)`, and all the json output by the child logger will have the property __customKey__ you can track with.
 
 
-All the event buses, as well as socket-io in the application should be already attached with a logger by `./solution/common/src/log-event-bus.ts`. Every time when an event, e.g. `apiEvents.gameStateUpdate` is registerd with a handler or emmited, the event will be automatically logged as well as the arguments passed through. You can easily track the application on your heroku deployment by redirecting `heroku logs` to you own disk. You can also use some json search and filter techniques provided by [bunyan cli](https://github.com/trentm/node-bunyan#cli-usage)
+All the event buses, as well as socket-io in the application should be already attached with a logger by `./solution/common/src/log-event-bus.ts`. 
+
+__Every time when an event, e.g. `apiEvents.gameStateUpdate` is registerd with a handler or emmited, the event will be automatically logged as well as the arguments passed through__. 
+
+You can easily track the application on your heroku deployment by redirecting `heroku logs` to you own disk. You can also use some json search and filter techniques provided by [bunyan cli](https://github.com/trentm/node-bunyan#cli-usage)
 
 __Note__: bunyan logger just automatically appended a word 'undefined' at 'msg' fields of each log, this is not an application error.
 
@@ -231,7 +266,7 @@ For example, a root level log is like this
 {"name":"Development Log","hostname":"6a6b14989f8f","pid":464,"level":30,"msg":"listening on 8080 undefined","time":"2017-12-26T07:41:16.694Z","v":0}
 ```
 
-And a child logger by spawned by `logger.child('apiService - socketio')`  looks like this, as you can see it has a property named `apiService - socketio`. This is a sample log when a handler is registered(mounted) on the __error__ event.
+And a child logger spawned by `logger.child('apiService - socketio')`  looks like this, as you can see it has a property named `apiService - socketio`. This is a sample log when a handler is registered(mounted) on the __error__ event.
 
 ```javascript
 {"name":"Development Log","hostname":"6a6b14989f8f","pid":464,"apiService - socketio":"apiService - socketio","level":30,"eventKey":"error","msg":"event mounted on 1514274076702","time":"2017-12-26T07:41:16.702Z","v":0}
@@ -255,6 +290,7 @@ And here is another sample log when the event __game-state-update__ is emitted.
   - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
   - better error messages to players
   - a log reader to organize and present the logs nicely
+  - double check and correct file naming consistency
   - multi-room support for users, i.e. different game instances for multiple groups of players
   - For production environment, use `pm2` to restart process in case of exit, and add health monitor like [appmetrics](https://github.com/RuntimeTools/appmetrics)
 
