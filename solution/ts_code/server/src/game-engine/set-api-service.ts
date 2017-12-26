@@ -32,7 +32,7 @@ export function setApiService(io: SocketIO.Server, toplogger: ILogger, game: Gam
       const loggedSocket = logEventBus(logger, socket)
 
       loggedSocket.on(apiEvents.newPlayerIn, (profile: IPlayerProfile) => {
-        logger.info(apiEvents.newPlayerIn, 'event captured')
+
         game.newPlayer(profile.name)
           .then((playerContext) => {
             const currentPlayer = playerContext.player
