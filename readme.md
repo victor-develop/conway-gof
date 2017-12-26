@@ -1,6 +1,19 @@
 # Multi-player Conway's Game of Life
 
-This is a web-based game: Conway's Game of Life, developed as the specification at https://hackmd.io/s/SyXikdg_g#full-stack--backend-developer--eng-manager
+This is a web-based multi-player game: Conway's Game of Life.
+
+This game is a world of cells on 2-d grid. The world is having endless rounds of natural evolution, e.g. 3 seconds for a round, according to the following rules:
+
+```sh
+1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+2. Any live cell with two or three live neighbours lives on to the next generation.
+3. Any live cell with more than three live neighbours dies, as if by overcrowding.
+4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+```
+
+Each player will be assigned a color and some random cells with that color on the grid. The players can also put more cells onto the grid by clicking. The cells they created will evolve together with other cells.
+
+A dead cell that comes back to life will have a color that is the averaged of its neighbor cells who saved it.
 
 ## Built With
 
@@ -172,7 +185,7 @@ To enable easier testing and debug, the following items were intentionally desig
   - `evolveFunc: (board: GameBoard) => GameBoard`: the logic of natural evolution
   - `getRandomPattern: (board: GameBoard) => Pattern`: random pattern generator,it can be mocked with a function which returns known pattern series during testing
   - `eventBus: IEventBus`: mainly used to broadcast game state updates
-  - `evolveTimer: IIntervalLoopSetter`: an interface that does similar function as native JS `setInterval`, by mocking this object, you can manually control how and when the board updates during testing
+  - `evolveTimer: IIntervalLoopSetter`: an interface that does similar function as native JS `setInterval`, by mocking this object, you can manually control how and when the board evolves during testing
   - `jobQueueTimer: IIntervalLoopSetter`: an interfae that does similar function as native JS `setInterval`, by mocking this object, you can decide the behaviour of how and when a update-board job is dequeued and consumed during testing
 
 By using these injection you can simulate a completely predicatable test against the state changes of the game board. See `./solution/ts_code/server/tests/set-api-service.spec.ts`
@@ -232,6 +245,7 @@ And here is another sample log when the event __game-state-update__ is emitted.
   - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
   - better error messages to players
   - a log reader to organize and present the logs nicely
+  - multi-room support for users, i.e. different game instances for multiple groups of players
   - For production environment, use `pm2` to restart process in case of exit, and add health monitor like [appmetrics](https://github.com/RuntimeTools/appmetrics)
 
 
