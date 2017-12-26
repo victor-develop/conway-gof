@@ -64,7 +64,7 @@ function setupVueComponents(Vue) {
 
   Vue.component('pattern-board', {
     template:`
-    <popover content="Click on game board to place this pattern" trigger="manual" v-model="selected">
+    <popover content="Click on game board to place this pattern" trigger="manual" v-model="shouldPop">
       <table class="board pattern-board" type="primary" v-on:click="select(board)">
       <tbody>
           <tr v-for="h in board.height">
@@ -76,7 +76,7 @@ function setupVueComponents(Vue) {
       </table>
     </popover>
     `,
-    props: ['color', 'board', 'selected'],
+    props: ['color', 'board', 'selected', 'patchPatternMode'],
     methods: {
       hasValue: function(x, y) {
         const offsetX = parseInt(this.board.width/3);
@@ -87,5 +87,10 @@ function setupVueComponents(Vue) {
         this.$emit('select', board)
       }
     },
+    computed: {
+      shouldPop: function() {
+        return (this.patchPatternMode === "cursor") && this.selected
+      }
+    }
   })
 }

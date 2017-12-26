@@ -283,7 +283,7 @@ And here is another sample log when the event __game-state-update__ is emitted.
 
   - The game instance runs and the game world evolves endlessly together with the server regardless of the existence of player. This is a waste. When there is no player, the game instance can stopped until a new player enters. But it has to store the state somewhere in advance and reloads it, calculating how many rounds of interval it has stopped for and directly evolve for that many times to recover to the right state it should be at. 
 
-  - A single Node.js app can support very limited number of concurrent socket connections. To scale up multiple nodes should be used for purely socket connections and all of them connect to the same game world.
+  - A single Node.js app can support very limited number of concurrent socket connections. One of the ideas to scale up, is that multiple nodes could be used for purely socket connections and all of them use api tp connect to the same game world provided by a service(another server, another language for faster caculation ...), which only responsible for maintaining the game state. 
 
   - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
   

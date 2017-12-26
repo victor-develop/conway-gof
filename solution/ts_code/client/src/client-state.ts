@@ -26,6 +26,7 @@ export function initialClientState(): ClientState {
     errors: [],
     playername: '',
     selectedPattern: InitialValue.instance,
+    patchPatternMode: 'random',
   }
 }
 
@@ -44,4 +45,5 @@ export interface ClientState {
   }[],
   playername: string,
   selectedPattern: InitialValue | Board
+  patchPatternMode: string
 }

@@ -33,8 +33,17 @@
                     <div class="panel-body row">
                       <div v-if="hasInit(game)">
                         <div class="pattern-board-container" v-for="patternBoard in context.presetPatternBoards">
-                          <pattern-board :color=context.currentPlayer.color :board="patternBoard" v-on:select="selectPattern" :selected="selectedPattern === patternBoard"></pattern-board>
+                          <pattern-board
+                            v-on:select="selectPattern"
+                            :color=context.currentPlayer.color 
+                            :board="patternBoard" 
+                            :patch-pattern-mode="patchPatternMode"
+                            :selected="selectedPattern === patternBoard"></pattern-board>
                         </div>
+                        <btn-group>
+                          <btn input-type="radio" input-value="random" v-model="patchPatternMode">randomly place pattern</btn>
+                          <btn input-type="radio" input-value="cursor" v-model="patchPatternMode">place pattern with cursor</btn>
+                        </btn-group>
                       </div>
                     </div>
                   </div>              
