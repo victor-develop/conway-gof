@@ -149,7 +149,7 @@ As in the diagram,
   - `client` contains front end logic. __Vue__ is used as the reactive presenter of __:ClientState__, which is part of __:Client__, __:GameApi__ takes care of communication with server, and coordinates with __:Client__ through events.
   - `server` 's main component is the __:Game__ instance, the function __setApiService__ handles communication with clients and manipulate the __:Game__ instance accordingly
 
-The real time connection is currently implemented with __SocketIO__, but can also be replaced with other solutions if needed in the future, by changing the __GameApi__ at the clien-side and __setApiService__ at the server-side, without affecting other components.
+The real time connection is currently implemented with __SocketIO__, but can also be replaced with other solutions if needed in the future, by changing the __GameApi__ at the client-side and __setApiService__ at the server-side, without affecting other components.
 
 #### Core components
 
@@ -165,7 +165,7 @@ A function that takes a board as input and output a "evolved" board with lists o
 
 ![Game Class Diagram](./docs/game-class.svg)
 
-The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different events which will enqueue an update function.
+The __:Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different events which will enqueue an update function.
 
 ![events updating the game board](./docs/client-server-api-events.svg)
 
@@ -229,7 +229,7 @@ And here is another sample log when the event __game-state-update__ is emitted.
 
   - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
   - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
-  - at client side, `Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `Client` does not need to know anything about `GameApi`, but just has to simply expose its methods to `GameApi`, then `GameApi` will call `Client` according to different events. By doing so `Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `Game` does not know anything about the api object, in fact there is not even a real class named `ApiService`, just used the function `setApiService` to set tup the `Game`'s behaviour according to different events.
+  - at client side, `:Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `:Client` does not need to know anything about `:GameApi`, but just has to simply expose its methods to `:GameApi`, then `:GameApi` will call `:Client` according to different events. By doing so `:Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `:Game` does not know anything about the api object, in fact there is not even a real class named `:ApiService`, just used the function `setApiService` to set tup the `:Game`'s behaviour according to different events.
   - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
   - better error messages to players
   - a log reader to organize and present the logs nicely
