@@ -130,16 +130,15 @@ cd solution
 ```
 
 And then, in the bash shell, you may:
- - __run tests__: 
-
-  ```sh
-    npm run test
-  ```
-
  - __development with live-reload server__: 
  
   ```sh
     npm run dev
+  ```
+ - __run tests__: 
+
+  ```sh
+    npm run test
   ```
 
 

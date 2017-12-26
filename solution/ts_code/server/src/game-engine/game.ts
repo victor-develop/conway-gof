@@ -27,7 +27,7 @@ export const updateBoardEvent = {
   playerPatchCells: 'player-patch-cells',
 }
 
-const jobConsumeInterval = 10
+const jobConsumeInterval = 2
 
 export class Game {
 
