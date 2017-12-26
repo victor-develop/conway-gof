@@ -165,7 +165,7 @@ A function that takes a board as input and output a "evolved" board with lists o
 
 The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happened which will enqueue an update function.
 
-![events updating the game board](./docs/game-board-update.svg)
+![events updating the game board](./docs/game-board-update.png)
 
 To enable easier testing and debug, the following items were intentionally designed as injected dependencies of the constructor of __Game__ .(below only list some arguments important to note, for full list of argumrents required plz See __./solution/ts_code/server/game-engine/game.ts -> constructor()__)
 
