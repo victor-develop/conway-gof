@@ -142,7 +142,7 @@ Webpack will also transplie and place a bundled front-end `base.bundle.js` into 
 
 This is not a strict UML but a rough conceptual overview of the whole application.
 
-![conway gof overview](./docs/conway-gof-overview.svg)
+![conway gof overview](./docs/conway-gof-overview.png)
 
 As in the diagram, 
   - `common` includes data models, interfaces, events, and utitlities, e.g. logger that are shared by both front&back ends.
