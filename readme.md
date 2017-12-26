@@ -5,7 +5,7 @@ This is a web-based game: Conway's Game of Life, developed as the specification 
 ## Built With
 
 * [express](https://expressjs.com/) - Web server
-* [socketIo](https://socket.io/) - widely used lib for real time connection
+* [socket-io](https://socket.io/) - widely used lib for real time connection
 * [Vue](https://vuejs.org/) - Front end framework
 * [Typescript](https://www.typescriptlang.org/index.html) - static type checkings
 * [mocha](https://mochajs.org/) - testing framework
@@ -92,8 +92,6 @@ And then, in the bash shell, you may:
     npm run test
   ```
 
-  While the test results will display at the standard output, the detailed operational logs during the test can be found at `./solution/dist/server/tests/ouput_xxxxx.txt`, note that althought the output is placed under `./solution/dist/server/tests`, it contains all test logs produced regardless of front-end/back-end when you run `npm run test`
-
  - __development with live-reload server__: 
  
   ```sh
@@ -163,13 +161,13 @@ A function that takes a board as input and output a "evolved" board with lists o
 
 ##### Game
 
-![Game Class Diagram](./docs/game-class.svg)
+![Game Class Diagram](./docs/game-class.png)
 
-The __:Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different events which will enqueue an update function.
+The __Game__ class at server side broadcast its state to clients via api service whenerver updated. Ideally, the game board can be updated by evolution or manually updated by players at any time. But it would be complex and hard to debug if the game board is being updated by evolution and by user at the same moement. Thus, the __Game__ internally uses a queue to avoid muting the game state concurrently. Any update logic to the board will be packed in a funtion and queued up, and the board will be updated sequentially according to queue order. The __Game__ keeps scanning and consuming the job queue every 10 milleseconds, making it feeling reactive in players' experience. The following diagram shows different things happened which will enqueue an update function.
 
-![events updating the game board](./docs/client-server-api-events.svg)
+![events updating the game board](./docs/game-board-update.svg)
 
-To enable easier testing and debug, the following items were intentionally designed as injected dependencies of the constructor of __:Game__ .(below only list some arguments important to note, for full list of argumrents required plz See __./solution/ts_code/server/game-engine/game.ts -> constructor()__)
+To enable easier testing and debug, the following items were intentionally designed as injected dependencies of the constructor of __Game__ .(below only list some arguments important to note, for full list of argumrents required plz See __./solution/ts_code/server/game-engine/game.ts -> constructor()__)
 
   - `evolveFunc: (board: GameBoard) => GameBoard`: the logic of natural evolution
   - `getRandomPattern: (board: GameBoard) => Pattern`: random pattern generator,it can be mocked with a function which returns known pattern series during testing
@@ -187,6 +185,7 @@ Different components depend on `IEventBus` to coordinates with each other. These
  - `socketEvents`: ./solution/ts_code/common/src/api/socket-events
 
 The major events happened between server and clients is shown below (error events omitted):
+![Client Server Api Events](./docs/client-server-api-events.png)
 
 
 #### Logging
@@ -229,7 +228,7 @@ And here is another sample log when the event __game-state-update__ is emitted.
 
   - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
   - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
-  - at client side, `:Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `:Client` does not need to know anything about `:GameApi`, but just has to simply expose its methods to `:GameApi`, then `:GameApi` will call `:Client` according to different events. By doing so `:Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `:Game` does not know anything about the api object, in fact there is not even a real class named `:ApiService`, just used the function `setApiService` to set tup the `:Game`'s behaviour according to different events.
+  - at client side, `Client` is calling `GameApi` and vice versa, they depended on each other, but things can be simpler, `Client` does not need to know anything about `GameApi`, but just has to simply expose its methods to `GameApi`, then `GameApi` will call `Client` according to different events. By doing so `Client` does not depend on `GameApi` anymore. Bi-directional dependency becomes one way. That's actually what I already did at server side, `Game` does not know anything about the api object, in fact there is not even a real class named `ApiService`, just used the function `setApiService` to set tup the `Game`'s behaviour according to different events.
   - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
   - better error messages to players
   - a log reader to organize and present the logs nicely
