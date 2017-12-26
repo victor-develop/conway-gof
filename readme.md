@@ -13,7 +13,7 @@ This is a web-based game: Conway's Game of Life, developed as the specification 
 ## deploy to Heroku
 
 #### The Automated way
-
+A heroku account is required.
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 #### The Manual way
@@ -57,7 +57,7 @@ At the time of development I am using version `17.09.0` on Windows machine. Dock
   ```sh
     docker-compose exec conway /bin/bash
   ```
-- You shall be at the /home/dev now. The `package.json` at root directory is __NOT__ the package.json for this project. This is just a file created for Heroku's requirement to deploy the app successfully. Instead, you should go to `solution` folder to see the real package.json, where the project source code stays, like below.
+- You shall be at the /home/dev now. The `package.json` at root directory is __NOT__ the package.json for this project. This is just a file created for Heroku's requirement to deploy the app successfully. Instead, you should go to `solution` folder to see the real package.json, where the project source code stays.
 
 - Install npm dependencies
 
@@ -157,8 +157,12 @@ To enable easier testing and debug, the following items were intentionally desig
   - `evolveTimer: IIntervalLoopSetter`: An interface does similar function as native JS `setInterval`, by mocking this object, you can manually control how the board updates during testing/debugging
   - `jobQueueTimer: IIntervalLoopSetter`: An interfae does similar function as native JS `setInterval`, by mocking this object, you can decide the behaviour of how job is dequeued and consumed
 
-By using these injection you can simulate a completely predicatable test against the state changes of the game board.
+By using these injection you can simulate a completely predicatable test against the state changes of the game board. See `./solution/ts_code/server/tests/set-api-service.spec.ts`
 
+## Logging
+This project used [bunyan](https://github.com/trentm/node-bunyan) for logging implementation of the `ILogger` interface. In development environment it will output everything to the `stdout`. During tests it will output logs to `./solution/dist/server/tests/ouput_xxxxx.txt` depending on the datetime at runtime. The whole application starts with one root level logger, and different places in the application may spawn a subLogger by using `logger.child(customKey: stirng)`, and all the json output by the sublogger will have the property __customKey__ you can track with.
+
+All the event buses, as well as socket-io in the application should be attached with a logger by `./solution/common/src/log-event-bus.ts`. Every time when an event, e.g. `apiEvents.gameStateUpdate` is registerd with a handler or emmited, the event will be logged as well as the arguments passed through. You can easily track the application on your heroku deployment by redirecting `heroku logs` to you own disk. You can also use some json search and filter techniques provided by [bunyan cli](https://github.com/trentm/node-bunyan#cli-usage)
 
 ## Versioning
 
