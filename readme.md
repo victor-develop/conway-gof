@@ -295,6 +295,7 @@ And here is another sample log when the event __game-state-update__ is emitted.
 
   - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
 
+  - tune bunyan to avoid the 'undefined' word appended in the log
   - front end is using TempLogger outputting to console, should be changed to bunyan, consider important logs to be stored in localstorage/report to server
   - better error messages to players
   - a log reader to organize and present the logs nicely
