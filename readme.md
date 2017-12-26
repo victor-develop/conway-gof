@@ -22,8 +22,7 @@
         - [Game](#game)
       - [Events](#events)
       - [Logging](#logging)
-  - [Versioning](#versioning)
-  - [TODOs](#todos)
+  - [Known Limitations & TODOs](#known-limitations--todos)
   - [License](#license)
   - [Acknowledgments](#acknowledgments)
 
@@ -279,18 +278,26 @@ And here is another sample log when the event __game-state-update__ is emitted.
 {"name":"Development Log","hostname":"6a6b14989f8f","pid":464,"level":30,"eventKey":"game-state-update","args":[{"updateAt":1514274121728,"players":[{"uid":"S1h76OkXf","name":"Plaki","color":"#a5c359"}]}],"msg":"event emitted 1514274121728","time":"2017-12-26T07:42:01.728Z","v":0}
 ```
 
-## Known Limitations
- - Currently the server broadcast the whole grid together with the list of players to clients to ensure syncronization. A better approach(with more effort) would be only sending the updated data for most clients in stable connection and let clients which fails to syncronize request for whole-state update. 
+## Known Limitations & TODOs
+  - Currently the server broadcasts the whole grid together with the list of players to clients to ensure syncronization. A better approach(with more effort) would be only sending the updated data for most clients in stable connection and let clients which fails to syncronize request for whole-state update. For example, the client may check for an increamental sync-id transmitted from server, if the difference is more than 1, the client requests for whole-state update. 
 
-## TODOs
-  - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
-  - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
+  - The game instance runs and the game world evolves endlessly together with the server regardless of the existence of player. This is a waste. When there is no player, the game instance can stopped until a new player enters. But it has to store the state somewhere in advance and reloads it, calculating how many rounds of interval it has stopped for and directly evolve for that many times to recover to the right state it should be at. 
+
+  - A single Node.js app can support very limited number of concurrent socket connections. To scale up multiple nodes should be used for purely socket connections and all of them connect to the same game world.
+
   - currently the board is bordered and cannot have negative coordinates. But the `evolveBoard()` function CAN support borderless evolution argrithmatically. What else needed is to implement a board which can dynamically shrink and enlarge its width and height according to the cells it has, of course then the client intereface should also support world-exploring feature.
+  
+  - For production environment, use `pm2` to restart process in case of exit, and add health monitor like [appmetrics](https://github.com/RuntimeTools/appmetrics)
+
+  - __common/src/api/__`apiEvents` contains keys representing client->server and server->client, better to sepearate them in later versions.
+
+  - __dist/client/static__: Move it somewhere else and copy it into `dist` at build time, so that `dist` can be a directory purely for built artifacts.
+
+  - front end is using TempLogger outputting to console, should be changed to bunyan, consider important logs to be stored in localstorage/report to server
   - better error messages to players
   - a log reader to organize and present the logs nicely
   - double check and correct file naming consistency
-  - multi-room support for users, i.e. different game instances for multiple groups of players
-  - For production environment, use `pm2` to restart process in case of exit, and add health monitor like [appmetrics](https://github.com/RuntimeTools/appmetrics)
+
 
 
 ## License
