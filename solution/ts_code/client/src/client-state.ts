@@ -45,5 +45,5 @@ export interface ClientState {
   }[],
   playername: string,
   selectedPattern: InitialValue | Board
-  patchPatternMode: string
+  patchPatternMode: string // 'cursor', 'random' supported
 }
