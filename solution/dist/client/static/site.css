@@ -42,8 +42,33 @@ table {
 }
 
 .pattern-board {
-  float: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer
+}
+
+.navbar {
+  padding-bottom: 10px;
+}
+
+.navbar img {
+  width: 30px;
+  height: 30px;  
+}
+
+.game-control {
+  padding: 10px;
+}
+
+.mode-btns-container {
+  margin-left: 45px;
+}
+
+.mode-hint {
   margin-left: 10px;
   margin-right: 10px;
-  cursor: pointer
+}
+
+.players-list-item {
+  margin-left: 10px;
 }

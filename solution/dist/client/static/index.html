@@ -3,16 +3,51 @@
   <head>
     <meta charset="utf-8">
     <title>Conway s Game of Life</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" />
     <link rel="stylesheet" href="/site.css"/>
 
     <script type="text/javascript" src="//unpkg.com/uiv/dist/uiv.min.js"></script>
     <script src="vuecomponents.js"></script>
     <script src="base.bundle.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css" />
   </head>
   <body>
+  <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="/conway.png">
+              </a>
+        </div>
+      </div>
+    </nav>    
+
     <div class="container" id="app">
+      <div class="row">
+        <div class="jumbotron">
+          <h2>
+            Multi-Player Conway's Game Of Life
+          </h2>
+          <p>
+            This is a multi-player version of <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">Conway’s Game of Life</a>.
+            The cells on the board will evolve automatically. You can just sit and watch how it changes.
+            You can also put some more cells onto the board by simply clicking on the board. There are also some preset patterns ready
+            there for you, you can put it on a specific position or let it be randomly placed onto the board.
+            If you want to know how these cells evolves, see <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life#Rules" target="_blank">Rules</a>.
+            There is no win or lose. This game is often used as a coding challenge for coders. I am sorry if this is boring for you :).
+          </p>
+          <p>
+            Open one more browser tab or window and then you can see how it looks like for multiple players.
+          </p>
+          <p>
+            If you are interested in TypesScript, Node.js, Socket-IO, and Vue.js, you probably want to check out the code.
+          </p>
+          <p>
+            <a class="btn btn-primary btn-large" href="https://github.com/victor-develop/conway-gof"><i class="octicon  octicon-mark-github"></i> Show me the code.</a>
+          </p>
+        </div>        
+      </div>
       <div class="row">
         <div class="col-md-12 game-title">
           <h3>
@@ -24,8 +59,46 @@
         <alert v-for="err in errors" type="danger" >{{ err.message }}</alert>
       </div>
       <div class="row">
-        <div class="col-md-8">
-            <div class="row preset-pattern-toolbar-container">
+        <div class="col-md-12 players-container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                      Players
+                    </h3>
+                </div>
+                <div class="panel-body row players-list">
+                  <span v-if="hasInit(game)">
+                    <span v-for="player in game.players" class="players-list-item">
+                        <player-banner :current-player="context.currentPlayer" :player="player" ></player-banner> 
+                    </span>
+                  </span>
+                  <span v-if="(!hasInit(game)) && hasInit(context.currentPlayer)">
+                    <span class="players-list-item">
+                        <player-banner :current-player="context.currentPlayer" :player="context.currentPlayer" ></player-banner> 
+                    </span>
+                  </span>
+                </div>
+            </div>                          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  Game World
+                </h3>
+              </div>
+              <div class="panel-body">
+                  <game-board v-if="hasInit(game)" :board=game.board v-on:patch-position="patchPosition" ></game-board>
+              </div>
+              <div class="panel-footer">
+                
+              </div>
+            </div>       
+        </div>
+        <div class="col-md-2">
+            <div class="preset-pattern-toolbar-container">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Preset Pattern
@@ -40,53 +113,29 @@
                             :patch-pattern-mode="patchPatternMode"
                             :selected="selectedPattern === patternBoard"></pattern-board>
                         </div>
-                        <btn-group>
-                          <btn input-type="radio" input-value="random" v-model="patchPatternMode">randomly place pattern</btn>
-                          <btn input-type="radio" input-value="cursor" v-model="patchPatternMode">place pattern with cursor</btn>
-                        </btn-group>
-                      </div>
+                      </div>                      
                     </div>
+                    <div class="panel-heading">
+                        Patch Model
+                    </div>
+                    <div class="game-control panel-body row">
+                        <btn-group vertical class="mode-btns-container">
+                            <btn input-type="radio" input-value="random" v-model="patchPatternMode">random</btn>
+                            <btn input-type="radio" input-value="cursor" v-model="patchPatternMode">cursor</btn>
+                        </btn-group>
+                    </div>
+                    <div class="panel-body row mode-hint">
+                        <span v-if="patchPatternMode === 'random'">
+                            A preset pattern will be randomly placed on the board when you click on it.
+                        </span> 
+                        <span v-if="patchPatternMode === 'cursor'">
+                            Click on a preset pattern to select it.
+                        </span>                        
+                    </div>               
                   </div>              
             </div>
-        </div>
-        <div class="col-md-4 players-container">
-          <div class="row">
-            <div class="col-md-12">
-              <h3>
-                Players
-              </h3>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <ul v-if="hasInit(game)">
-                <li v-for="player in game.players">
-                  <player-banner :current-player="context.currentPlayer" :player="player" ></player-banner> 
-                </li>
-              </ul>
-              <ul v-if="(!hasInit(game)) && hasInit(context.currentPlayer)" >
-                <li>
-                  <player-banner :current-player="context.currentPlayer" :player="context.currentPlayer" ></player-banner> 
-                </li>                
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-          <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">
-                  Game World
-                </h3>
-              </div>
-              <div class="panel-body">
-                  <game-board v-if="hasInit(game)" :board=game.board v-on:patch-position="patchPosition" ></game-board>
-              </div>
-              <div class="panel-footer">
-                
-              </div>
-            </div>              
+
+        </div>  
       </div>      
     </div>
   </body>
